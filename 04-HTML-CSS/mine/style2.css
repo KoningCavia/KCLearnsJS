@@ -1,0 +1,62 @@
+/* * is used to select ALL the elements. 
+Here we use it to reset margin and paddings for all elements to zero. (certain headers get a margin and we dont want that. */
+* {
+  margin: 0;
+  padding: 0;
+  /* Border-box is not wel explained and thats fine */
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgba(90, 179, 238, 0.773);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  padding: 50px;
+}
+
+h1 {
+  font-size: 100px;
+  margin-bottom: 25px;
+}
+
+h2 {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* . is used to select class names */
+.first {
+  color: rgb(0, 0, 150);
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+/* # is used to select Id's */
+#your-name {
+  background-color: rgba(1, 1, 243, 0.36);
+  border: 5px solid #444;
+  width: 400px;
+  padding: 25px;
+  margin-top: 30px;
+}
+
+input,
+button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+a {
+  background-color: yellowgreen;
+}
+
+#course-image {
+  width: 300px;
+  height: 300px;
+}
+/* selects h2 elements that occur within id-element your-name */
+#your-name h2 {
+  color: olivedrab;
+}
