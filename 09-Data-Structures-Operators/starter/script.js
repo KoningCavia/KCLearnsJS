@@ -45,46 +45,98 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`Here is you paste with ${ing1}, ${ing2}, ${ing3}`);
   },
+
+  orderPizza: function(mainIngredient, ...otherIngredients){
+  console.log(mainIngredient);
+  console.log(...otherIngredients);
+  }
 };
-//105 Spread operator
-console.log(`105 SPREAD OPERATOR`);
-const arr = [7, 8, 9]; // we have array
-const badNewArray = [1, 2, arr[0], arr[1], arr[2]]; // we add array jankily to existing array
-console.log(badNewArray); // but it works
-const newArray = [1, 2, ...arr]; // does the same but better and in less code
-console.log(newArray);
-console.log(...newArray); // it basically just unpacks your entire array
 
-const newMeny = [...restaurant.mainMenu, 'Gnocci']; // we created a new menu that takes the old meny and adds gnocci. Old array stil exists.
+// 106 Rest Pattern and Parameters
 
-// Copy array
-const mainMenuCopy = [...restaurant.mainMenu];
+//Spread because the '...' is on the right side of the '='
+const arr = [1,2, ...[3,4]];
 
-//join 2 arrays
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
-console.log(menu);
+//Rest because the '...' is on the left side of the '='
+const [a,b, ...others]= [1,2,3,4,5];
+console.log(a,b, others);
 
-const str = 'Jonas';
-const letters = [...str, ' ', 'S.'];
-console.log(letters);
-
-
-// real world example
-// ask user for toppings/ingredients and save them in an arrayList
-const ingredients = [
-  // prompt("Let's make pasta! Ingredient 1"), 
-  // prompt("Let's make pasta! Ingredient 2"), 
-  // prompt("Let's make pasta! Ingredient 3")
+//arrays
+const [pizza, , Risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu
 ];
-console.log(ingredients);
-//Call the orderPasta function and automatically add the destructured array as arguments
-restaurant.orderPasta(...ingredients);
+console.log(pizza, Risotto, otherFood);
+
+
+// Objects
+const { sat, ...weekdays} = restaurant.openingHours;
+console.log({...weekdays});
+console.log(weekdays);
+
+
+// Functions
+const add = function(...numbers) {
+  let sum = 0
+  for (let i = 0; i < numbers.length; i++) {
+    sum+= numbers[i];
+  }
+
+  console.log(sum);
+  console.log(numbers);
+}
+
+add(2,3)
+add(5,3,7,2)
+add(8,2,5,3,2,1,4)
+const x = [23 ,5 ,7]
+add(...x)
+
+restaurant.orderPizza('mushroom' , 'onion' , 'olives', 'spinach')
+restaurant.orderPizza('poekies')
+//105 Spread operator
+// console.log(`105 SPREAD OPERATOR`);
+// const arr = [7, 8, 9]; // we have array
+// const badNewArray = [1, 2, arr[0], arr[1], arr[2]]; // we add array jankily to existing array
+// console.log(badNewArray); // but it works
+// const newArray = [1, 2, ...arr]; // does the same but better and in less code
+// console.log(newArray);
+// console.log(...newArray); // it basically just unpacks your entire array
+
+// const newMeny = [...restaurant.mainMenu, 'Gnocci']; // we created a new menu that takes the old meny and adds gnocci. Old array stil exists.
+
+// // Copy array
+// const mainMenuCopy = [...restaurant.mainMenu];
+
+// //join 2 arrays
+// const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+// console.log(menu);
+
+// const str = 'Jonas';
+// const letters = [...str, ' ', 'S.'];
+// console.log(letters);
+
+
+// // real world example
+// // ask user for toppings/ingredients and save them in an arrayList
+// const ingredients = [
+//   // prompt("Let's make pasta! Ingredient 1"), 
+//   // prompt("Let's make pasta! Ingredient 2"), 
+//   // prompt("Let's make pasta! Ingredient 3")
+// ];
+// console.log(ingredients);
+// //Call the orderPasta function and automatically add the destructured array as arguments
+// restaurant.orderPasta(...ingredients);
 
 
 
-//OBJECTS
-const newRestaurant = {...restaurant, founder: 'Guiseppe', foundIn: 1998}
-console.log(newRestaurant);
+// //OBJECTS
+// const newRestaurant = {...restaurant, founder: 'Guiseppe', foundIn: 1998}
+// console.log(newRestaurant);
+
+
+
+
 
 // 104 DESTRUCTURING OBJECTS
 // console.log('104 DESTRUCTURING OBJECT');
