@@ -52,6 +52,15 @@ const restaurant = {
   }
 };
 
+//108 The nullish coalescing operator (??)
+
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+console.log(guests);
+
+// this works literally like the || operator except it works with nullish values rather than falsy values:
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect);
 
 // // 107 && }} and shortcircuiting
 
