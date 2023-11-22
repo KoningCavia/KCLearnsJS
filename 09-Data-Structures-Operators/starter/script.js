@@ -52,48 +52,92 @@ const restaurant = {
   }
 };
 
-// 106 Rest Pattern and Parameters
 
-//Spread because the '...' is on the right side of the '='
-const arr = [1,2, ...[3,4]];
+// // 107 && }} and shortcircuiting
 
-//Rest because the '...' is on the left side of the '='
-const [a,b, ...others]= [1,2,3,4,5];
-console.log(a,b, others);
+// //this can use ANY data type and can return ANY datatype
+// console.log(3 || 'Jonas');
 
-//arrays
-const [pizza, , Risotto, ...otherFood] = [
-  ...restaurant.mainMenu,
-  ...restaurant.starterMenu
-];
-console.log(pizza, Risotto, otherFood);
+// console.log('' || 'Jonas');
+// console.log(true || 0);
+// console.log(undefined || null);
+
+// console.log( undefined || 0 || '' || 'Hello' || 23 || null);
+
+// //check wether there is a value numGuests if not defaults to ten.
+// restaurant.numGuests = 23;
+// const guests1 = restaurant.numGuests ? restaurant.numGuests :10;
+// console.log(guests1);
+
+// //this does literally the same but much quicker.
+// const guests2 = restaurant.numGuests||10;
+// console.log(guests2);
 
 
-// Objects
-const { sat, ...weekdays} = restaurant.openingHours;
-console.log({...weekdays});
-console.log(weekdays);
 
+console.log('------ AND ------');
+// && does the opposite of || (which is counter intuitive actually).
+// If the datatype is falsey, it immediately gets returned and it short circuits
+//logic here: the last operator will only be published if EVERYTHING is true. 
+//If anything is falsy, than you can return that falsy value, because the entire list will be falsy
+console.log(0 && 'Jonas');
+console.log(7 && 'Jonas');
 
-// Functions
-const add = function(...numbers) {
-  let sum = 0
-  for (let i = 0; i < numbers.length; i++) {
-    sum+= numbers[i];
-  }
-
-  console.log(sum);
-  console.log(numbers);
+//practical example
+// If the method orderPizza exists (in js i bet you can create the method for an instance whenever thinking in js baby), then perform the method order pizza
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('bacon', 'chickens')
 }
 
-add(2,3)
-add(5,3,7,2)
-add(8,2,5,3,2,1,4)
-const x = [23 ,5 ,7]
-add(...x)
+//this can be shortened to:
+restaurant.orderPizza && restaurant.orderPizza('chicken', 'bacons')
 
-restaurant.orderPizza('mushroom' , 'onion' , 'olives', 'spinach')
-restaurant.orderPizza('poekies')
+
+// // 106 Rest Pattern and Parameters
+
+// //Spread because the '...' is on the right side of the '='
+// const arr = [1,2, ...[3,4]];
+
+// //Rest because the '...' is on the left side of the '='
+// const [a,b, ...others]= [1,2,3,4,5];
+// console.log(a,b, others);
+
+// //arrays
+// const [pizza, , Risotto, ...otherFood] = [
+//   ...restaurant.mainMenu,
+//   ...restaurant.starterMenu
+// ];
+// console.log(pizza, Risotto, otherFood);
+
+
+// // Objects
+// const { sat, ...weekdays} = restaurant.openingHours;
+// console.log({...weekdays});
+// console.log(weekdays);
+
+
+// // Functions
+// const add = function(...numbers) {
+//   let sum = 0
+//   for (let i = 0; i < numbers.length; i++) {
+//     sum+= numbers[i];
+//   }
+
+//   console.log(sum);
+//   console.log(numbers);
+// }
+
+// add(2,3)
+// add(5,3,7,2)
+// add(8,2,5,3,2,1,4)
+// const x = [23 ,5 ,7]
+// add(...x)
+
+// restaurant.orderPizza('mushroom' , 'onion' , 'olives', 'spinach')
+// restaurant.orderPizza('poekies')
+
+
+
 //105 Spread operator
 // console.log(`105 SPREAD OPERATOR`);
 // const arr = [7, 8, 9]; // we have array
