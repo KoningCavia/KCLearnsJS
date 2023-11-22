@@ -52,15 +52,60 @@ const restaurant = {
   }
 };
 
-//108 The nullish coalescing operator (??)
 
-restaurant.numGuests = 0;
-const guests = restaurant.numGuests || 10;
-console.log(guests);
+// 109 Logical Assignment operators
+const rest1 =  {
+  name: 'Capri',
+  numGuests: 0,
+};
+const rest2 =  {
+  name: 'la Piazza',
+  owner: 'Giovanni Rosi',
+};
 
-// this works literally like the || operator except it works with nullish values rather than falsy values:
-const guestCorrect = restaurant.numGuests ?? 10;
-console.log(guestCorrect);
+//FIRSTLY based of  || -> the OR assignment operator
+// // Using the || operator to set a default
+// rest2.numGuests = rest2.numGuests || 10
+// rest1.numGuests = rest1.numGuests || 10
+
+// // This is literally the same but even Shorter!
+// rest1.numGuests ||= 10;
+// rest2.numGuests ||= 10;
+
+// console.log(rest1);
+// console.log(rest2);
+
+//SECONDLY variant of ?? -> Nullish assignment operator
+
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+console.log(rest1);
+console.log(rest2);
+
+
+// Thirdly:variant of && -> the AND assignment operators 
+// If the restaurant has an owner, we want to replace it with the string anonymous
+
+// rest1.owner = rest1.owner && '<ANONYMOUS>';     // returns undefined, because rest1.owner is undefined
+// rest2.owner = rest2.owner && '<ANONYMOUS>';     // returns anonymous, because rest2.owner is truthy
+rest1.owner &&= '<ANONYMOUS>'
+rest2.owner &&= '<ANONYMOUS>'
+
+console.log(rest1);       // returns undefined, because rest1.owner is undefined
+console.log(rest2);       // returns anonymous, because rest2.owner is truthy
+
+
+
+// //108 The nullish coalescing operator (??)
+
+// restaurant.numGuests = 0;
+// const guests = restaurant.numGuests || 10;
+// console.log(guests);
+
+// // this works literally like the || operator except it works with nullish values rather than falsy values:
+// const guestCorrect = restaurant.numGuests ?? 10;
+// console.log(guestCorrect);
 
 // // 107 && }} and shortcircuiting
 
@@ -84,22 +129,22 @@ console.log(guestCorrect);
 
 
 
-console.log('------ AND ------');
-// && does the opposite of || (which is counter intuitive actually).
-// If the datatype is falsey, it immediately gets returned and it short circuits
-//logic here: the last operator will only be published if EVERYTHING is true. 
-//If anything is falsy, than you can return that falsy value, because the entire list will be falsy
-console.log(0 && 'Jonas');
-console.log(7 && 'Jonas');
+// console.log('------ AND ------');
+// // && does the opposite of || (which is counter intuitive actually).
+// // If the datatype is falsey, it immediately gets returned and it short circuits
+// //logic here: the last operator will only be published if EVERYTHING is true. 
+// //If anything is falsy, than you can return that falsy value, because the entire list will be falsy
+// console.log(0 && 'Jonas');
+// console.log(7 && 'Jonas');
 
-//practical example
-// If the method orderPizza exists (in js i bet you can create the method for an instance whenever thinking in js baby), then perform the method order pizza
-if (restaurant.orderPizza) {
-  restaurant.orderPizza('bacon', 'chickens')
-}
+// //practical example
+// // If the method orderPizza exists (in js i bet you can create the method for an instance whenever thinking in js baby), then perform the method order pizza
+// if (restaurant.orderPizza) {
+//   restaurant.orderPizza('bacon', 'chickens')
+// }
 
-//this can be shortened to:
-restaurant.orderPizza && restaurant.orderPizza('chicken', 'bacons')
+// //this can be shortened to:
+// restaurant.orderPizza && restaurant.orderPizza('chicken', 'bacons')
 
 
 // // 106 Rest Pattern and Parameters
