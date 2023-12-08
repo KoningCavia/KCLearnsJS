@@ -52,293 +52,317 @@ const restaurant = {
   }
 };
 
+// 111 Looping arrays: the for-loop
 
-// 109 Logical Assignment operators
-const rest1 =  {
-  name: 'Capri',
-  numGuests: 0,
-};
-const rest2 =  {
-  name: 'la Piazza',
-  owner: 'Giovanni Rosi',
-};
+const menu = [...restaurant.starterMenu, ... restaurant.mainMenu]
 
-//FIRSTLY based of  || -> the OR assignment operator
-// // Using the || operator to set a default
-// rest2.numGuests = rest2.numGuests || 10
-// rest1.numGuests = rest1.numGuests || 10
+for (const item of menu) {
+  console.log(item);
+}
 
-// // This is literally the same but even Shorter!
-// rest1.numGuests ||= 10;
-// rest2.numGuests ||= 10;
+// the entries method wil return an individual array for each item. This array contains both the index number of the item and the item itself.
+for (const item of menu.entries()) {
+  console.log(item)
+}
+
+// index 0 gives the index number, indes 1 gives the item. 
+for (const item of menu.entries()) {
+  console.log(`${item[0]+1}: ${item[1]}`);
+}
+
+// we can treat the array like any other array and use destructuring here. kinda amazing
+for (const [i, el] of menu.entries()) {
+  console.log(`${i+1}: ${el}`);
+}
+
+
+
+// // 109 Logical Assignment operators
+// const rest1 =  {
+//   name: 'Capri',
+//   numGuests: 0,
+// };
+// const rest2 =  {
+//   name: 'la Piazza',
+//   owner: 'Giovanni Rosi',
+// };
+
+// //FIRSTLY based of  || -> the OR assignment operator
+// // // Using the || operator to set a default
+// // rest2.numGuests = rest2.numGuests || 10
+// // rest1.numGuests = rest1.numGuests || 10
+
+// // // This is literally the same but even Shorter!
+// // rest1.numGuests ||= 10;
+// // rest2.numGuests ||= 10;
+
+// // console.log(rest1);
+// // console.log(rest2);
+
+// //SECONDLY variant of ?? -> Nullish assignment operator
+
+// rest1.numGuests ??= 10;
+// rest2.numGuests ??= 10;
 
 // console.log(rest1);
 // console.log(rest2);
 
-//SECONDLY variant of ?? -> Nullish assignment operator
 
-rest1.numGuests ??= 10;
-rest2.numGuests ??= 10;
+// // Thirdly:variant of && -> the AND assignment operators 
+// // If the restaurant has an owner, we want to replace it with the string anonymous
 
-console.log(rest1);
-console.log(rest2);
+// // rest1.owner = rest1.owner && '<ANONYMOUS>';     // returns undefined, because rest1.owner is undefined
+// // rest2.owner = rest2.owner && '<ANONYMOUS>';     // returns anonymous, because rest2.owner is truthy
+// rest1.owner &&= '<ANONYMOUS>'
+// rest2.owner &&= '<ANONYMOUS>'
 
+// console.log(rest1);       // returns undefined, because rest1.owner is undefined
+// console.log(rest2);       // returns anonymous, because rest2.owner is truthy
 
-// Thirdly:variant of && -> the AND assignment operators 
-// If the restaurant has an owner, we want to replace it with the string anonymous
 
-// rest1.owner = rest1.owner && '<ANONYMOUS>';     // returns undefined, because rest1.owner is undefined
-// rest2.owner = rest2.owner && '<ANONYMOUS>';     // returns anonymous, because rest2.owner is truthy
-rest1.owner &&= '<ANONYMOUS>'
-rest2.owner &&= '<ANONYMOUS>'
 
-console.log(rest1);       // returns undefined, because rest1.owner is undefined
-console.log(rest2);       // returns anonymous, because rest2.owner is truthy
+// // //108 The nullish coalescing operator (??)
 
+// // restaurant.numGuests = 0;
+// // const guests = restaurant.numGuests || 10;
+// // console.log(guests);
 
+// // // this works literally like the || operator except it works with nullish values rather than falsy values:
+// // const guestCorrect = restaurant.numGuests ?? 10;
+// // console.log(guestCorrect);
 
-// //108 The nullish coalescing operator (??)
+// // // 107 && }} and shortcircuiting
 
-// restaurant.numGuests = 0;
-// const guests = restaurant.numGuests || 10;
-// console.log(guests);
+// // //this can use ANY data type and can return ANY datatype
+// // console.log(3 || 'Jonas');
 
-// // this works literally like the || operator except it works with nullish values rather than falsy values:
-// const guestCorrect = restaurant.numGuests ?? 10;
-// console.log(guestCorrect);
+// // console.log('' || 'Jonas');
+// // console.log(true || 0);
+// // console.log(undefined || null);
 
-// // 107 && }} and shortcircuiting
+// // console.log( undefined || 0 || '' || 'Hello' || 23 || null);
 
-// //this can use ANY data type and can return ANY datatype
-// console.log(3 || 'Jonas');
+// // //check wether there is a value numGuests if not defaults to ten.
+// // restaurant.numGuests = 23;
+// // const guests1 = restaurant.numGuests ? restaurant.numGuests :10;
+// // console.log(guests1);
 
-// console.log('' || 'Jonas');
-// console.log(true || 0);
-// console.log(undefined || null);
+// // //this does literally the same but much quicker.
+// // const guests2 = restaurant.numGuests||10;
+// // console.log(guests2);
 
-// console.log( undefined || 0 || '' || 'Hello' || 23 || null);
 
-// //check wether there is a value numGuests if not defaults to ten.
-// restaurant.numGuests = 23;
-// const guests1 = restaurant.numGuests ? restaurant.numGuests :10;
-// console.log(guests1);
 
-// //this does literally the same but much quicker.
-// const guests2 = restaurant.numGuests||10;
-// console.log(guests2);
+// // console.log('------ AND ------');
+// // // && does the opposite of || (which is counter intuitive actually).
+// // // If the datatype is falsey, it immediately gets returned and it short circuits
+// // //logic here: the last operator will only be published if EVERYTHING is true. 
+// // //If anything is falsy, than you can return that falsy value, because the entire list will be falsy
+// // console.log(0 && 'Jonas');
+// // console.log(7 && 'Jonas');
 
+// // //practical example
+// // // If the method orderPizza exists (in js i bet you can create the method for an instance whenever thinking in js baby), then perform the method order pizza
+// // if (restaurant.orderPizza) {
+// //   restaurant.orderPizza('bacon', 'chickens')
+// // }
 
+// // //this can be shortened to:
+// // restaurant.orderPizza && restaurant.orderPizza('chicken', 'bacons')
 
-// console.log('------ AND ------');
-// // && does the opposite of || (which is counter intuitive actually).
-// // If the datatype is falsey, it immediately gets returned and it short circuits
-// //logic here: the last operator will only be published if EVERYTHING is true. 
-// //If anything is falsy, than you can return that falsy value, because the entire list will be falsy
-// console.log(0 && 'Jonas');
-// console.log(7 && 'Jonas');
 
-// //practical example
-// // If the method orderPizza exists (in js i bet you can create the method for an instance whenever thinking in js baby), then perform the method order pizza
-// if (restaurant.orderPizza) {
-//   restaurant.orderPizza('bacon', 'chickens')
-// }
+// // // 106 Rest Pattern and Parameters
 
-// //this can be shortened to:
-// restaurant.orderPizza && restaurant.orderPizza('chicken', 'bacons')
+// // //Spread because the '...' is on the right side of the '='
+// // const arr = [1,2, ...[3,4]];
 
+// // //Rest because the '...' is on the left side of the '='
+// // const [a,b, ...others]= [1,2,3,4,5];
+// // console.log(a,b, others);
 
-// // 106 Rest Pattern and Parameters
+// // //arrays
+// // const [pizza, , Risotto, ...otherFood] = [
+// //   ...restaurant.mainMenu,
+// //   ...restaurant.starterMenu
+// // ];
+// // console.log(pizza, Risotto, otherFood);
 
-// //Spread because the '...' is on the right side of the '='
-// const arr = [1,2, ...[3,4]];
 
-// //Rest because the '...' is on the left side of the '='
-// const [a,b, ...others]= [1,2,3,4,5];
-// console.log(a,b, others);
+// // // Objects
+// // const { sat, ...weekdays} = restaurant.openingHours;
+// // console.log({...weekdays});
+// // console.log(weekdays);
 
-// //arrays
-// const [pizza, , Risotto, ...otherFood] = [
-//   ...restaurant.mainMenu,
-//   ...restaurant.starterMenu
-// ];
-// console.log(pizza, Risotto, otherFood);
 
+// // // Functions
+// // const add = function(...numbers) {
+// //   let sum = 0
+// //   for (let i = 0; i < numbers.length; i++) {
+// //     sum+= numbers[i];
+// //   }
 
-// // Objects
-// const { sat, ...weekdays} = restaurant.openingHours;
-// console.log({...weekdays});
-// console.log(weekdays);
+// //   console.log(sum);
+// //   console.log(numbers);
+// // }
 
+// // add(2,3)
+// // add(5,3,7,2)
+// // add(8,2,5,3,2,1,4)
+// // const x = [23 ,5 ,7]
+// // add(...x)
 
-// // Functions
-// const add = function(...numbers) {
-//   let sum = 0
-//   for (let i = 0; i < numbers.length; i++) {
-//     sum+= numbers[i];
-//   }
+// // restaurant.orderPizza('mushroom' , 'onion' , 'olives', 'spinach')
+// // restaurant.orderPizza('poekies')
+
+
 
-//   console.log(sum);
-//   console.log(numbers);
-// }
+// //105 Spread operator
+// // console.log(`105 SPREAD OPERATOR`);
+// // const arr = [7, 8, 9]; // we have array
+// // const badNewArray = [1, 2, arr[0], arr[1], arr[2]]; // we add array jankily to existing array
+// // console.log(badNewArray); // but it works
+// // const newArray = [1, 2, ...arr]; // does the same but better and in less code
+// // console.log(newArray);
+// // console.log(...newArray); // it basically just unpacks your entire array
+
+// // const newMeny = [...restaurant.mainMenu, 'Gnocci']; // we created a new menu that takes the old meny and adds gnocci. Old array stil exists.
 
-// add(2,3)
-// add(5,3,7,2)
-// add(8,2,5,3,2,1,4)
-// const x = [23 ,5 ,7]
-// add(...x)
+// // // Copy array
+// // const mainMenuCopy = [...restaurant.mainMenu];
 
-// restaurant.orderPizza('mushroom' , 'onion' , 'olives', 'spinach')
-// restaurant.orderPizza('poekies')
-
-
+// // //join 2 arrays
+// // const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+// // console.log(menu);
+
+// // const str = 'Jonas';
+// // const letters = [...str, ' ', 'S.'];
+// // console.log(letters);
 
-//105 Spread operator
-// console.log(`105 SPREAD OPERATOR`);
-// const arr = [7, 8, 9]; // we have array
-// const badNewArray = [1, 2, arr[0], arr[1], arr[2]]; // we add array jankily to existing array
-// console.log(badNewArray); // but it works
-// const newArray = [1, 2, ...arr]; // does the same but better and in less code
-// console.log(newArray);
-// console.log(...newArray); // it basically just unpacks your entire array
-
-// const newMeny = [...restaurant.mainMenu, 'Gnocci']; // we created a new menu that takes the old meny and adds gnocci. Old array stil exists.
 
-// // Copy array
-// const mainMenuCopy = [...restaurant.mainMenu];
+// // // real world example
+// // // ask user for toppings/ingredients and save them in an arrayList
+// // const ingredients = [
+// //   // prompt("Let's make pasta! Ingredient 1"), 
+// //   // prompt("Let's make pasta! Ingredient 2"), 
+// //   // prompt("Let's make pasta! Ingredient 3")
+// // ];
+// // console.log(ingredients);
+// // //Call the orderPasta function and automatically add the destructured array as arguments
+// // restaurant.orderPasta(...ingredients);
 
-// //join 2 arrays
-// const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
-// console.log(menu);
-
-// const str = 'Jonas';
-// const letters = [...str, ' ', 'S.'];
-// console.log(letters);
 
 
-// // real world example
-// // ask user for toppings/ingredients and save them in an arrayList
-// const ingredients = [
-//   // prompt("Let's make pasta! Ingredient 1"), 
-//   // prompt("Let's make pasta! Ingredient 2"), 
-//   // prompt("Let's make pasta! Ingredient 3")
-// ];
-// console.log(ingredients);
-// //Call the orderPasta function and automatically add the destructured array as arguments
-// restaurant.orderPasta(...ingredients);
+// // //OBJECTS
+// // const newRestaurant = {...restaurant, founder: 'Guiseppe', foundIn: 1998}
+// // console.log(newRestaurant);
 
 
 
-// //OBJECTS
-// const newRestaurant = {...restaurant, founder: 'Guiseppe', foundIn: 1998}
-// console.log(newRestaurant);
 
 
+// // 104 DESTRUCTURING OBJECTS
+// console.log('104 DESTRUCTURING OBJECT');
 
+// const { name, openingHours, categories } = restaurant;
+// console.log(name, openingHours, categories);
+// //
 
+// const {
+//   name: restaurantName,
+//   openingHours: hours,
+//   categories: tags,
+// } = restaurant;
+// console.log(restaurantName, tags, hours);
 
-// 104 DESTRUCTURING OBJECTS
-console.log('104 DESTRUCTURING OBJECT');
+// //DEFAULT VALUES
+// // menu = [], zet een defaultvalue. "startMenu: starter = []" zet een alias (starter) en een default value voor attribute startMenu
+// const { menu = [], starterMenu: starters = [] } = restaurant;
+// console.log(menu, starters);
 
-const { name, openingHours, categories } = restaurant;
-console.log(name, openingHours, categories);
-//
+// //MUTATING VARIABLES
+// //first we create two variables with default values
+// let a = 111;
+// let b = 999;
+// // we create an object with three variables named a, b, and c
+// const obj = { a: 23, b: 7, c: 14 };
 
-const {
-  name: restaurantName,
-  openingHours: hours,
-  categories: tags,
-} = restaurant;
-console.log(restaurantName, tags, hours);
+// // //we want to mutate variables a and b into the a and b variables from the object. However this intuitive solution doesnt work.
+// // // because this {} normally depicts a codeblock.
+// // {a,b} = obj;
+// // we need to wrap the entire thing in parenthesese for it to work
+// ({a,b} = obj);
+// console.log(a,b);
 
-//DEFAULT VALUES
-// menu = [], zet een defaultvalue. "startMenu: starter = []" zet een alias (starter) en een default value voor attribute startMenu
-const { menu = [], starterMenu: starters = [] } = restaurant;
-console.log(menu, starters);
+// restaurant.orderDelivery({
+//   time: '22:30',
+//   address: 'smakelaarsveld 3',
+//   starterIndex: 2,
+//   mainIndex: 2,
+// });
 
-//MUTATING VARIABLES
-//first we create two variables with default values
-let a = 111;
-let b = 999;
-// we create an object with three variables named a, b, and c
-const obj = { a: 23, b: 7, c: 14 };
+// restaurant.orderDeliveryDestr({
+//   time: '22:30',
+//   address: 'smakelaarsveld 3',
+//   starterIndex: 2,
+//   mainIndex: 2,
+// });
+// console.log('BEYOND HERE BE DRAGONS');
+// console.log('BEYOND HERE BE DRAGONS');
+// console.log('BEYOND HERE BE DRAGONS');
 
-// //we want to mutate variables a and b into the a and b variables from the object. However this intuitive solution doesnt work.
-// // because this {} normally depicts a codeblock.
-// {a,b} = obj;
-// we need to wrap the entire thing in parenthesese for it to work
-({a,b} = obj);
-console.log(a,b);
+// //NESTED OBJECTS
+// // I find this weird, but fri needs to be an attribute of openingHours. and it can only be calles by the log if you initalize it like this first
+// const { fri } = openingHours;
+// console.log(fri);
 
-restaurant.orderDelivery({
-  time: '22:30',
-  address: 'smakelaarsveld 3',
-  starterIndex: 2,
-  mainIndex: 2,
-});
+// // (but i guess this does work in fact)
+// console.log(openingHours.fri);
 
-restaurant.orderDeliveryDestr({
-  time: '22:30',
-  address: 'smakelaarsveld 3',
-  starterIndex: 2,
-  mainIndex: 2,
-});
-console.log('BEYOND HERE BE DRAGONS');
-console.log('BEYOND HERE BE DRAGONS');
-console.log('BEYOND HERE BE DRAGONS');
+// const {
+//   fri: { open, close },
+// } = openingHours;
+// console.log(close, open);
 
-//NESTED OBJECTS
-// I find this weird, but fri needs to be an attribute of openingHours. and it can only be calles by the log if you initalize it like this first
-const { fri } = openingHours;
-console.log(fri);
+// // here we call the orderDelivery method. which takes any object (which we just created  in between {} and logs it to the console)
 
-// (but i guess this does work in fact)
-console.log(openingHours.fri);
+// //// 103 DESTRUCTURING ARRAYS
 
-const {
-  fri: { open, close },
-} = openingHours;
-console.log(close, open);
+// // 103 theory:
+// const arr = [2, 3, 4];
+// // line by line destructuring
+// const a = arr[0];
+// const b = arr[1];
+// const c = arr[2];
 
-// here we call the orderDelivery method. which takes any object (which we just created  in between {} and logs it to the console)
+// // destructuring in one line:
 
-//// 103 DESTRUCTURING ARRAYS
+// const [x, y, z] = arr; // this looks like an array but it is not. It is a way to initialize several values in one line.
 
-// 103 theory:
-const arr = [2, 3, 4];
-// line by line destructuring
-const a = arr[0];
-const b = arr[1];
-const c = arr[2];
+// // theory based on the restaurant object (rondom 10:00 )
+// let [main, secondary] = restaurant.categories; // this extracts the first and second value of the categories array and saves them as tbhe variables main and secondary
+// console.log(main, secondary);
 
-// destructuring in one line:
+// //This is a (slow) method to switch the values:       it requires storing temporary values and is a hassle and hard to read.
+// const temp = main; // temporary save for main
+// main = secondary; // main gets overwritten with new secondary
+// secondary = temp; // secondary gets overwritten with main
+// console.log(main, secondary);
 
-const [x, y, z] = arr; // this looks like an array but it is not. It is a way to initialize several values in one line.
+// // this is better:          It is readable and simple.
+// [main, secondary] = [secondary, main];
+// console.log(main, secondary);
 
-// theory based on the restaurant object (rondom 10:00 )
-let [main, secondary] = restaurant.categories; // this extracts the first and second value of the categories array and saves them as tbhe variables main and secondary
-console.log(main, secondary);
+// const [starter, mainCourse] = restaurant.order(2, 0);
+// console.log(starter, mainCourse);
 
-//This is a (slow) method to switch the values:       it requires storing temporary values and is a hassle and hard to read.
-const temp = main; // temporary save for main
-main = secondary; // main gets overwritten with new secondary
-secondary = temp; // secondary gets overwritten with main
-console.log(main, secondary);
+// //Nested destructuringg
+// const nested = [2, 4, [5, 6]];
+// const [i, , j] = nested;
+// console.log(i, j);
 
-// this is better:          It is readable and simple.
-[main, secondary] = [secondary, main];
-console.log(main, secondary);
+// const [l, , [m, n]] = nested;
+// console.log(l, m, n);
 
-const [starter, mainCourse] = restaurant.order(2, 0);
-console.log(starter, mainCourse);
-
-//Nested destructuringg
-const nested = [2, 4, [5, 6]];
-const [i, , j] = nested;
-console.log(i, j);
-
-const [l, , [m, n]] = nested;
-console.log(l, m, n);
-
-//Default values
-const [p, q, r] = [8, 9];
-console.log(p, q, r); // the third value r is undefined, because the original array only had two values
+// //Default values
+// const [p, q, r] = [8, 9];
+// console.log(p, q, r); // the third value r is undefined, because the original array only had two values
