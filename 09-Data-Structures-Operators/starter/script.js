@@ -52,28 +52,79 @@ const restaurant = {
   }
 };
 
-// 111 Looping arrays: the for-loop
 
-const menu = [...restaurant.starterMenu, ... restaurant.mainMenu]
+// 113 Chaining chaining
 
-for (const item of menu) {
-  console.log(item);
+// oh oh. Maandag bestaat helemaal niet. Dus mon.open bestaat ZEKER  niet. Wat nu?
+// console.log(restaurant.openingHours.mon.open);
+
+//we kunnen dit doen om te checken of mon uberhaupt bestaat. Dit is onleedbaar broer wtf.
+// en als maandag wel bestaat, maar er zijn geen openings hours, dan
+if (restaurant.openingHours.mon) console.log(restaurant.openingHours.mon.open);
+
+// en als maandag wel bestaat, maar er zijn geen openings hours, dan moet je nog een check doen. en dit kan best wel doorslaan met lange method chains
+if (restaurant.openingHours.mon && restaurant.openingHours.mon.open) console.log(restaurant.openingHours.mon.open);
+
+//optional chaining to the rescue. EZ Bby. og btw de ? is nullish (like before)
+console.log(restaurant.openingHours.mon?.open);
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri' , 'sat', 'sun'];
+for(const day of days) {
+  console.log(day);
+  //day isnt an actual name in the object. just a name in the for loop
+  // restaurant.openingHours.day
+  //so we do this: and im not sure why
+  console.log(restaurant.openingHours[day]);
 }
 
-// the entries method wil return an individual array for each item. This array contains both the index number of the item and the item itself.
-for (const item of menu.entries()) {
-  console.log(item)
+// use case of the nullish coalescing operator!!! and also optional chaining
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 'oh shit, we actually closed';
+  console.log(`on ${day}, we open at ${open}`);
 }
 
-// index 0 gives the index number, indes 1 gives the item. 
-for (const item of menu.entries()) {
-  console.log(`${item[0]+1}: ${item[1]}`);
-}
+//METHODS
+//check to see if method exists or gives a warning.
+console.log(restaurant.order?.(0,1) ?? 'Method does not exist');
+console.log(restaurant.orderRisotto?.(0,1) ?? 'Method does not exist');
 
-// we can treat the array like any other array and use destructuring here. kinda amazing
-for (const [i, el] of menu.entries()) {
-  console.log(`${i+1}: ${el}`);
+//ARRAYS
+//to check if array is empty
+const users = [
+  // {name: 'Jonas', email: 'hello@jonas.io'}
+]
+console.log(users[0]?.name ?? 'User array empty');
+
+//the above used to be like this
+if(users.length>0) {
+  console.log(users[0].name)
+ } else {
+console.log('Users Array empty');
 }
+//. what a hassle. nooo optional chaining is much better.
+
+// // 111 Looping arrays: the for-loop
+
+// const menu = [...restaurant.starterMenu, ... restaurant.mainMenu]
+
+// for (const item of menu) {
+//   console.log(item);
+// }
+
+// // the entries method wil return an individual array for each item. This array contains both the index number of the item and the item itself.
+// for (const item of menu.entries()) {
+//   console.log(item)
+// }
+
+// // index 0 gives the index number, indes 1 gives the item. 
+// for (const item of menu.entries()) {
+//   console.log(`${item[0]+1}: ${item[1]}`);
+// }
+
+// // we can treat the array like any other array and use destructuring here. kinda amazing
+// for (const [i, el] of menu.entries()) {
+//   console.log(`${i+1}: ${el}`);
+// }
 
 
 
