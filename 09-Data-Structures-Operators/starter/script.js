@@ -4,15 +4,8 @@
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
-// Data needed for first part of the section
-const restaurant = {
-  name: 'Classico Italiano',
-  location: 'Via Angelo Tavanti 23, Firenze, Italy',
-  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
-  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
-  openingHours: {
+  const openingHours = {
     thu: {
       open: 12,
       close: 22,
@@ -25,7 +18,15 @@ const restaurant = {
       open: 0, // Open 24 hours
       close: 24,
     },
-  },
+  }
+  
+// Data needed for first part of the section
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
   order: function (starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
@@ -53,55 +54,86 @@ const restaurant = {
 };
 
 
-// 113 Chaining chaining
+// Object.keys(openingHours) takes the openinghours object's KEYS and turns it into an Array
+const properties = Object.keys(openingHours);
+console.log('keys:', properties);
 
-// oh oh. Maandag bestaat helemaal niet. Dus mon.open bestaat ZEKER  niet. Wat nu?
-// console.log(restaurant.openingHours.mon.open);
-
-//we kunnen dit doen om te checken of mon uberhaupt bestaat. Dit is onleedbaar broer wtf.
-// en als maandag wel bestaat, maar er zijn geen openings hours, dan
-if (restaurant.openingHours.mon) console.log(restaurant.openingHours.mon.open);
-
-// en als maandag wel bestaat, maar er zijn geen openings hours, dan moet je nog een check doen. en dit kan best wel doorslaan met lange method chains
-if (restaurant.openingHours.mon && restaurant.openingHours.mon.open) console.log(restaurant.openingHours.mon.open);
-
-//optional chaining to the rescue. EZ Bby. og btw de ? is nullish (like before)
-console.log(restaurant.openingHours.mon?.open);
-
-const days = ['mon', 'tue', 'wed', 'thu', 'fri' , 'sat', 'sun'];
-for(const day of days) {
-  console.log(day);
-  //day isnt an actual name in the object. just a name in the for loop
-  // restaurant.openingHours.day
-  //so we do this: and im not sure why
-  console.log(restaurant.openingHours[day]);
+let openStr = `We are open on ${properties.length} days:`;
+//114 looping over objects
+for (const day of properties) {
+  // console.log(day);
+  openStr += `${day}, `;
 }
 
-// use case of the nullish coalescing operator!!! and also optional chaining
-for (const day of days) {
-  const open = restaurant.openingHours[day]?.open ?? 'oh shit, we actually closed';
-  console.log(`on ${day}, we open at ${open}`);
+console.log(openStr);
+
+
+//PROPERTY VALUES
+// before we got the keys, now we got the values
+const values = Object.values(openingHours);
+console.log('values',values);
+
+
+//ENTIRE object
+//and now we use "entries" which is both the key and the values.
+const entries = Object.entries(openingHours);
+console.log('entries:', entries);
+
+// down here we destructure the openingHours object and the arrays containing the times. 
+for (const [key, {open, close}] of entries) {
+  console.log(`On ${key} we open at ${open} and close at ${close}`);
 }
 
-//METHODS
-//check to see if method exists or gives a warning.
-console.log(restaurant.order?.(0,1) ?? 'Method does not exist');
-console.log(restaurant.orderRisotto?.(0,1) ?? 'Method does not exist');
 
-//ARRAYS
-//to check if array is empty
-const users = [
-  // {name: 'Jonas', email: 'hello@jonas.io'}
-]
-console.log(users[0]?.name ?? 'User array empty');
+// // 113 Chaining chaining
 
-//the above used to be like this
-if(users.length>0) {
-  console.log(users[0].name)
- } else {
-console.log('Users Array empty');
-}
-//. what a hassle. nooo optional chaining is much better.
+// // oh oh. Maandag bestaat helemaal niet. Dus mon.open bestaat ZEKER  niet. Wat nu?
+// // console.log(restaurant.openingHours.mon.open);
+
+// //we kunnen dit doen om te checken of mon uberhaupt bestaat. Dit is onleedbaar broer wtf.
+// // en als maandag wel bestaat, maar er zijn geen openings hours, dan
+// if (restaurant.openingHours.mon) console.log(restaurant.openingHours.mon.open);
+
+// // en als maandag wel bestaat, maar er zijn geen openings hours, dan moet je nog een check doen. en dit kan best wel doorslaan met lange method chains
+// if (restaurant.openingHours.mon && restaurant.openingHours.mon.open) console.log(restaurant.openingHours.mon.open);
+
+// //optional chaining to the rescue. EZ Bby. og btw de ? is nullish (like before)
+// console.log(restaurant.openingHours.mon?.open);
+
+// const days = ['mon', 'tue', 'wed', 'thu', 'fri' , 'sat', 'sun'];
+// for(const day of days) {
+//   console.log(day);
+//   //day isnt an actual name in the object. just a name in the for loop
+//   // restaurant.openingHours.day
+//   //so we do this: and im not sure why
+//   console.log(restaurant.openingHours[day]);
+// }
+
+// // use case of the nullish coalescing operator!!! and also optional chaining
+// for (const day of days) {
+//   const open = restaurant.openingHours[day]?.open ?? 'oh shit, we actually closed';
+//   console.log(`on ${day}, we open at ${open}`);
+// }
+
+// //METHODS
+// //check to see if method exists or gives a warning.
+// console.log(restaurant.order?.(0,1) ?? 'Method does not exist');
+// console.log(restaurant.orderRisotto?.(0,1) ?? 'Method does not exist');
+
+// //ARRAYS
+// //to check if array is empty
+// const users = [
+//   // {name: 'Jonas', email: 'hello@jonas.io'}
+// ]
+// console.log(users[0]?.name ?? 'User array empty');
+
+// //the above used to be like this
+// if(users.length>0) {
+//   console.log(users[0].name)
+//  } else {
+// console.log('Users Array empty');
+// }
+// //. what a hassle. nooo optional chaining is much better.
 
 // // 111 Looping arrays: the for-loop
 
