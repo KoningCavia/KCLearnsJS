@@ -54,6 +54,7 @@ const restaurant = {
 };
 
 
+// 114 Looping objects, + keys values and entries
 // Object.keys(openingHours) takes the openinghours object's KEYS and turns it into an Array
 const properties = Object.keys(openingHours);
 console.log('keys:', properties);
