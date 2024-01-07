@@ -53,37 +53,89 @@ const restaurant = {
   }
 };
 
+// 116 SETS
+// a set = a unique set of iterables. So for example here an array (which is iterable). 
+  const ordersSet = new Set([
+    'Pasta', 'Pizza', 'Pizza', 'Risotto', 'Pasta', 'Pizza'
+  ]);
+  console.log(ordersSet);
 
-// 114 Looping objects, + keys values and entries
-// Object.keys(openingHours) takes the openinghours object's KEYS and turns it into an Array
-const properties = Object.keys(openingHours);
-console.log('keys:', properties);
+  // a string is also iterable
+  console.log(new Set('Jonas'));
 
-let openStr = `We are open on ${properties.length} days:`;
-//114 looping over objects
-for (const day of properties) {
-  // console.log(day);
-  openStr += `${day}, `;
-}
+  // get size of set. Note it is not .length, but .size 
+  console.log(ordersSet.size); // 3
 
-console.log(openStr);
+  // Check if a particular value is present in the set
+  console.log(ordersSet.has('Pizza')); // true
+  console.log(ordersSet.has('Bread')); // false
+
+  // add new elements to set
+  ordersSet.add('Garlic Bread');
+  ordersSet.add('Garlic Bread'); // the garlic bread was added twice, but shows once of course
+
+  //remove element from set
+  ordersSet.delete('Risotto');
+  console.log(ordersSet); // no risotto anymore
+
+  // a set doesnt have indexes. So the below doesnt work. This makes sense: there is no need for it. If all values are unique and they have no order. then it doesnt make any sense.
+  console.log(ordersSet[0]);
+
+  // // Empty a set:
+  // ordersSet.clear;
+
+  // looping over set (they are iterables)
+  for (const order of ordersSet){
+  console.log(order)  
+  } // results in loose values rather than a array.
 
 
-//PROPERTY VALUES
-// before we got the keys, now we got the values
-const values = Object.values(openingHours);
-console.log('values',values);
+  //Example UseCase  -> a typical use for sets is removing duplicates from an array.
+  const staff = ['waiter', 'Chef', 'waiter', 'Manager', 'Chef', 'waiter'];
+  //lets check which positions exist in our restaurant
+const staffUnique = new Set(staff);
+console.log(staffUnique);
+//now we have a set, but we want it to be an array again.
+//we make a new Set using the staff array. and we immediately destructure that (...) and make it an array ( [] ) 
+const staffUniqueArray = [...new Set(staff)];
+console.log(staffUniqueArray);
+
+// it looks a bit weird, but here we log to the console how many unique values are in the Set (3).
+// we have a list of non-uique values. We turn it into a set and we determine the size, which we log to the console.
+console.log(new Set(['waiter', 'Chef', 'waiter', 'Manager', 'Chef', 'waiter']).size);
 
 
-//ENTIRE object
-//and now we use "entries" which is both the key and the values.
-const entries = Object.entries(openingHours);
-console.log('entries:', entries);
+console.log(new Set('HarrydeBarry').size);
+// // 114 Looping objects, + keys values and entries
+// // Object.keys(openingHours) takes the openinghours object's KEYS and turns it into an Array
+// const properties = Object.keys(openingHours);
+// console.log('keys:', properties);
 
-// down here we destructure the openingHours object and the arrays containing the times. 
-for (const [key, {open, close}] of entries) {
-  console.log(`On ${key} we open at ${open} and close at ${close}`);
-}
+// let openStr = `We are open on ${properties.length} days:`;
+// //114 looping over objects
+// for (const day of properties) {
+//   // console.log(day);
+//   openStr += `${day}, `;
+// }
+
+// console.log(openStr);
+
+
+// //PROPERTY VALUES
+// // before we got the keys, now we got the values
+// const values = Object.values(openingHours);
+// console.log('values',values);
+
+
+// //ENTIRE object
+// //and now we use "entries" which is both the key and the values.
+// const entries = Object.entries(openingHours);
+// console.log('entries:', entries);
+
+// // down here we destructure the openingHours object and the arrays containing the times. 
+// for (const [key, {open, close}] of entries) {
+//   console.log(`On ${key} we open at ${open} and close at ${close}`);
+// }
 
 
 // // 113 Chaining chaining
