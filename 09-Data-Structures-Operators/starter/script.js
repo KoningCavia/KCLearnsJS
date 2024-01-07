@@ -53,59 +53,124 @@ const restaurant = {
   }
 };
 
-// 116 SETS
-// a set = a unique set of iterables. So for example here an array (which is iterable). 
-  const ordersSet = new Set([
-    'Pasta', 'Pizza', 'Pizza', 'Risotto', 'Pasta', 'Pizza'
-  ]);
-  console.log(ordersSet);
 
-  // a string is also iterable
-  console.log(new Set('Jonas'));
+// 117 MAPS
+//is a datastructure we can use to 
 
-  // get size of set. Note it is not .length, but .size 
-  console.log(ordersSet.size); // 3
+const rest = new Map();
+//add key-value pair to the map. similar to the add method in sets
+rest.set('Name', 'Classico Italiano');
+rest.set(1, 'Firenze, Italy');
+// this shows not only the added pair, but the entire updated map.
+console.log(rest.set(2, 'Lisban Portugal'));
 
-  // Check if a particular value is present in the set
-  console.log(ordersSet.has('Pizza')); // true
-  console.log(ordersSet.has('Bread')); // false
-
-  // add new elements to set
-  ordersSet.add('Garlic Bread');
-  ordersSet.add('Garlic Bread'); // the garlic bread was added twice, but shows once of course
-
-  //remove element from set
-  ordersSet.delete('Risotto');
-  console.log(ordersSet); // no risotto anymore
-
-  // a set doesnt have indexes. So the below doesnt work. This makes sense: there is no need for it. If all values are unique and they have no order. then it doesnt make any sense.
-  console.log(ordersSet[0]);
-
-  // // Empty a set:
-  // ordersSet.clear;
-
-  // looping over set (they are iterables)
-  for (const order of ordersSet){
-  console.log(order)  
-  } // results in loose values rather than a array.
+//this allows us to chain the set method like so:
+rest.set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+    .set('Open', 11)
+    .set('close', 23)
+    .set(true, 'We are open')
+    .set(false, 'We are close');
 
 
-  //Example UseCase  -> a typical use for sets is removing duplicates from an array.
-  const staff = ['waiter', 'Chef', 'waiter', 'Manager', 'Chef', 'waiter'];
-  //lets check which positions exist in our restaurant
-const staffUnique = new Set(staff);
-console.log(staffUnique);
-//now we have a set, but we want it to be an array again.
-//we make a new Set using the staff array. and we immediately destructure that (...) and make it an array ( [] ) 
-const staffUniqueArray = [...new Set(staff)];
-console.log(staffUniqueArray);
+    // we can of course retrievve information from our map and all we need is to use get on the name of the key.
+console.log(rest.get('name'));
+console.log(rest.get(true));
+console.log(rest.get(1));
 
-// it looks a bit weird, but here we log to the console how many unique values are in the Set (3).
-// we have a list of non-uique values. We turn it into a set and we determine the size, which we log to the console.
-console.log(new Set(['waiter', 'Chef', 'waiter', 'Manager', 'Chef', 'waiter']).size);
+// determie if the restaurant is open or closed we can do this: rest.get(boolean). if the time is between open and close do rest.get(true) (is open), else do rest.get(false) (closed).
+const time = 21;
+rest.get(time > rest.get('open') && time<rest.get('close'));
+
+//check if certain key is present
+console.log(rest.has('categories'));
+//remove key-value pair
+rest.delete(2);
+console.log(rest);
+
+//size property
+console.log(rest.size);
+
+//remove all elements from map
+rest.clear();
+console.log(rest);
+
+//use an array as a key-value pair
+rest.set([1,2], 'Test');
+console.log(rest.get([1,2]));  // this returns undefined. weird right? It's because while the values are the same, it is a different Array/object. 
+//This WOULD work
+const arr = [3,4];
+rest.set(arr, 'Test2');
+console.log(rest.get(arr));
+
+// dome elements are objects. So we can get the heading. Now if you hover over h1 in the dom, it will highlight the heading element. pretty cool hey.
+rest.set(document.querySelector('h1'), 'Heading');
+console.log(rest);
 
 
-console.log(new Set('HarrydeBarry').size);
+
+//-----------------------------------------------------
+
+
+// // 116 SETS
+
+
+// // a set = a unique set of iterables. So for example here an array (which is iterable). 
+//   const ordersSet = new Set([
+//     'Pasta', 'Pizza', 'Pizza', 'Risotto', 'Pasta', 'Pizza'
+//   ]);
+//   console.log(ordersSet);
+
+//   // a string is also iterable
+//   console.log(new Set('Jonas'));
+
+//   // get size of set. Note it is not .length, but .size 
+//   console.log(ordersSet.size); // 3
+
+//   // Check if a particular value is present in the set
+//   console.log(ordersSet.has('Pizza')); // true
+//   console.log(ordersSet.has('Bread')); // false
+
+//   // add new elements to set
+//   ordersSet.add('Garlic Bread');
+//   ordersSet.add('Garlic Bread'); // the garlic bread was added twice, but shows once of course
+
+//   //remove element from set
+//   ordersSet.delete('Risotto');
+//   console.log(ordersSet); // no risotto anymore
+
+//   // a set doesnt have indexes. So the below doesnt work. This makes sense: there is no need for it. If all values are unique and they have no order. then it doesnt make any sense.
+//   console.log(ordersSet[0]);
+
+//   // // Empty a set:
+//   // ordersSet.clear;
+
+//   // looping over set (they are iterables)
+//   for (const order of ordersSet){
+//   console.log(order)  
+//   } // results in loose values rather than a array.
+
+
+//   //Example UseCase  -> a typical use for sets is removing duplicates from an array.
+//   const staff = ['waiter', 'Chef', 'waiter', 'Manager', 'Chef', 'waiter'];
+//   //lets check which positions exist in our restaurant
+// const staffUnique = new Set(staff);
+// console.log(staffUnique);
+// //now we have a set, but we want it to be an array again.
+// //we make a new Set using the staff array. and we immediately destructure that (...) and make it an array ( [] ) 
+// const staffUniqueArray = [...new Set(staff)];
+// console.log(staffUniqueArray);
+
+// // it looks a bit weird, but here we log to the console how many unique values are in the Set (3).
+// // we have a list of non-uique values. We turn it into a set and we determine the size, which we log to the console.
+// console.log(new Set(['waiter', 'Chef', 'waiter', 'Manager', 'Chef', 'waiter']).size);
+
+
+// console.log(new Set('HarrydeBarry').size);
+
+
+// ------------------------------------------------------------------------------------
+
+
 // // 114 Looping objects, + keys values and entries
 // // Object.keys(openingHours) takes the openinghours object's KEYS and turns it into an Array
 // const properties = Object.keys(openingHours);
