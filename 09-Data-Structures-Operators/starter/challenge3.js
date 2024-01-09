@@ -16,14 +16,16 @@ const gameEvents = new Map([
 
 //      1. Create an array 'events' of the different game events that happened (no
 //     duplicates)
-console.log([...gameEvents.values()]);
+//this creates an aray of (key/value-pair) arrays
 
 //step by step version
-const eventsSet = new Set([...gameEvents.values()])
+console.log(gameEvents.values());
+const eventsSet = new Set(gameEvents.values())
 const events = [eventsSet];
 console.log(events);
 //short version :)
-console.log([new Set([...gameEvents.values()])]);
+// console.log([new Set([...gameEvents.values()])]);
+// console.log([...new Set(gameEvents.values())]);
 
 //     2. After the game has finished, is was found that the yellow card from minute 64
 //     was unfair. So remove this event from the game events log.
@@ -52,7 +54,7 @@ for (const [time, event] of gameEvents) {
     time > 45 ? console.log('second half', time, event ) :  console.log('first half', time, event);
 };
 
-for (const[key, value] of question) {
-    if (typeof key=== 'number') {
-      console.log(`Answer ${key}: ${value}`);
-    }};
+
+for (const [time, event] of gameEvents) {
+    time > 45 ? console.log('second half', time, event ) :  console.log('first half', time, event);
+};

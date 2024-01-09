@@ -54,103 +54,107 @@ const restaurant = {
 };
 
 
-//118 Maps iteration
-//in the last method we used the set method to add new values to the map.
-// however there is a different wa thats less cumbersome. Which is during initalization of the map, i guess.
 
-const question = new Map([
-  ['Question', 'What is the best programming language i the world?'],
-  [1, 'C'],
-  [2, 'Java'],
-  [3, 'JavaScript'],
-  ['correct', 3],
-  [true, 'Correct'],
-  [false, 'Try again']
-])
-console.log(question); // this gives the exact same array structure as when using:
-console.log(Object.entries(openingHours));
-// in both cases we get an: Array of arrays.
-//this means theres an easy way to convert objects to maps. (but probably not the other way around?)
-const hoursMap = new Map(Object.entries(openingHours));
-console.log(hoursMap);
-
-// Iteration.
-// maps are iterables so the for loop is usable here.
-// first we log the question
-console.log(question.get('question'));
-//then if the key is a number log the key and the value (show only possible answers
-for (const[key, value] of question) {
-  if (typeof key=== 'number') {
-    console.log(`Answer ${key}: ${value}`);
-  }};
-
-  // now open a prompt menu and ask for an answer. The answer is a string so we convert it to a number.
-  const answer = Number(prompt('Your answer'));
-  console.log(answer);
+//---------------------------------------------------------------------------------------
+// //118 Maps iteration
 
 
-console.log(question.get(answer == question.get('correct')));
+// //in the last method we used the set method to add new values to the map.
+// // however there is a different wa thats less cumbersome. Which is during initalization of the map, i guess.
 
-// convert map back to array:
+// const question = new Map([
+//   ['Question', 'What is the best programming language i the world?'],
+//   [1, 'C'],
+//   [2, 'Java'],
+//   [3, 'JavaScript'],
+//   ['correct', 3],
+//   [true, 'Correct'],
+//   [false, 'Try again']
+// ])
+// console.log(question); // this gives the exact same array structure as when using:
+// console.log(Object.entries(openingHours));
+// // in both cases we get an: Array of arrays.
+// //this means theres an easy way to convert objects to maps. (but probably not the other way around?)
+// const hoursMap = new Map(Object.entries(openingHours));
+// console.log(hoursMap);
 
-console.log([...question]); //now we end again with an array of arrays!
-// console.log([...question.entries]); // is the same as the line above
-console.log([...question.keys]);
-console.log([...question.values]);
-//-----------------------------------------------------------------------------
+// // Iteration.
+// // maps are iterables so the for loop is usable here.
+// // first we log the question
+// console.log(question.get('question'));
+// //then if the key is a number log the key and the value (show only possible answers
+// for (const[key, value] of question) {
+//   if (typeof key=== 'number') {
+//     console.log(`Answer ${key}: ${value}`);
+//   }};
+
+//   // now open a prompt menu and ask for an answer. The answer is a string so we convert it to a number.
+//   const answer = Number(prompt('Your answer'));
+//   console.log(answer);
 
 
-// 117 MAPS
-//is a datastructure we can use to 
+// console.log(question.get(answer == question.get('correct')));
 
-const rest = new Map();
-//add key-value pair to the map. similar to the add method in sets
-rest.set('Name', 'Classico Italiano');
-rest.set(1, 'Firenze, Italy');
-// this shows not only the added pair, but the entire updated map.
-console.log(rest.set(2, 'Lisban Portugal'));
+// // convert map back to array:
 
-//this allows us to chain the set method like so:
-rest.set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
-    .set('Open', 11)
-    .set('close', 23)
-    .set(true, 'We are open')
-    .set(false, 'We are close');
+// console.log([...question]); //now we end again with an array of arrays!
+// // console.log([...question.entries]); // is the same as the line above
+// console.log([...question.keys]);
+// console.log([...question.values]);
+// //-----------------------------------------------------------------------------
 
 
-    // we can of course retrievve information from our map and all we need is to use get on the name of the key.
-console.log(rest.get('name'));
-console.log(rest.get(true));
-console.log(rest.get(1));
+// // 117 MAPS
+// //is a datastructure we can use to 
 
-// determie if the restaurant is open or closed we can do this: rest.get(boolean). if the time is between open and close do rest.get(true) (is open), else do rest.get(false) (closed).
-const time = 21;
-rest.get(time > rest.get('open') && time<rest.get('close'));
+// const rest = new Map();
+// //add key-value pair to the map. similar to the add method in sets
+// rest.set('Name', 'Classico Italiano');
+// rest.set(1, 'Firenze, Italy');
+// // this shows not only the added pair, but the entire updated map.
+// console.log(rest.set(2, 'Lisban Portugal'));
 
-//check if certain key is present
-console.log(rest.has('categories'));
-//remove key-value pair
-rest.delete(2);
-console.log(rest);
+// //this allows us to chain the set method like so:
+// rest.set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+//     .set('Open', 11)
+//     .set('close', 23)
+//     .set(true, 'We are open')
+//     .set(false, 'We are close');
 
-//size property
-console.log(rest.size);
 
-//remove all elements from map
-rest.clear();
-console.log(rest);
+//     // we can of course retrievve information from our map and all we need is to use get on the name of the key.
+// console.log(rest.get('name'));
+// console.log(rest.get(true));
+// console.log(rest.get(1));
 
-//use an array as a key-value pair
-rest.set([1,2], 'Test');
-console.log(rest.get([1,2]));  // this returns undefined. weird right? It's because while the values are the same, it is a different Array/object. 
-//This WOULD work
-const arr = [3,4];
-rest.set(arr, 'Test2');
-console.log(rest.get(arr));
+// // determie if the restaurant is open or closed we can do this: rest.get(boolean). if the time is between open and close do rest.get(true) (is open), else do rest.get(false) (closed).
+// const time = 21;
+// rest.get(time > rest.get('open') && time<rest.get('close'));
 
-// dome elements are objects. So we can get the heading. Now if you hover over h1 in the dom, it will highlight the heading element. pretty cool hey.
-rest.set(document.querySelector('h1'), 'Heading');
-console.log(rest);
+// //check if certain key is present
+// console.log(rest.has('categories'));
+// //remove key-value pair
+// rest.delete(2);
+// console.log(rest);
+
+// //size property
+// console.log(rest.size);
+
+// //remove all elements from map
+// rest.clear();
+// console.log(rest);
+
+// //use an array as a key-value pair
+// rest.set([1,2], 'Test');
+// console.log(rest.get([1,2]));  // this returns undefined. weird right? It's because while the values are the same, it is a different Array/object. 
+// //This WOULD work
+// const arr = [3,4];
+// rest.set(arr, 'Test2');
+// console.log(rest.get(arr));
+
+// // dome elements are objects. So we can get the heading. Now if you hover over h1 in the dom, it will highlight the heading element. pretty cool hey.
+// rest.set(document.querySelector('h1'), 'Heading');
+// console.log(rest);
 
 
 
