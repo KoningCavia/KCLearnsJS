@@ -53,6 +53,61 @@ const restaurant = {
   }
 };
 
+// -------------------------------------------------------------------------------------
+// 119 working with string 1
+
+ const airline = 'TAP air Portugal';
+ const plane = 'A320';
+
+ //every letter in a string has an index number
+ console.log(plane[0]);
+ console.log(plane[1]);
+ console.log(plane[2]);
+ console.log('B737'[0]);  //the same, but directly on the string
+
+ console.log(airline.length);  // length of the word
+ console.log('B737'.length); 
+
+ console.log(airline.indexOf('r'));   // find first occurence of a letter
+ console.log(airline.lastIndexOf('r')); // lat occurence of a letter
+console.log(airline.indexOf('Portugal'));   //find words
+
+//usecase, extract parts of string
+
+console.log(airline.slice(4));   // 4 is the position where the extraction starts. It excludes the first 4 letters.
+console.log(airline.slice(4, 7));  // 4 is beginning and 7 is end of the slice.
+ 
+//Extract the first word
+console.log(airline.slice(0, airline.indexOf(" "))); // start at index 0, and ends at index of the first 'space'.
+//extract the last word
+console.log(airline.slice(airline.lastIndexOf(' ')+1));  //we start extraction at first 'space'and we dont specify the end (it's not necesary). We add the +1 to remove the space
+
+console.log(airline.slice(-2));   // negative values start counting from the end. So this shows the last 2 letters
+console.log(airline.slice(1, -1));  //start at index one and end at second to last index.
+
+// const checkMiddleSeat = function(seat) {
+//   // B and E are middle seat
+//   if (seat.slice(-1) == 'B' || seat.slice(-1) == 'E') {
+//     console.log(seat.slice(-1));
+//     console.log('Is middle seat');
+//   } else {
+//     console.log(seat.slice(-1));
+//     console.log('Is not middle seat');
+//   }
+// }
+
+// same solution, written shorteri find this ugly. i prefer using else { }, but whatever.
+const checkMiddleSeat = function(seat) {
+const s = seat.slice(-1);
+if (s =='B' || s =='E')
+console.log('Is middle seat');
+else console.log('Is not middle seat');
+}
+
+checkMiddleSeat('11B')
+checkMiddleSeat('23C')
+checkMiddleSeat('3E')
+
 
 
 //---------------------------------------------------------------------------------------
