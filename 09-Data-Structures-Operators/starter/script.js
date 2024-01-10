@@ -51,62 +51,157 @@ const restaurant = {
   console.log(mainIngredient);
   console.log(...otherIngredients);
   }
+
 };
 
-// -------------------------------------------------------------------------------------
-// 119 working with string 1
+  //---------------------------------------------------------------------------------
+  // Airline 'DATA'
 
- const airline = 'TAP air Portugal';
- const plane = 'A320';
 
- //every letter in a string has an index number
- console.log(plane[0]);
- console.log(plane[1]);
- console.log(plane[2]);
- console.log('B737'[0]);  //the same, but directly on the string
-
- console.log(airline.length);  // length of the word
- console.log('B737'.length); 
-
- console.log(airline.indexOf('r'));   // find first occurence of a letter
- console.log(airline.lastIndexOf('r')); // lat occurence of a letter
-console.log(airline.indexOf('Portugal'));   //find words
-
-//usecase, extract parts of string
-
-console.log(airline.slice(4));   // 4 is the position where the extraction starts. It excludes the first 4 letters.
-console.log(airline.slice(4, 7));  // 4 is beginning and 7 is end of the slice.
+  const airline = 'TAP air Portugal';
+  const plane = 'A320';
  
-//Extract the first word
-console.log(airline.slice(0, airline.indexOf(" "))); // start at index 0, and ends at index of the first 'space'.
-//extract the last word
-console.log(airline.slice(airline.lastIndexOf(' ')+1));  //we start extraction at first 'space'and we dont specify the end (it's not necesary). We add the +1 to remove the space
 
-console.log(airline.slice(-2));   // negative values start counting from the end. So this shows the last 2 letters
-console.log(airline.slice(1, -1));  //start at index one and end at second to last index.
+ //-----------------------------------------------------------------------------------
+// 121 
+ 
+// //----------------------------------------------------------------------------------
+// // 120 Working with Strings 2
 
+// console.log(airline.toLowerCase());
+// console.log(airline.toUpperCase());
+
+// // Fix capitalization in name
+// const passenger = 'jOnAs'; //Jonas
+// const passengerLower = passenger.toLowerCase();
+// let passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1);
+// console.log(passengerCorrect);  // now it is correct
+
+// const fixPassengerName = function(name) {
+//   const nameLower = name.toLowerCase();
+//   const nameCorrect = nameLower[0].toUpperCase() + nameLower.slice(1);
+//   console.log(nameCorrect);
+// }
+// fixPassengerName('WICHer');
+// fixPassengerName('HARRY');
+// fixPassengerName('Mark');
+
+// //Comparing Emails
+
+// const email = 'hello@harry.io';
+// const loginEmail = 'Hello@Harry.Io \n';
+
+// const lowerEmail = loginEmail.toLowerCase();  // change everything to lower case
+// const trimmedEmail = lowerEmail.trim(); // Get rid of white space
+// console.log(trimmedEmail);
+
+// //do the above in one step
+// const normalizedEmail = loginEmail.toLowerCase().trim()
+
+// console.log(normalizedEmail);
+// console.log(email === normalizedEmail);
+
+
+// // REPLACING
+// const priceGB = '288,97€'   //in europa komma, maar niet in us. 
+// const priceUS = priceGB.replace('€', '$').replace(',', '.'); //replace specific symbols with other symbols
+// console.log(priceUS);
+
+// const announcement = 'All passengers come to boarding door 23. Boarding door 23!';
+
+// console.log(announcement.replace('door', 'gate'));  //however this only replaces the first instance of the word door. 
+// console.log(announcement.replaceAll('door', 'gate')); // This works (it is new, but it is not in the autosuggestions..)
+// console.log(announcement);
+// console.log(announcement.replace(/door/, 'gate'));  // the /txt/ here works like '' but it is called a 'regular expression'. the 'g' means global.
+
+
+// // BOOLEANS
+
+// const plane2 = 'A320neo';
+// const plane3 = 'Airbus neo'
+// console.log(plane2.includes('A320'));
+// console.log(plane2.includes('Boing'));
+
+// console.log(plane2.startsWith('Air'));  //false
+// console.log(plane3.startsWith('Air'));   //true
+
+// // check if plane is an airbus, and check if the type is neo.
+// if(plane3.startsWith('Airbus') && plane3.endsWith('neo')) {
+//   console.log('Part of the new airbus Family');
+// } 
+
+// // PRACTICE EXERCISE
+
+// const checkBaggage = function(items) {
+//   const baggage = items.toLowerCase();
+//   // const baggage = items; //this doesnt check for uppercased words so the first person could enter with a knife.
+
+//   if (baggage.includes('knife') || baggage.includes('gun')) {
+//   console.log('You are not allowed on board')
+// } else {
+//   console.log('Welcome on Board')
+// }}
+
+// checkBaggage('I have a laptop, some Food and a pocketKnife');
+// checkBaggage('Socks and Camera');
+// checkBaggage('Got some snacks and a gun for protection');
+
+
+
+// // -------------------------------------------------------------------------------------
+// // 119 working with string 1
+
+//  const airline = 'TAP air Portugal';
+//  const plane = 'A320';
+
+//  //every letter in a string has an index number
+//  console.log(plane[0]);
+//  console.log(plane[1]);
+//  console.log(plane[2]);
+//  console.log('B737'[0]);  //the same, but directly on the string
+
+//  console.log(airline.length);  // length of the word
+//  console.log('B737'.length); 
+
+//  console.log(airline.indexOf('r'));   // find first occurence of a letter
+//  console.log(airline.lastIndexOf('r')); // lat occurence of a letter
+// console.log(airline.indexOf('Portugal'));   //find words
+
+// //usecase, extract parts of string
+
+// console.log(airline.slice(4));   // 4 is the position where the extraction starts. It excludes the first 4 letters.
+// console.log(airline.slice(4, 7));  // 4 is beginning and 7 is end of the slice.
+ 
+// //Extract the first word
+// console.log(airline.slice(0, airline.indexOf(" "))); // start at index 0, and ends at index of the first 'space'.
+// //extract the last word
+// console.log(airline.slice(airline.lastIndexOf(' ')+1));  //we start extraction at first 'space'and we dont specify the end (it's not necesary). We add the +1 to remove the space
+
+// console.log(airline.slice(-2));   // negative values start counting from the end. So this shows the last 2 letters
+// console.log(airline.slice(1, -1));  //start at index one and end at second to last index.
+
+// // const checkMiddleSeat = function(seat) {
+// //   // B and E are middle seat
+// //   if (seat.slice(-1) == 'B' || seat.slice(-1) == 'E') {
+// //     console.log(seat.slice(-1));
+// //     console.log('Is middle seat');
+// //   } else {
+// //     console.log(seat.slice(-1));
+// //     console.log('Is not middle seat');
+// //   }
+// // }
+
+// // same solution, written shorteri find this ugly. i prefer using else { }, but whatever.
 // const checkMiddleSeat = function(seat) {
-//   // B and E are middle seat
-//   if (seat.slice(-1) == 'B' || seat.slice(-1) == 'E') {
-//     console.log(seat.slice(-1));
-//     console.log('Is middle seat');
-//   } else {
-//     console.log(seat.slice(-1));
-//     console.log('Is not middle seat');
-//   }
+// const s = seat.slice(-1);
+// if (s =='B' || s =='E')
+// console.log('Is middle seat');
+// else console.log('Is not middle seat');
 // }
 
-// same solution, written shorteri find this ugly. i prefer using else { }, but whatever.
-const checkMiddleSeat = function(seat) {
-const s = seat.slice(-1);
-if (s =='B' || s =='E')
-console.log('Is middle seat');
-else console.log('Is not middle seat');
-}
-
-checkMiddleSeat('11B')
-checkMiddleSeat('23C')
-checkMiddleSeat('3E')
+// checkMiddleSeat('11B')
+// checkMiddleSeat('23C')
+// checkMiddleSeat('3E')
 
 
 
