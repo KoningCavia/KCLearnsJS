@@ -63,7 +63,7 @@ const restaurant = {
  
 
  //-----------------------------------------------------------------------------------
-// 121 Working with string 3
+// 124 Working with string 3
 
 // SPLIT AND JOIN
 
@@ -128,7 +128,7 @@ planesInLine(3);
 planesInLine(22);
 
 // //----------------------------------------------------------------------------------
-// // 122 Working with Strings 2
+// // 123 Working with Strings 2
 
 // console.log(airline.toLowerCase());
 // console.log(airline.toUpperCase());
