@@ -63,10 +63,72 @@ const restaurant = {
  
 
  //-----------------------------------------------------------------------------------
-// 121 
+// 121 Working with string 3
+
+// SPLIT AND JOIN
+
+
+// splits the string at any '+' sign and returns an array of created segments.
+console.log('A+very+nice+string'.split('+')); 
+console.log('Harry Barry'.split(' '));
+
+// split first and last name
+const [firstName, lastName] = 'Harry Barry'.split(' '); 
+
+// joins all strings into the array into one string, devided by a ' '. also lastName is made uppercase
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' '); 
+console.log(newName);
+
+
+// takes a name and capitalizes the first letter of each word.
+const capitalizeName = function(name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+
+  for(const n of names) {
+    // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));   // same but different
+
+  }
+  console.log(namesUpper.join(' '));
+}
+
+capitalizeName('jessica ann smith davis');
+capitalizeName('Henk Stubbe');
+capitalizeName('Floris Jan van Fleppenstein'); 
  
+// PADDING
+const mesage = 'Go to gate 23!';
+
+//make the string 25  symbols long, padd it using the '+' sign at the start
+console.log(mesage.padStart(25, '+'));
+console.log(mesage.padStart(25, '+').padEnd(35, '+'));
+console.log(mesage.padEnd(25, '+'));    //pad at the end
+
+
+const maskCreditCard = function(number) {
+  const str = number+'';    //turn number into a string 
+  const last = str.slice(-4);     // take the alst 4 symbols
+  return last.padStart(str.length, '*');  //padd the new string to length of original nr.
+}
+
+console.log(maskCreditCard(12345678));
+console.log(maskCreditCard('1321i2473411731'));
+
+
+const message2 = 'Bad weather... All departures delayed...'
+console.log(message2.repeat(5));
+
+const planesInLine = function(n) {
+  console.log(`There are ${n} planes in line ${'✈️'.repeat(n)}`);
+}
+ 
+planesInLine(5);
+planesInLine(3);
+planesInLine(22);
+
 // //----------------------------------------------------------------------------------
-// // 120 Working with Strings 2
+// // 122 Working with Strings 2
 
 // console.log(airline.toLowerCase());
 // console.log(airline.toUpperCase());
@@ -149,7 +211,7 @@ const restaurant = {
 
 
 // // -------------------------------------------------------------------------------------
-// // 119 working with string 1
+// // 122 working with string 1
 
 //  const airline = 'TAP air Portugal';
 //  const plane = 'A320';
