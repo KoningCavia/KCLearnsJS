@@ -31,14 +31,13 @@
 
   document.body.append(document.createElement('textarea')); 
   document.body.append(document.createElement('button')); 
-
-  const refactorText = function() {
+  const button = document.querySelector('button').addEventListener('click', function() {
   const str = document.querySelector('textarea').value;
-  let strSplit = str.toLowerCase().split('\n');
+  let strSplit = str.split('\n');
   let i = 1
 
     for (const word of strSplit) {
-      let [word1, word2] = word.trim().split('_'); 
+      let [word1, word2] = word.toLowerCase().trim().split('_'); 
 
       const word2Capital = [];
       word2Capital.push(word1);
@@ -48,7 +47,7 @@
       console.log(wordsDone);
       i++;
     }
-  }
+  })
   //add listener to button
-  const button = document.querySelector('button')
-  button.addEventListener('click', refactorText); 
+  // const button = document.querySelector('button').addEventListener('click', refactorText); 
+  // button.addEventListener('click', refactorText); 

@@ -127,54 +127,54 @@ planesInLine(5);
 planesInLine(3);
 planesInLine(22);
 
-// //----------------------------------------------------------------------------------
-// // 123 Working with Strings 2
+//----------------------------------------------------------------------------------
+// 123 Working with Strings 2
 
-// console.log(airline.toLowerCase());
-// console.log(airline.toUpperCase());
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
 
-// // Fix capitalization in name
-// const passenger = 'jOnAs'; //Jonas
-// const passengerLower = passenger.toLowerCase();
-// let passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1);
-// console.log(passengerCorrect);  // now it is correct
+// Fix capitalization in name
+const passenger = 'jOnAs'; //Jonas
+const passengerLower = passenger.toLowerCase();
+let passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);  // now it is correct
 
-// const fixPassengerName = function(name) {
-//   const nameLower = name.toLowerCase();
-//   const nameCorrect = nameLower[0].toUpperCase() + nameLower.slice(1);
-//   console.log(nameCorrect);
-// }
-// fixPassengerName('WICHer');
-// fixPassengerName('HARRY');
-// fixPassengerName('Mark');
+const fixPassengerName = function(name) {
+  const nameLower = name.toLowerCase();
+  const nameCorrect = nameLower[0].toUpperCase() + nameLower.slice(1);
+  console.log(nameCorrect);
+}
+fixPassengerName('WICHer');
+fixPassengerName('HARRY');
+fixPassengerName('Mark');
 
-// //Comparing Emails
+//Comparing Emails
 
-// const email = 'hello@harry.io';
-// const loginEmail = 'Hello@Harry.Io \n';
+const email = 'hello@harry.io';
+const loginEmail = 'Hello@Harry.Io \n';
 
-// const lowerEmail = loginEmail.toLowerCase();  // change everything to lower case
-// const trimmedEmail = lowerEmail.trim(); // Get rid of white space
-// console.log(trimmedEmail);
+const lowerEmail = loginEmail.toLowerCase();  // change everything to lower case
+const trimmedEmail = lowerEmail.trim(); // Get rid of white space
+console.log(trimmedEmail);
 
-// //do the above in one step
-// const normalizedEmail = loginEmail.toLowerCase().trim()
+//do the above in one step
+const normalizedEmail = loginEmail.toLowerCase().trim()
 
-// console.log(normalizedEmail);
-// console.log(email === normalizedEmail);
+console.log(normalizedEmail);
+console.log(email === normalizedEmail);
 
 
-// // REPLACING
-// const priceGB = '288,97€'   //in europa komma, maar niet in us. 
-// const priceUS = priceGB.replace('€', '$').replace(',', '.'); //replace specific symbols with other symbols
-// console.log(priceUS);
+// REPLACING
+const priceGB = '288,97€'   //in europa komma, maar niet in us. 
+const priceUS = priceGB.replace('€', '$').replace(',', '.'); //replace specific symbols with other symbols
+console.log(priceUS);
 
-// const announcement = 'All passengers come to boarding door 23. Boarding door 23!';
+const announcement = 'All passengers come to boarding door 23. Boarding door 23!';
 
-// console.log(announcement.replace('door', 'gate'));  //however this only replaces the first instance of the word door. 
-// console.log(announcement.replaceAll('door', 'gate')); // This works (it is new, but it is not in the autosuggestions..)
-// console.log(announcement);
-// console.log(announcement.replace(/door/, 'gate'));  // the /txt/ here works like '' but it is called a 'regular expression'. the 'g' means global.
+console.log(announcement.replace('door', 'gate'));  //however this only replaces the first instance of the word door. 
+console.log(announcement.replaceAll('door', 'gate')); // This works (it is new, but it is not in the autosuggestions..)
+console.log(announcement);
+console.log(announcement.replace(/door/, 'gate'));  // the /txt/ here works like '' but it is called a 'regular expression'. the 'g' means global.
 
 
 // // BOOLEANS
