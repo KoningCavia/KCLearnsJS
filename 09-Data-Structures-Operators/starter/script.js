@@ -86,12 +86,12 @@ const capitalizeName = function(name) {
   const namesUpper = [];
 
   for(const n of names) {
-    // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n[0].toUpperCase() + n.slice(1));
     namesUpper.push(n.replace(n[0], n[0].toUpperCase()));   // same but different
 
   }
   console.log(namesUpper.join(' '));
-}
+  }
 
 capitalizeName('jessica ann smith davis');
 capitalizeName('Henk Stubbe');

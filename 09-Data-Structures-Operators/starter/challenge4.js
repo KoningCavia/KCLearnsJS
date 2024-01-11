@@ -32,53 +32,23 @@
   document.body.append(document.createElement('textarea')); 
   document.body.append(document.createElement('button')); 
 
-
-
-  //create method to refactor string from textbox
   const refactorText = function() {
-      //retrieve info from text box
   const str = document.querySelector('textarea').value;
-// const str = "   underscore_case \n first_name \nSome_Variable  \n  calculate_AGE \n delayed_departure  ";
+  let strSplit = str.toLowerCase().split('\n');
+  let i = 1
 
-  console.log(str);
+    for (const word of strSplit) {
+      let [word1, word2] = word.trim().split('_'); 
 
-    //remove spaces
+      const word2Capital = [];
+      word2Capital.push(word1);
+      word2Capital.push(word2[0].toUpperCase() + word2.slice(1));
 
-
-    // toLowerCap
-    let strLower = str.toLowerCase();
-
-    //split text by '\n' (put in aray?), into 5 elements
-
-    //split each element into 2
-
-    // capitalize second word of each element
-
-    // join two words of each element
-
-    // use for loop to log.consol each element to console
-
-    // add increasingly more smileys per element in the for loop.
-
-    console.log("hiephoi");
-    console.log(strLower);
-    //
+      let wordsDone = word2Capital.join('').padEnd(20, ' ').padEnd(20+i, '✅');
+      console.log(wordsDone);
+      i++;
+    }
   }
-
-
   //add listener to button
   const button = document.querySelector('button')
   button.addEventListener('click', refactorText); 
-
-
-// const str = "   underscore_case \n first_name \nSome_Variable  \n  calculate_AGE \n delayed_departure  ";
-
-// console.log("Original String:");
-// console.log(/str/);
-
-// const strTrimmed = str.trim();  
-
-// console.log("Trimmed String:");
-// console.log(strTrimmed);
-// const textareaContent = document.querySelector('textarea').value;
-// console.log(textareaContent);
