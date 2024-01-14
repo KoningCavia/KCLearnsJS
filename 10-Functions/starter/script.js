@@ -1,4 +1,9 @@
 'use strict';
+
+// //------------------------------------------------------
+// // 132  Functions accepting callback functions
+
+// //------------------------------------------------------
 // // 132  Functions accepting callback functions
 
 const oneWord = function (str) {
@@ -35,6 +40,9 @@ document.body.addEventListener('click', high5);
 //callback functions allow us to  reuse usefull code but more important
 // they allow us to create abstraction
 // // 131 First class and higher order functions. Like the transformer. we could have given it the code directly, but we have abstracted that away. the transformer doesnt care about what it does. (safety i guess?)
+
+// //------------------------------------------------------
+// // 131 firts class functions and higher order functions
 
 //FIRST CLASS FUNCTIONS
 // are first class citizens (they are treated as values and this is very special for Javascript). Function are just another type of object and objects are values, so funciton are simply values.
