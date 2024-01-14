@@ -2,44 +2,77 @@
 
 // //------------------------------------------------------
 // // 132  Functions accepting callback functions
+//opposite from last lecture
+
+const greet = function(greeting) {
+    return function(name) {
+        console.log(`${greeting} ${name}`);
+    }
+}
+
+//the greet method returns a function. Which is stored as 'greeterHey', in this case.
+const greeterHey = greet('Hey');
+
+greeterHey('Harry');
+greeterHey('Rinus');
+
+// we can do all of this in one line: 
+//greet('Hello') returns a function. So we can call it simply like this.
+greet('Hello')('Rooie Rinus');
+
+//What's the point to do this: It has to do with functional programming.
+
+
+// rewrite above code as arrow method. pretty hard and weird and unreadable. met chatGPT
+const greetArrow = (greeting) => { return (name) => {console.log(`${greeting} ${name}`)}};
+
+//All unnecesart boiler code removed
+const greetArrow2 = greeting => name => {console.log(`${greeting} ${name}`)};
+
+greetArrow('Mai')('BimBam Bino');
+greetArrow2('Halli Hallo')('Kleiner Feigling')
 
 // //------------------------------------------------------
 // // 132  Functions accepting callback functions
 
-const oneWord = function (str) {
-  return str.replace(/ /g, '').toLowerCase();
-};
+// const oneWord = function (str) {
+//   return str.replace(/ /g, '').toLowerCase();
+// };
 
-const upperFirstWord = function (str) {
-  const [first, ...others] = str.split(' ');
-  return [first.toUpperCase(), ...others].join(' ');
-};
+// const upperFirstWord = function (str) {
+//   const [first, ...others] = str.split(' ');
+//   return [first.toUpperCase(), ...others].join(' ');
+// };
 
-// higher-order function
-const transformer = function (str, fn) {
-  console.log(`Original string: ${str}`);
-  console.log(`Transformed string: ${fn(str)}`);
-  console.log(`Transformed by: ${fn.name}`); // name is a baked in property of methods
-};
+// // higher-order function
+// const transformer = function (str, fn) {
+//   console.log(`Original string: ${str}`);
+//   console.log(`Transformed string: ${fn(str)}`);
+//   console.log(`Transformed by: ${fn.name}`); // name is a baked in property of methods
+// };
 
-// Here we are passing in a string and a function. See how we are not 'calling' the function (it doesnt end with '()'). we are merely passing it in like a value.
-transformer('JavaScript is the best!', upperFirstWord);
-transformer('JavaScript is the best!', oneWord);
+// // Here we are passing in a string and a function. See how we are not 'calling' the function (it doesnt end with '()'). we are merely passing it in like a value.
+// transformer('JavaScript is the best!', upperFirstWord);
+// transformer('JavaScript is the best!', oneWord);
 
-//first order function
-const high5 = function () {
-  console.log('👋');
-};
+// //first order function
+// const high5 = function () {
+//   console.log('👋');
+// };
 
-//higher order function. (that returns the above first order function.)
-//JS uses callbacks ALL the time
-document.body.addEventListener('click', high5);
-//returns 3 waves. One for each name.
-['Harry', 'Pieternella', 'Pomni'].forEach(high5);
+// //higher order function. (that returns the above first order function.)
+// //JS uses callbacks ALL the time
+// document.body.addEventListener('click', high5);
+// //returns 3 waves. One for each name.
+// ['Harry', 'Pieternella', 'Pomni'].forEach(high5);
 
-//callback functions allow us to  reuse usefull code but more important
-// they allow us to create abstraction
-// // 131 First class and higher order functions. Like the transformer. we could have given it the code directly, but we have abstracted that away. the transformer doesnt care about what it does. (safety i guess?)
+// //callback functions allow us to  reuse usefull code but more important
+// // they allow us to create abstraction
+// // // 131 First class and higher order functions. Like the transformer. we could have given it the code directly, but we have abstracted that away. the transformer doesnt care about what it does. (safety i guess?)
+
+
+
+
 
 // //------------------------------------------------------
 // // 131 firts class functions and higher order functions
@@ -57,6 +90,10 @@ document.body.addEventListener('click', high5);
 
 //first class functions is just a feature that a languge has or does not hav. All it means is that all function are values. There are no first-class functions in practice. Its just a concept
 //there are however higher order functions in practice. Which are possible because the language reports first-class functions.
+
+
+
+
 
 // //------------------------------------------------------
 // // 130 Passing arguments value vs reference
@@ -89,6 +126,11 @@ document.body.addEventListener('click', high5);
 // };
 // newPassport(Harry);
 // checkIn(flight, Harry);
+
+
+
+
+
 
 // // // ------------------------------------------------------
 // // // 129 Default Parameters
