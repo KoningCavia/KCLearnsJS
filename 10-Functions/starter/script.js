@@ -1,4 +1,7 @@
 'use strict';
+
+
+
 // //------------------------------------------------------
 // // 134 The call and apply methods
 
@@ -66,8 +69,91 @@ console.log(swiss);
 // we just use the call method and destructure the array using the spread operator.
 book.call(swiss, ...flightdata);
 
-
 // //------------------------------------------------------
+// // 135 The bind method
+
+//just like the call method it allows us to bind a method to an object. the difference with the call method is, bind doesnt immediately call the function. It returns a new function where the 'this.' keyword is bound.
+
+const bookEW = book.bind(eurowings);
+const bookLM = book.bind(lufthansa);
+const bookLX = book.bind(swiss);
+
+bookEW(23, 'Steven Gull')
+console.log(eurowings);     // apparently the method is not logged as part of the object.
+
+// using bind we can also create a function for a specific fligt, by defining arguments/parameters.
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Sjenkie Horgel')  //so we only need to add the name of the passenger :)
+
+const bookEW23Jan = book.bind(eurowings, 23, 'Janneman Robinson'); // Je kunt alle parameters definieren, maar dat is wat overdreven.
+
+
+
+// with EVENTLISTENERS
+
+lufthansa.planes = 300; // add new parameter to lufthanse;
+lufthansa.buyPlanes = function () {    //add new method
+    console.log(this);
+
+
+    this.planes++;
+    console.log(this.planes);
+};
+
+// now we add the method to the button (class name = .buy)
+// document.querySelector('.buy').addEventListener('click', lufthansa.buyPlanes);
+
+//ah, this is wrong. '.this' refers to the button. so the logs are screwy.
+// with eventlisteners the 'this' keyword always refers to the element it is bound to. even when the method using the this keyword is part of an object. oh my javascript..
+lufthansa.buyPlanes;    // here the this keyword works properly.
+
+//we can fix this by using the bind keyword. Because it returns a new function (even within the eventlisteren). 
+// other way of explanating. The first parameter of the'.bind' method is the new '.this' for the function.
+document.querySelector('.buy').addEventListener('click', lufthansa.buyPlanes.bind(lufthansa));
+// and now it works properly :).
+
+
+
+// PARTIAL APPLICATION
+
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.10, 200));
+
+// now we create a specific addtax method for BTW.
+const addVAT = addTax.bind(null, 0.23)  
+//even though there is now relevant this keyword for this situation the bind method expects one. So we set it to null.
+// const addVAT = value => value + value * 0.23;    // this is the new method we made (hardcoded).
+
+console.log(addVAT(100));
+console.log(addVAT(23));
+
+//!!!   Binding basically makes a more specific version of a method from a more general version of that method.   !!!
+
+const addTax2 = function(rate, value) {
+    console.log(`taxes are ${value + value*rate}`);
+    return function(newRate) {
+        // addTax2.bind(null, newRate)
+
+        console.log(`Special added tax = ${value + value*newRate}`);
+    }
+}
+
+addTax2(0.10, 100)(0.23);
+
+const addTaxRate = function(rate) {
+    return function(value) {
+        return value + value *rate;
+    }
+}
+
+const addVAT3 = addTaxRate(0.23)    // returns a method, but with the rate already set.
+console.log(addVAT3(100));          // Uses the returned function with the set rate, and new value
+console.log(addVAT3(23));
+
+
+
+
+// // ------------------------------------------------------
 // // 133  Functions returning functions
 // //opposite from last lecture
 
@@ -135,7 +221,7 @@ book.call(swiss, ...flightdata);
 
 // //callback functions allow us to  reuse usefull code but more important
 // // they allow us to create abstraction
-// // // 131 First class and higher order functions. Like the transformer. we could have given it the code directly, but we have abstracted that away. the transformer doesnt care about what it does. (safety i guess?)
+// // 131 First class and higher order functions. Like the transformer. we could have given it the code directly, but we have abstracted that away. the transformer doesnt care about what it does. (safety i guess?)
 
 
 
