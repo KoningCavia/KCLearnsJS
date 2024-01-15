@@ -1,36 +1,103 @@
 'use strict';
-
 // //------------------------------------------------------
-// // 132  Functions accepting callback functions
-//opposite from last lecture
+// // 134 The call and apply methods
 
-const greet = function(greeting) {
-    return function(name) {
-        console.log(`${greeting} ${name}`);
-    }
+const lufthansa = {
+    airline: 'Lufthansa',
+    iataCode: 'LH',
+    bookings: [],
+
+    // new syntax for methods writing. (removes the unnecesary 'function' keyword)
+    book(flighNum, name) {
+    console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flighNum}`);
+    // adds a string describing the current booking to the bookings array.
+    this.bookings.push({flight: `${this.iataCode}${flighNum}`, name})
+    },
 }
 
-//the greet method returns a function. Which is stored as 'greeterHey', in this case.
-const greeterHey = greet('Hey');
+lufthansa.book(239, 'Harry de Barry');
+lufthansa.book(667, 'Rooie Rinus');
 
-greeterHey('Harry');
-greeterHey('Rinus');
+const eurowings = {
+    airline: 'Eurowings',
+    iataCode: 'EW',
+    bookings: [],
+    // we want the same method here. Butcopying the method is bad practice.
+};
 
-// we can do all of this in one line: 
-//greet('Hello') returns a function. So we can call it simply like this.
-greet('Hello')('Rooie Rinus');
+//we store the method lufthanse.book as a new method. this is possible because we have first order functions. cool.
+const book = lufthansa.book
+// doesnt work, because only the method was copied. so 'this.' doesnt aim at anything.
+// book(23, 'Greetje Rachelvoet')
 
-//What's the point to do this: It has to do with functional programming.
 
 
-// rewrite above code as arrow method. pretty hard and weird and unreadable. met chatGPT
-const greetArrow = (greeting) => { return (name) => {console.log(`${greeting} ${name}`)}};
+//CALL METHOD
 
-//All unnecesart boiler code removed
-const greetArrow2 = greeting => name => {console.log(`${greeting} ${name}`)};
+//now with the '.call' method we can add the name of 'this'/the object we want to use.(which doesnt have the method) and then the normal attributed necesarry and the method will work on that object. 
+book.call(eurowings, 23, 'Histibe Rachelvoet ');
+console.log(eurowings);
+//you can see that the booking is now in the eurowings bookings array. and the book method is based on the eurowings attributed.
 
-greetArrow('Mai')('BimBam Bino');
-greetArrow2('Halli Hallo')('Kleiner Feigling')
+book.call(lufthansa, 23, 'Peter Snotje');
+console.log(lufthansa);
+
+const swiss = {
+    airline: 'Swiss Air Lines',
+    iataCode: 'LX',
+    bookings: [],
+}
+
+book.call(swiss, 555, 'Andre Griezel');
+console.log(swiss);
+
+
+
+// APPLY METHOD
+
+// this is similar to the call method, except it doesnt receive a list of arguments, but it takes an array of arguments.
+
+
+const flightdata = [555, 'Trudy Griezel'];
+book.apply(swiss, flightdata);
+console.log(swiss);
+// Apply is not used in modern java script, because we have something better now that does the exact same thing,:
+
+// we just use the call method and destructure the array using the spread operator.
+book.call(swiss, ...flightdata);
+
+
+// //------------------------------------------------------
+// // 133  Functions returning functions
+// //opposite from last lecture
+
+// const greet = function(greeting) {
+//     return function(name) {
+//         console.log(`${greeting} ${name}`);
+//     }
+// }
+
+// //the greet method returns a function. Which is stored as 'greeterHey', in this case.
+// const greeterHey = greet('Hey');
+
+// greeterHey('Harry');
+// greeterHey('Rinus');
+
+// // we can do all of this in one line: 
+// //greet('Hello') returns a function. So we can call it simply like this.
+// greet('Hello')('Rooie Rinus');
+
+// //What's the point to do this: It has to do with functional programming.
+
+
+// // rewrite above code as arrow method. pretty hard and weird and unreadable. met chatGPT
+// const greetArrow = (greeting) => { return (name) => {console.log(`${greeting} ${name}`)}};
+
+// //All unnecesart boiler code removed
+// const greetArrow2 = greeting => name => {console.log(`${greeting} ${name}`)};
+
+// greetArrow('Mai')('BimBam Bino');
+// greetArrow2('Halli Hallo')('Kleiner Feigling')
 
 // //------------------------------------------------------
 // // 132  Functions accepting callback functions
