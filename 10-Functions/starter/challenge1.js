@@ -1,11 +1,5 @@
 'use strict';
 
-const poll = {
-    question: "What is your favourite programming language?",
-    options: ["0: JavaScript", "1: Python", "2: Rust", "3:C++"],
-    // This generates [0, 0, 0, 0]. More in the next section!
-    answers: new Array(4).fill(0),
-    };
 
 // A Closer Look at Functions
 // Coding Challenge #1
@@ -26,15 +20,15 @@ const poll = {
 // 3: C++
 // (Write option number)
 
+const poll = {
+    question: "What is your favourite programming language?",
+    options: ["0: JavaScript", "1: Python", "2: Rust", "3:C++"],
+    // This generates [0, 0, 0, 0]. More in the next section!
+    answers: new Array(4).fill(0),
+    };
+
 console.log(poll);
 
-// const registerNewAnswer = function() {
-//   // Using forEach loop
-//   console.log("Using forEach loop:");
-//   poll.options.forEach(function (option) {
-//     console.log(option);
-//   });
-// }
 const registerNewAnswer = function () {
 
     const questionPrompt = [];              // create empty prompt
@@ -45,18 +39,32 @@ const registerNewAnswer = function () {
     }
 
     const questionPromptDef = questionPrompt.join('\n')     // turn prompt array in string
-    console.log(`before answering ${poll.answers}`);
 
 
-    let currentAnswer = Number((prompt(questionPromptDef)));       //wrong 
+    let currentAnswer;
 
-    if (currentAnswer >=0 && currentAnswer<= 3) {
-    poll.answers[currentAnswer]++;
-    console.log(`after answering ${poll.answers}`);
-    } else {alert('Answer incorrect. Please try again')}
+    do {
+        currentAnswer = prompt(questionPromptDef);
+        poll.answers[currentAnswer]++;
+        if (currentAnswer === null || currentAnswer.trim() === "" || isNaN(currentAnswer)|| currentAnswer < 0 || currentAnswer > 3) {
+            alert("Invalid input. Please enter a valid number between 0 and 3.")
+        } else {
+            poll.answers[currentAnswer]++
+     }} while (currentAnswer.trim() === "" || isNaN(currentAnswer) || currentAnswer < 0 || currentAnswer > 3)
+
+     
+     console.log(`after answering ${poll.answers}`);    
 
 
-};
+};  
+
+console.log(`before answering ${poll.answers}`);
+// = Number(prompt(questionPromptDef));       //wrong 
+
+// if (currentAnswer >=0 && currentAnswer<= 3) {
+// poll.answers[currentAnswer]++;
+// console.log(`after answering ${poll.answers}`);
+// } else {alert('Answer incorrect. Please try again')}
 document.querySelector('.poll').addEventListener('click', registerNewAnswer )
 // 1.2. Based on the input number, update the 'answers' array property. For
 // example, if the option is 3, increase the value at position 3 of the array by
