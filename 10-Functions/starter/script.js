@@ -2,153 +2,153 @@
 
 
 
-// //------------------------------------------------------
-// // 134 The call and apply methods
+// // //------------------------------------------------------
+// // // 134 The call and apply methods
 
-const lufthansa = {
-    airline: 'Lufthansa',
-    iataCode: 'LH',
-    bookings: [],
+// const lufthansa = {
+//     airline: 'Lufthansa',
+//     iataCode: 'LH',
+//     bookings: [],
 
-    // new syntax for methods writing. (removes the unnecesary 'function' keyword)
-    book(flighNum, name) {
-    console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flighNum}`);
-    // adds a string describing the current booking to the bookings array.
-    this.bookings.push({flight: `${this.iataCode}${flighNum}`, name})
-    },
-}
+//     // new syntax for methods writing. (removes the unnecesary 'function' keyword)
+//     book(flighNum, name) {
+//     console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flighNum}`);
+//     // adds a string describing the current booking to the bookings array.
+//     this.bookings.push({flight: `${this.iataCode}${flighNum}`, name})
+//     },
+// }
 
-lufthansa.book(239, 'Harry de Barry');
-lufthansa.book(667, 'Rooie Rinus');
+// lufthansa.book(239, 'Harry de Barry');
+// lufthansa.book(667, 'Rooie Rinus');
 
-const eurowings = {
-    airline: 'Eurowings',
-    iataCode: 'EW',
-    bookings: [],
-    // we want the same method here. Butcopying the method is bad practice.
-};
+// const eurowings = {
+//     airline: 'Eurowings',
+//     iataCode: 'EW',
+//     bookings: [],
+//     // we want the same method here. Butcopying the method is bad practice.
+// };
 
-//we store the method lufthanse.book as a new method. this is possible because we have first order functions. cool.
-const book = lufthansa.book
-// doesnt work, because only the method was copied. so 'this.' doesnt aim at anything.
-// book(23, 'Greetje Rachelvoet')
-
-
-
-//CALL METHOD
-
-//now with the '.call' method we can add the name of 'this'/the object we want to use.(which doesnt have the method) and then the normal attributed necesarry and the method will work on that object. 
-book.call(eurowings, 23, 'Histibe Rachelvoet ');
-console.log(eurowings);
-//you can see that the booking is now in the eurowings bookings array. and the book method is based on the eurowings attributed.
-
-book.call(lufthansa, 23, 'Peter Snotje');
-console.log(lufthansa);
-
-const swiss = {
-    airline: 'Swiss Air Lines',
-    iataCode: 'LX',
-    bookings: [],
-}
-
-book.call(swiss, 555, 'Andre Griezel');
-console.log(swiss);
+// //we store the method lufthanse.book as a new method. this is possible because we have first order functions. cool.
+// const book = lufthansa.book
+// // doesnt work, because only the method was copied. so 'this.' doesnt aim at anything.
+// // book(23, 'Greetje Rachelvoet')
 
 
 
-// APPLY METHOD
+// //CALL METHOD
 
-// this is similar to the call method, except it doesnt receive a list of arguments, but it takes an array of arguments.
+// //now with the '.call' method we can add the name of 'this'/the object we want to use.(which doesnt have the method) and then the normal attributed necesarry and the method will work on that object. 
+// book.call(eurowings, 23, 'Histibe Rachelvoet ');
+// console.log(eurowings);
+// //you can see that the booking is now in the eurowings bookings array. and the book method is based on the eurowings attributed.
 
+// book.call(lufthansa, 23, 'Peter Snotje');
+// console.log(lufthansa);
 
-const flightdata = [555, 'Trudy Griezel'];
-book.apply(swiss, flightdata);
-console.log(swiss);
-// Apply is not used in modern java script, because we have something better now that does the exact same thing,:
+// const swiss = {
+//     airline: 'Swiss Air Lines',
+//     iataCode: 'LX',
+//     bookings: [],
+// }
 
-// we just use the call method and destructure the array using the spread operator.
-book.call(swiss, ...flightdata);
-
-// //------------------------------------------------------
-// // 135 The bind method
-
-//just like the call method it allows us to bind a method to an object. the difference with the call method is, bind doesnt immediately call the function. It returns a new function where the 'this.' keyword is bound.
-
-const bookEW = book.bind(eurowings);
-const bookLM = book.bind(lufthansa);
-const bookLX = book.bind(swiss);
-
-bookEW(23, 'Steven Gull')
-console.log(eurowings);     // apparently the method is not logged as part of the object.
-
-// using bind we can also create a function for a specific fligt, by defining arguments/parameters.
-const bookEW23 = book.bind(eurowings, 23);
-bookEW23('Sjenkie Horgel')  //so we only need to add the name of the passenger :)
-
-const bookEW23Jan = book.bind(eurowings, 23, 'Janneman Robinson'); // Je kunt alle parameters definieren, maar dat is wat overdreven.
+// book.call(swiss, 555, 'Andre Griezel');
+// console.log(swiss);
 
 
 
-// with EVENTLISTENERS
+// // APPLY METHOD
 
-lufthansa.planes = 300; // add new parameter to lufthanse;
-lufthansa.buyPlanes = function () {    //add new method
-    console.log(this);
+// // this is similar to the call method, except it doesnt receive a list of arguments, but it takes an array of arguments.
 
 
-    this.planes++;
-    console.log(this.planes);
-};
+// const flightdata = [555, 'Trudy Griezel'];
+// book.apply(swiss, flightdata);
+// console.log(swiss);
+// // Apply is not used in modern java script, because we have something better now that does the exact same thing,:
 
-// now we add the method to the button (class name = .buy)
-// document.querySelector('.buy').addEventListener('click', lufthansa.buyPlanes);
+// // we just use the call method and destructure the array using the spread operator.
+// book.call(swiss, ...flightdata);
 
-//ah, this is wrong. '.this' refers to the button. so the logs are screwy.
-// with eventlisteners the 'this' keyword always refers to the element it is bound to. even when the method using the this keyword is part of an object. oh my javascript..
-lufthansa.buyPlanes;    // here the this keyword works properly.
+// // //------------------------------------------------------
+// // // 135 The bind method
 
-//we can fix this by using the bind keyword. Because it returns a new function (even within the eventlisteren). 
-// other way of explanating. The first parameter of the'.bind' method is the new '.this' for the function.
-document.querySelector('.buy').addEventListener('click', lufthansa.buyPlanes.bind(lufthansa));
-// and now it works properly :).
+// //just like the call method it allows us to bind a method to an object. the difference with the call method is, bind doesnt immediately call the function. It returns a new function where the 'this.' keyword is bound.
+
+// const bookEW = book.bind(eurowings);
+// const bookLM = book.bind(lufthansa);
+// const bookLX = book.bind(swiss);
+
+// bookEW(23, 'Steven Gull')
+// console.log(eurowings);     // apparently the method is not logged as part of the object.
+
+// // using bind we can also create a function for a specific fligt, by defining arguments/parameters.
+// const bookEW23 = book.bind(eurowings, 23);
+// bookEW23('Sjenkie Horgel')  //so we only need to add the name of the passenger :)
+
+// const bookEW23Jan = book.bind(eurowings, 23, 'Janneman Robinson'); // Je kunt alle parameters definieren, maar dat is wat overdreven.
 
 
 
-// PARTIAL APPLICATION
+// // with EVENTLISTENERS
 
-const addTax = (rate, value) => value + value * rate;
-console.log(addTax(0.10, 200));
+// lufthansa.planes = 300; // add new parameter to lufthanse;
+// lufthansa.buyPlanes = function () {    //add new method
+//     console.log(this);
 
-// now we create a specific addtax method for BTW.
-const addVAT = addTax.bind(null, 0.23)  
-//even though there is now relevant this keyword for this situation the bind method expects one. So we set it to null.
-// const addVAT = value => value + value * 0.23;    // this is the new method we made (hardcoded).
 
-console.log(addVAT(100));
-console.log(addVAT(23));
+//     this.planes++;
+//     console.log(this.planes);
+// };
 
-//!!!   Binding basically makes a more specific version of a method from a more general version of that method.   !!!
+// // now we add the method to the button (class name = .buy)
+// // document.querySelector('.buy').addEventListener('click', lufthansa.buyPlanes);
 
-const addTax2 = function(rate, value) {
-    console.log(`taxes are ${value + value*rate}`);
-    return function(newRate) {
-        // addTax2.bind(null, newRate)
+// //ah, this is wrong. '.this' refers to the button. so the logs are screwy.
+// // with eventlisteners the 'this' keyword always refers to the element it is bound to. even when the method using the this keyword is part of an object. oh my javascript..
+// lufthansa.buyPlanes;    // here the this keyword works properly.
 
-        console.log(`Special added tax = ${value + value*newRate}`);
-    }
-}
+// //we can fix this by using the bind keyword. Because it returns a new function (even within the eventlisteren). 
+// // other way of explanating. The first parameter of the'.bind' method is the new '.this' for the function.
+// document.querySelector('.buy').addEventListener('click', lufthansa.buyPlanes.bind(lufthansa));
+// // and now it works properly :).
 
-addTax2(0.10, 100)(0.23);
 
-const addTaxRate = function(rate) {
-    return function(value) {
-        return value + value *rate;
-    }
-}
 
-const addVAT3 = addTaxRate(0.23)    // returns a method, but with the rate already set.
-console.log(addVAT3(100));          // Uses the returned function with the set rate, and new value
-console.log(addVAT3(23));
+// // PARTIAL APPLICATION
+
+// const addTax = (rate, value) => value + value * rate;
+// console.log(addTax(0.10, 200));
+
+// // now we create a specific addtax method for BTW.
+// const addVAT = addTax.bind(null, 0.23)  
+// //even though there is now relevant this keyword for this situation the bind method expects one. So we set it to null.
+// // const addVAT = value => value + value * 0.23;    // this is the new method we made (hardcoded).
+
+// console.log(addVAT(100));
+// console.log(addVAT(23));
+
+// //!!!   Binding basically makes a more specific version of a method from a more general version of that method.   !!!
+
+// const addTax2 = function(rate, value) {
+//     console.log(`taxes are ${value + value*rate}`);
+//     return function(newRate) {
+//         // addTax2.bind(null, newRate)
+
+//         console.log(`Special added tax = ${value + value*newRate}`);
+//     }
+// }
+
+// addTax2(0.10, 100)(0.23);
+
+// const addTaxRate = function(rate) {
+//     return function(value) {
+//         return value + value *rate;
+//     }
+// }
+
+// const addVAT3 = addTaxRate(0.23)    // returns a method, but with the rate already set.
+// console.log(addVAT3(100));          // Uses the returned function with the set rate, and new value
+// console.log(addVAT3(23));
 
 
 
@@ -227,22 +227,22 @@ console.log(addVAT3(23));
 
 
 
-// //------------------------------------------------------
-// // 131 firts class functions and higher order functions
+// // //------------------------------------------------------
+// // // 131 firts class functions and higher order functions
 
-//FIRST CLASS FUNCTIONS
-// are first class citizens (they are treated as values and this is very special for Javascript). Function are just another type of object and objects are values, so funciton are simply values.
-// this means we can store functions as in variables or Object properties.
-// we can also pass function as arguments to other functions.
-//we can even return functions from other functions
-// remember functions are objects. so functions can have methods. which is craaaazy.
+// //FIRST CLASS FUNCTIONS
+// // are first class citizens (they are treated as values and this is very special for Javascript). Function are just another type of object and objects are values, so funciton are simply values.
+// // this means we can store functions as in variables or Object properties.
+// // we can also pass function as arguments to other functions.
+// //we can even return functions from other functions
+// // remember functions are objects. so functions can have methods. which is craaaazy.
 
-//HIGHER ORDER FUNCTIONS
-//are functions that either 1: receives a function as an argument, 2:returns a new function or 3: Both.
-// this is only possible thanks to first class functions.
+// //HIGHER ORDER FUNCTIONS
+// //are functions that either 1: receives a function as an argument, 2:returns a new function or 3: Both.
+// // this is only possible thanks to first class functions.
 
-//first class functions is just a feature that a languge has or does not hav. All it means is that all function are values. There are no first-class functions in practice. Its just a concept
-//there are however higher order functions in practice. Which are possible because the language reports first-class functions.
+// //first class functions is just a feature that a languge has or does not hav. All it means is that all function are values. There are no first-class functions in practice. Its just a concept
+// //there are however higher order functions in practice. Which are possible because the language reports first-class functions.
 
 
 

@@ -9,6 +9,7 @@
 // Your tasks:
 // 1. Create a method called 'registerNewAnswer' on the 'poll' object. The
 // method does 2 things:
+
 // 1.1. Display a prompt window for the user to input the number of the
 // selected option. The prompt should look like this:
 // What is your favourite programming language?
@@ -17,6 +18,8 @@
 // 2: Rust
 // 3: C++
 // (Write option number)
+
+
 // 1.2. Based on the input number, update the 'answers' array property. For
 // example, if the option is 3, increase the value at position 3 of the array by
 // 1. Make sure to check if the input is a number and if the number makes
