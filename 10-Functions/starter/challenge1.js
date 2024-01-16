@@ -37,15 +37,22 @@ console.log(poll);
 // }
 const registerNewAnswer = function () {
 
-    const questionPrompt = [];
-    questionPrompt.push(poll.question)
+    const questionPrompt = [];              // create empty prompt
+    questionPrompt.push(poll.question)      // add question to prompt
 
-    for (const answer of poll.options) {
+    for (const answer of poll.options) {        // add each option to prompt
         questionPrompt.push(answer)
     }
-    const questionPromptDef = questionPrompt.join('\n')
-    console.log(questionPromptDef);
-    prompt(questionPromptDef);
+
+    const questionPromptDef = questionPrompt.join('\n')     // turn prompt array in string
+    console.log(`before answering ${poll.answers}`);
+
+
+    const currentAnswer = (prompt(questionPromptDef));       //wrong 
+    poll.answers[currentAnswer]++;
+
+
+    console.log(`after answering ${poll.answers}`);
 
 };
 document.querySelector('.poll').addEventListener('click', registerNewAnswer )
