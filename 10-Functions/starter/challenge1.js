@@ -53,7 +53,7 @@ const registerNewAnswer = function () {
     if (currentAnswer >=0 && currentAnswer<= 3) {
     poll.answers[currentAnswer]++;
     console.log(`after answering ${poll.answers}`);
-    } else {prompt('Answer incorrect. Please try again')}
+    } else {alert('Answer incorrect. Please try again')}
 
 
 };
