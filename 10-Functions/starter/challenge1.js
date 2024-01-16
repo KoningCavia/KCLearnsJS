@@ -48,11 +48,13 @@ const registerNewAnswer = function () {
     console.log(`before answering ${poll.answers}`);
 
 
-    const currentAnswer = (prompt(questionPromptDef));       //wrong 
+    let currentAnswer = Number((prompt(questionPromptDef)));       //wrong 
+
+    if (currentAnswer >=0 && currentAnswer<= 3) {
     poll.answers[currentAnswer]++;
-
-
     console.log(`after answering ${poll.answers}`);
+    } else {prompt('Answer incorrect. Please try again')}
+
 
 };
 document.querySelector('.poll').addEventListener('click', registerNewAnswer )
