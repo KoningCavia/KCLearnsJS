@@ -268,41 +268,41 @@ console.log(announcement.replace(/door/, 'gate'));  // the /txt/ here works like
 
 
 //---------------------------------------------------------------------------------------
-// //118 Maps iteration
+//118 Maps iteration
 
 
-// //in the last method we used the set method to add new values to the map.
-// // however there is a different wa thats less cumbersome. Which is during initalization of the map, i guess.
+//in the last method we used the set method to add new values to the map.
+// however there is a different wa thats less cumbersome. Which is during initalization of the map, i guess.
 
-// const question = new Map([
-//   ['Question', 'What is the best programming language i the world?'],
-//   [1, 'C'],
-//   [2, 'Java'],
-//   [3, 'JavaScript'],
-//   ['correct', 3],
-//   [true, 'Correct'],
-//   [false, 'Try again']
-// ])
-// console.log(question); // this gives the exact same array structure as when using:
-// console.log(Object.entries(openingHours));
-// // in both cases we get an: Array of arrays.
-// //this means theres an easy way to convert objects to maps. (but probably not the other way around?)
-// const hoursMap = new Map(Object.entries(openingHours));
-// console.log(hoursMap);
+const question = new Map([
+  ['Question', 'What is the best programming language i the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct'],
+  [false, 'Try again']
+])
+console.log(question); // this gives the exact same array structure as when using:
+console.log(Object.entries(openingHours));
+// in both cases we get an: Array of arrays.
+//this means theres an easy way to convert objects to maps. (but probably not the other way around?)
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
 
-// // Iteration.
-// // maps are iterables so the for loop is usable here.
-// // first we log the question
-// console.log(question.get('question'));
-// //then if the key is a number log the key and the value (show only possible answers
-// for (const[key, value] of question) {
-//   if (typeof key=== 'number') {
-//     console.log(`Answer ${key}: ${value}`);
-//   }};
+// Iteration.
+// maps are iterables so the for loop is usable here.
+// first we log the question
+console.log(question.get('question'));
+//then if the key is a number log the key and the value (show only possible answers
+for (const[key, value] of question) {
+  if (typeof key=== 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }};
 
-//   // now open a prompt menu and ask for an answer. The answer is a string so we convert it to a number.
-//   const answer = Number(prompt('Your answer'));
-//   console.log(answer);
+  // now open a prompt menu and ask for an answer. The answer is a string so we convert it to a number.
+  const answer = Number(prompt('Your answer'));
+  console.log(answer);
 
 
 // console.log(question.get(answer == question.get('correct')));
