@@ -29,43 +29,42 @@ const poll = {
 
 console.log(poll);
 
+
+// button method
 const registerNewAnswer = function () {
 
     const questionPrompt = [];              // create empty prompt
     questionPrompt.push(poll.question)      // add question to prompt
-
     for (const answer of poll.options) {        // add each option to prompt
         questionPrompt.push(answer)
     }
-
     const questionPromptDef = questionPrompt.join('\n')     // turn prompt array in string
-
-
-    let currentAnswer;
+    
+    // This do While-Loop shows prompt, takes an answer and checks if the answer is valid and reacts by incrementing associated poll answer or alerting user.
+    let currentAnswer;   
 
     do {
         currentAnswer = prompt(questionPromptDef);
-        poll.answers[currentAnswer]++;
-        if (currentAnswer === null || currentAnswer.trim() === "" || isNaN(currentAnswer)|| currentAnswer < 0 || currentAnswer > 3) {
+        if (checkNumberValid(currentAnswer)) {
             alert("Invalid input. Please enter a valid number between 0 and 3.")
         } else {
             poll.answers[currentAnswer]++
-     }} while (currentAnswer.trim() === "" || isNaN(currentAnswer) || currentAnswer < 0 || currentAnswer > 3)
+     }} while (checkNumberValid(currentAnswer))
 
-     
-     console.log(`after answering ${poll.answers}`);    
-
-
+     console.log(`after answering ${poll.answers}`);        //little log for checking answer
 };  
 
-console.log(`before answering ${poll.answers}`);
-// = Number(prompt(questionPromptDef));       //wrong 
+//This method checks if a number is a valid apoll answer
+const checkNumberValid = function(number) {
+    if(number === null || number.trim() === "" || isNaN(number)|| number < 0 || number > 3) {
+        return true;
+    } else {return false}
+}
 
-// if (currentAnswer >=0 && currentAnswer<= 3) {
-// poll.answers[currentAnswer]++;
-// console.log(`after answering ${poll.answers}`);
-// } else {alert('Answer incorrect. Please try again')}
+console.log(`before answering ${poll.answers}`);
 document.querySelector('.poll').addEventListener('click', registerNewAnswer )
+
+
 // 1.2. Based on the input number, update the 'answers' array property. For
 // example, if the option is 3, increase the value at position 3 of the array by
     // 1. Make sure to check if the input is a number and if the number makes
