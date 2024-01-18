@@ -26,6 +26,8 @@ const poll = {
     // This generates [0, 0, 0, 0]. More in the next section!
     answers: new Array(4).fill(0),
     };
+const Data1 = [5, 2, 3]
+const Data2 = [1, 5, 3, 9, 6, 1]
 
 console.log(poll);
 
@@ -72,10 +74,8 @@ const checkNumberValid = function(number) {
 
 const displayResults = function(type = 'object') {
     if (type === 'string') {
-        console.log('type is string');
         return displayResultsString;
     } else if (type === 'object') {
-        console.log('Type is object (array)');
         return displayResultsArray;
     }
 };
@@ -92,8 +92,25 @@ const displayResultsString = function(resultString) {
 
 
 document.querySelector('.poll').addEventListener('click', registerNewAnswer )
+console.log("Down here is Data 1    ARRAY METHOD");
+displayResults(typeof(Data1))(Data1);
 
 
+console.log(`\n\n\n`);
+console.log("Down here is Data 1    STRING METHOD:");
+const stringData1 = Data1.toString();
+displayResults(typeof(stringData1))(stringData1);
+
+
+console.log(`\n\n\n`);
+console.log("Down here is Data 2    ARRAY METHOD");
+displayResults(typeof(Data2))(Data2);
+
+
+console.log(`\n\n\n`);
+console.log("Down here is Data 2    STRING METHOD:");
+const stringData2 = Data2.toString();
+displayResults(typeof(stringData2))(stringData2);
 
 // 1.2. Based on the input number, update the 'answers' array property. For
 // example, if the option is 3, increase the value at position 3 of the array by
