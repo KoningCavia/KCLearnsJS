@@ -51,7 +51,10 @@ const registerNewAnswer = function () {
             poll.answers[currentAnswer]++
      }} while (checkNumberValid(currentAnswer))
 
-     console.log(`after answering ${poll.answers}`);        //little log for checking answer
+     const type = typeof poll.answers;
+     displayResults(type);
+
+    //  console.log(`after answering ${poll.answers}`);        //little log for checking answer
 };  
 
 //This method checks if a number is a valid apoll answer
@@ -59,19 +62,42 @@ const checkNumberValid = function(number) {
     if(number === null || number.trim() === "" || isNaN(number)|| number < 0 || number > 3) {
         return true;
     } else {return false}
+
 }
 
-console.log(`before answering ${poll.answers}`);
+const displayResults = function(type = 'object') {
+    if (type == 'string') {
+        console.log('type is string');
+        return displayResultsString(type);
+    } else if (type == 'object'){
+        console.log('Type is object (array)');
+        return displayResultsArray(poll.answers);
+    }
+}
+
+const displayResultsArray = function(arr) {
+    console.log(arr);
+}
+
+const displayResultsString = function(str) {
+    console.log(`Poll results are ${str}`);
+}
+
+
+
 document.querySelector('.poll').addEventListener('click', registerNewAnswer )
+
 
 
 // 1.2. Based on the input number, update the 'answers' array property. For
 // example, if the option is 3, increase the value at position 3 of the array by
     // 1. Make sure to check if the input is a number and if the number makes
     // sense (e.g. answer 52 wouldn't make sense, right?)
+    // DONE
 
 
 // 2. Call this method whenever the user clicks the "Answer poll" button.
+// DONE
 
 
 // 3. Create a method 'displayResults' which displays the poll results. The
