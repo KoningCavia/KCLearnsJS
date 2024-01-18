@@ -33,6 +33,8 @@ console.log(poll);
 // button method
 const registerNewAnswer = function () {
 
+    // let answerType;
+    // let pollResult;
     const questionPrompt = [];              // create empty prompt
     questionPrompt.push(poll.question)      // add question to prompt
     for (const answer of poll.options) {        // add each option to prompt
@@ -51,8 +53,11 @@ const registerNewAnswer = function () {
             poll.answers[currentAnswer]++
      }} while (checkNumberValid(currentAnswer))
 
-     const type = typeof poll.answers;
-     displayResults(type);
+     const answerType = typeof poll.answers;
+     const pollResult = poll.answers;
+     const functionForType = displayResults(answerType);
+     console.log(functionForType);
+     functionForType(pollResult);
 
     //  console.log(`after answering ${poll.answers}`);        //little log for checking answer
 };  
@@ -66,22 +71,23 @@ const checkNumberValid = function(number) {
 }
 
 const displayResults = function(type = 'object') {
-    if (type == 'string') {
+    if (type === 'string') {
         console.log('type is string');
-        return displayResultsString(type);
-    } else if (type == 'object'){
+        return displayResultsString;
+    } else if (type === 'object') {
         console.log('Type is object (array)');
-        return displayResultsArray(poll.answers);
+        return displayResultsArray;
     }
-}
+};
 
-const displayResultsArray = function(arr) {
-    console.log(arr);
-}
+const displayResultsArray = function(resultArray) {
+    console.log('You made it to the end of the array results');
+    console.log(resultArray);
+};
 
-const displayResultsString = function(str) {
-    console.log(`Poll results are ${str}`);
-}
+const displayResultsString = function(resultString) {
+    console.log(`Poll results are ${resultString}`);
+};
 
 
 
