@@ -3,66 +3,123 @@
 
 
 // //------------------------------------------------------
-// // 138 closures
+// // 139 more closure exampes
 
+let f;            // we initiate f
 
-//widely considered a difficult concept,, but if you understand: execution context, callstack and the scope chain.
-
-// SOME THEORY :D
-
-
-// EXECUTION CONTEXT
-// environment in which code is executed. There is: 
-// 1. global context. Default it includes global variables, functions and other declarations
-// 2. Function execution context. Everytime a function is called a new execution context is created for that function. After execution the context is removed from the stack.
-// 3. variable environment each execution context has its own variable environment. this includes  global variables. For function contexts, it  includes local variables and parameters +global variables.
-// the this keyword is part of the scope. global scope has a global this keyword. and each 
-
-//CALLSTACK
-// works according to LIFO (first in last out). Basically when a function is called it gets added on top of the stack. when this function has been executed it gets removed from the stack and the function that called it is back on top and thus in control.
-
-//SCOPE CHAIN
-// first you have global scope. There may be funcitons within the global scope and these re private and cant be called globally. there may even be nested scopes within the function, that can only be called in that scope and not in the funciton itself. This is scope chaining.
-
-
-//now closure isnt something that we explicitly decide. It's just something taht happens and we need to recognize when that happens.
-
-
-const secureBooking = function() {
-  let passengCount = 0;
-
-  return function(){    //so whats special about this function is that it returns another function.
-    passengCount++;     // this updates the passengercount that is one scope level lower.
-    console.log(`${passengCount} passengers`);
+const g= function() {
+  const a = 23
+  f = function() {      //when g is called, f is refactored to this function (a*2)
+    console.log(a*2);
   }
 }
 
-//when we call secureBooking it will then return the nested function and store it inside 'booker'
-const booker = secureBooking(); 
+g();          // when g is called
+f();          // f is transformed
+
+// so even when f was defined in the global scope and it gets refactored in a function environment closure still gives it the closed environment.
+//the a variable is iside the backpack of the f vriable.
+
+const h =function() {
+   const b= 777;
+  f = function() {
+    console.log(b*2);
+  }
+}
+
+g();      //f gets transformed
+f();    
+h();      // f gets transformed again.
+f();
 
 
-//something interesting happens now because we are storing a nested function with its own scope and variable context in a variables thats present in the global context. 
-// also note that according to how callstacks work the secureBooking function has done it's job and it's context has been removed fro the callstack.
+// example 2
+const boardPassenges = function(n, wait) {
+    const perGroup = n /3
 
-//now what happense if we call it a couple times.
-booker();
-booker();
-booker();
-//it works. But that's weird because the secureBooking context doesnt even exist anymore. It was closed after the function was called and it was finished.
-// apparently booker still has access to the viriables that were present when the function was created.
-//this is exactly what the closure. it allows a function to remember all the variables that were present when te function was born.
-// the secureBooking function was the birthplace of the booker();
+    //this is delayed for 3 seconds
+    setTimeout(function(){
+      console.log(`We are now boarding all ${n} passengers`);
+      console.log(`There are 3 groups, each with ${perGroup} passengers`);
+    }, wait*1000)    //timer here: the function will be called after 1000ms 
+    
+    // this is not delayed when boardPassenger is called.
+    console.log(`Will start boarding in ${wait} seconds`);
+};
+
+boardPassenges(180, 3)
+
+// even now boardPassenges will use the closure perGroup value. rather than the newly defined value . 
+// interestingly when you remove the perGroup from the boardPassenges function it will in fact use this new variable. It even needs it, else it wouldnt gave any perGroup variable.
+// so closure has priority over the scopechain.
+const perGroup = 1000;    
+boardPassenges(180, 3)    
 
 
-// !!!!!!!!!!!!!!!!
-//CLOSURE IS THE VARIABLE ENVIRONMENT ATTACHED TO THE FUNCTION, EXACTLY AS IT WAS AT THE TIME AND PLACE THE FUNCTION WAS CREATED
-//!!!!!!!!!!!!!!!!!
+// so the callback function setTimeout was called much later and independanctl from the "boardPassenges" function. But it still had acces to all the variables belonging to boardPassenges(). Which is a clear result of closure.
 
-//cute analogy: a closure is a little backpack containing all these variables that the function carries around.
 
-//closures are created automatically. We cant create them manually. We cant even directly acces these variables. But we can take a look at them,
+// //------------------------------------------------------
+// // 138 closures
 
-console.dir(booker);      // lol it even remembers the comments from the scope :)
+
+// //widely considered a difficult concept,, but if you understand: execution context, callstack and the scope chain.
+
+// // SOME THEORY :D
+
+
+// // EXECUTION CONTEXT
+// // environment in which code is executed. There is: 
+// // 1. global context. Default it includes global variables, functions and other declarations
+// // 2. Function execution context. Everytime a function is called a new execution context is created for that function. After execution the context is removed from the stack.
+// // 3. variable environment each execution context has its own variable environment. this includes  global variables. For function contexts, it  includes local variables and parameters +global variables.
+// // the this keyword is part of the scope. global scope has a global this keyword. and each 
+
+// //CALLSTACK
+// // works according to LIFO (first in last out). Basically when a function is called it gets added on top of the stack. when this function has been executed it gets removed from the stack and the function that called it is back on top and thus in control.
+
+// //SCOPE CHAIN
+// // first you have global scope. There may be funcitons within the global scope and these re private and cant be called globally. there may even be nested scopes within the function, that can only be called in that scope and not in the funciton itself. This is scope chaining.
+
+
+// //now closure isnt something that we explicitly decide. It's just something taht happens and we need to recognize when that happens.
+
+
+// const secureBooking = function() {
+//   let passengCount = 0;
+
+//   return function(){    //so whats special about this function is that it returns another function.
+//     passengCount++;     // this updates the passengercount that is one scope level lower.
+//     console.log(`${passengCount} passengers`);
+//   }
+// }
+
+// //when we call secureBooking it will then return the nested function and store it inside 'booker'
+// const booker = secureBooking(); 
+
+
+// //something interesting happens now because we are storing a nested function with its own scope and variable context in a variables thats present in the global context. 
+// // also note that according to how callstacks work the secureBooking function has done it's job and it's context has been removed fro the callstack.
+
+// //now what happense if we call it a couple times.
+// booker();
+// booker();
+// booker();
+// //it works. But that's weird because the secureBooking context doesnt even exist anymore. It was closed after the function was called and it was finished.
+// // apparently booker still has access to the viriables that were present when the function was created.
+// //this is exactly what the closure. it allows a function to remember all the variables that were present when te function was born.
+// // the secureBooking function was the birthplace of the booker();
+
+
+// // !!!!!!!!!!!!!!!!
+// //CLOSURE IS THE VARIABLE ENVIRONMENT ATTACHED TO THE FUNCTION, EXACTLY AS IT WAS AT THE TIME AND PLACE THE FUNCTION WAS CREATED
+// //!!!!!!!!!!!!!!!!!
+
+// //cute analogy: a closure is a little backpack containing all these variables that the function carries around.
+
+// //closures are created automatically. We cant create them manually. We cant even directly acces these variables. But we can take a look at them,
+
+// console.dir(booker);      // lol it even remembers the comments from the scope :)
 
 
 // // //------------------------------------------------------
@@ -424,3 +481,4 @@ console.dir(booker);      // lol it even remembers the comments from the scope :
 // createBooking('LH123', 5);
 // //skippig the second parameter with undefined.
 // createBooking('LH123', undefined, 1000);
+
