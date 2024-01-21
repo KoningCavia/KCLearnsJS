@@ -11,22 +11,22 @@
 
 
 
- (function () {
-    const header = document.querySelector('h1');
-    header.style.color = 'red';
-    document.querySelector('body').addEventListener(
-        'click', function(){header.style.color='blue'})
-    })();
-
-// (function () {
+//  (function () {
 //     const header = document.querySelector('h1');
-//     const body = document.querySelector('body');
+//     header.style.color = 'red';
+//     document.querySelector('body').addEventListener(
+//         'click', function(){header.style.color='blue'})
+//     })();
 
-//     body.addEventListener('mousedown', function () {
-//         header.style.color = 'blue';
-//     });
+(function () {
+    const header = document.querySelector('h1');
+    const body = document.querySelector('body');
 
-//     body.addEventListener('mouseup', function () {
-//         header.style.color = 'red';
-//     });
-// })();
+    body.addEventListener('mousedown', function () {
+        header.style.color = 'blue';
+    });
+
+    body.addEventListener('mouseup', function () {
+        header.style.color = 'red';
+    });
+})();
