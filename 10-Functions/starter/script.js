@@ -1,46 +1,109 @@
 'use strict';
 
+
+
 // //------------------------------------------------------
-// // 137 Immediately invoked  function expressions IIFE
+// // 138 closures
 
 
+//widely considered a difficult concept,, but if you understand: execution context, callstack and the scope chain.
 
-const runOnce =function() {
-  console.log("this function will never run again");
+// SOME THEORY :D
 
+
+// EXECUTION CONTEXT
+// environment in which code is executed. There is: 
+// 1. global context. Default it includes global variables, functions and other declarations
+// 2. Function execution context. Everytime a function is called a new execution context is created for that function. After execution the context is removed from the stack.
+// 3. variable environment each execution context has its own variable environment. this includes  global variables. For function contexts, it  includes local variables and parameters +global variables.
+// the this keyword is part of the scope. global scope has a global this keyword. and each 
+
+//CALLSTACK
+// works according to LIFO (first in last out). Basically when a function is called it gets added on top of the stack. when this function has been executed it gets removed from the stack and the function that called it is back on top and thus in control.
+
+//SCOPE CHAIN
+// first you have global scope. There may be funcitons within the global scope and these re private and cant be called globally. there may even be nested scopes within the function, that can only be called in that scope and not in the funciton itself. This is scope chaining.
+
+
+//now closure isnt something that we explicitly decide. It's just something taht happens and we need to recognize when that happens.
+
+
+const secureBooking = function() {
+  let passengCount = 0;
+
+  return function(){    //so whats special about this function is that it returns another function.
+    passengCount++;     // this updates the passengercount that is one scope level lower.
+    console.log(`${passengCount} passengers`);
+  }
 }
-runOnce();
-//the above method can in fact be run more than once
 
-runOnce();
+//when we call secureBooking it will then return the nested function and store it inside 'booker'
+const booker = secureBooking(); 
 
-// //the below code gives a little error message, because it misses a identifier.
-// function() {
+
+//something interesting happens now because we are storing a nested function with its own scope and variable context in a variables thats present in the global context. 
+// also note that according to how callstacks work the secureBooking function has done it's job and it's context has been removed fro the callstack.
+
+//now what happense if we call it a couple times.
+booker();
+booker();
+booker();
+//it works. But that's weird because the secureBooking context doesnt even exist anymore. It was closed after the function was called and it was finished.
+// apparently booker still has access to the viriables that were present when the function was created.
+//this is exactly what the closure. it allows a function to remember all the variables that were present when te function was born.
+// the secureBooking function was the birthplace of the booker();
+
+
+// !!!!!!!!!!!!!!!!
+//CLOSURE IS THE VARIABLE ENVIRONMENT ATTACHED TO THE FUNCTION, EXACTLY AS IT WAS AT THE TIME AND PLACE THE FUNCTION WAS CREATED
+//!!!!!!!!!!!!!!!!!
+
+//cute analogy: a closure is a little backpack containing all these variables that the function carries around.
+
+//closures are created automatically. We cant create them manually. We cant even directly acces these variables. But we can take a look at them,
+
+console.dir(booker);      // lol it even remembers the comments from the scope :)
+
+
+// // //------------------------------------------------------
+// // // 137 Immediately invoked  function expressions IIFE
+
+// const runOnce =function() {
+//   console.log("this function will never run again");
+
+// }
+// runOnce();
+// //the above method can in fact be run more than once
+
+// runOnce();
+
+// // //the below code gives a little error message, because it misses a identifier.
+// // function() {
+// //   console.log('This will never run again');
+// // } 
+
+// //however if we take that code and put parenthesis around it, we have changed the statement (code that does an action) into an expression (code that creates a value).
+// //and by putting another set of parentheses all the way at the end, we can now immediately call it.
+// (function() {
 //   console.log('This will never run again');
-// } 
+// })();
+// // so this is simply an expression that gets immediately called.
 
-//however if we take that code and put parenthesis around it, we have changed the statement (code that does an action) into an expression (code that creates a value).
-//and by putting another set of parentheses all the way at the end, we can now immediately call it.
-(function() {
-  console.log('This will never run again');
-})();
-// so this is simply an expression that gets immediately called.
+// //arrow expression
+// //right now it doesnt get called
+// () =>   console.log('This will ALSO never run again');
+// //but put the entire function between parentheses and end it with a set of parentheses and it gets called immediately.
+// (() =>   console.log('This will ALSO never run again'))();
 
-//arrow expression
-//right now it doesnt get called
-() =>   console.log('This will ALSO never run again');
-//but put the entire function between parentheses and end it with a set of parentheses and it gets called immediately.
-(() =>   console.log('This will ALSO never run again'))();
+// //why is this invented? well function create scopes. and in global scope we cannot call functions from inner scopes. only the other way around.
+// //ie all data inside a scope is private/encapsulated. Sometimes its important to hide variables and scopes are good to do that.
 
-//why is this invented? well function create scopes. and in global scope we cannot call functions from inner scopes. only the other way around.
-//ie all data inside a scope is private/encapsulated. Sometimes its important to hide variables and scopes are good to do that.
-
-{
-  const isPrivate = 23;   //cannot be called outside the block
-  var notPrivate = 46;    // CAN be called outside the block. remember var is not private.
-}
-// console.log(isPrivate);
-console.log(notPrivate);
+// {
+//   const isPrivate = 23;   //cannot be called outside the block
+//   var notPrivate = 46;    // CAN be called outside the block. remember var is not private.
+// }
+// // console.log(isPrivate);
+// console.log(notPrivate);
 
 
 
