@@ -73,4 +73,61 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+
+
+//Arays are objects that have their own set of methods that act as tools to deal with arrays
+
+
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+//SLICE  (just like in strings)     (no mutates)
+console.log(arr.slice(2))       // slices AFTER 2 (so 3 and after is included, but not 2)
+console.log(arr.slice(2, 4))    // slices BEFORE 4 (so 4 and before is included)
+
+console.log(arr.slice(-2));     // takes the last 2 elements of an array
+console.log(arr.slice(-1));     // gets the last element this is very handy, remember this.
+console.log(arr.slice(1, -2));  // gets everything except the first 1 and the last 2.
+console.log(arr.slice);         // creates a shallow copy.
+console.log([...arr]);      //also creates a shallow copy.
+
+//SPLICE  (mutates)
+  console.log("\n\n\n\n\SPLICING");
+  console.log(arr.splice(2));   //result seems the same, however look at the original array
+  arr.splice(-1)
+  console.log(arr);             // the spliced values are REMOVED from the ORIGINAL array.
+  //most of the time the removed part that we spliced (the first) doesnt interest us. This is generally used to remove data from the original aray.
+
+
+// Splicing parameters work differently from slice. Here splicing starts after 1, but then only the next 2 values are spliced. so specifically only value 2 and 3 are removed.
+arr = ['a', 'b', 'c', 'd', 'e'];
+
+console.log(arr.splice(1,2))
+console.log(arr)            // and everything BUT 2 and 3 are still in the original array.
+
+
+// REVERS   (mutates)
+console.log("\n\n\nREVERSE");
+
+arr = ['a', 'b', 'c', 'd', 'e'];
+let arr2 = ['j','i','h','g','f'];
+console.log(arr2.reverse());      // dont forget the '()'
+console.log(arr2);      // reverse does mutate the array. The original array stays reversed.
+
+// CONCAT   (NO mutate)
+console.log('\n\n\nCONCAT');
+const letters = arr.concat(arr2);     // concats arrays // (NO mutate)
+console.log(letters);     
+console.log([...arr, ...arr2]);       // does the same as concat.  (NO mutate)
+
+
+// JOIN
+console.log('\n\n\nJOIN');
+
+//Works just like letters
+console.log(letters.join(' - '));   // joins all the letters in the array with a dash.
+
+// remember also we know
+// : push unshift pop shift indexOf and includes
+
+
 /////////////////////////////////////////////////
