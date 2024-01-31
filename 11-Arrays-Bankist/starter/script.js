@@ -64,33 +64,6 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
-
-// // 144 SIMPLE ARRAY METHODS
-
-const arr = [23, 11, 64];
-console.log(arr[0]);    //shows index 0 or array (duh)
-console.log(arr.at(0));   //does the same but with a method.
-// But why?
-
-// suppose we dont know the end of the array. We would do this:
-console.log(arr[arr.length-1]);   //returns last value of the array
-console.log(arr.slice(-1)[0]);       // returns last value of the array (without brackets it returns an array with one value. with brackets just the value)
-
-//these are two classical methods to get the last value.
-// however the at method makes this easier
-console.log(arr.at(-1));
-console.log(arr.at(-2));
-//we dont need '-1', we dont need an extra [0]. we can just say -1 and it returns the value.
-
-// which should you use? it depends. But you probably want the .at method. Also for method chaining.
-
-console.log('Harry'.at(0));   // also works with strings (which are arrays.)
-
-
-console.log('\n\n\n\b');
-
-// // 143 SIMPLE ARRAY METHODS
-
 // const currencies = new Map([
 //   ['USD', 'United States dollar'],
 //   ['EUR', 'Euro'],
@@ -98,6 +71,98 @@ console.log('\n\n\n\b');
 // ]);
 
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+
+
+
+
+
+// // 145Looping arrays: forEach
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+
+// first a FOROF loop. As a comparison
+for (const movement of movements) {
+  if (movement >0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(console.log(`You withdrew ${Math.abs(movement)}`));
+  }
+}
+
+// Now the FOREACH loop
+// a FOREACH loop needs a callback function. forEach is a higher order function.
+// forEach will loop over the array and for each value it will call the function.
+console.log('-------------FOREACH-------------------');
+movements.forEach(function(movement) {
+  if (movement >0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(console.log(`You withdrew ${Math.abs(movement)}`));
+  }
+})
+
+
+console.log('-------------FOREOF + INDEX-------------------');
+// 0: function(200)
+// 1: function(450)
+// 2: function(400)
+
+// using index and value in a FOROF (HERHALING as an example)
+// In the forOf loop you have to specifically assign the index and the value as a little array, like so
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movement  ${i+1} You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${i+1}: You withdrew ${movement}`);
+  }
+}
+
+
+console.log('-------------FOREACH + INDEX-------------------');
+// The for each method however automatically gives the index and array like so:
+// note that you can give each of these elements any name you want.
+// BUT the order wil always be the same: 1:current element | 2: indexnr | 3: the entire array that we are looping over.
+movements.forEach(function(movement, i, arr) {
+  if (movement > 0) {
+    console.log(`Movement  ${movement+1} You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${movement+1}: You withdrew ${movement}`);
+  }
+})
+
+// CONCLUDING foreach is easier because its basically automatic.
+
+// when to use which:
+// you can not break out of a forEach loop. It will always loop through the entire array.
+// So if you need to break out you need to use the forOf loop.
+
+
+// // // 144 SIMPLE ARRAY METHODS
+
+// const arr = [23, 11, 64];
+// console.log(arr[0]);    //shows index 0 or array (duh)
+// console.log(arr.at(0));   //does the same but with a method.
+// // But why?
+
+// // suppose we dont know the end of the array. We would do this:
+// console.log(arr[arr.length-1]);   //returns last value of the array
+// console.log(arr.slice(-1)[0]);       // returns last value of the array (without brackets it returns an array with one value. with brackets just the value)
+
+// //these are two classical methods to get the last value.
+// // however the at method makes this easier
+// console.log(arr.at(-1));
+// console.log(arr.at(-2));
+// //we dont need '-1', we dont need an extra [0]. we can just say -1 and it returns the value.
+
+// // which should you use? it depends. But you probably want the .at method. Also for method chaining.
+
+// console.log('Harry'.at(0));   // also works with strings (which are arrays.)
+
+
+// console.log('\n\n\n\b');
+
+// // 143 SIMPLE ARRAY METHODS
 
 
 
