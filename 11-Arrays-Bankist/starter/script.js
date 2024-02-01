@@ -64,72 +64,95 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
-// const currencies = new Map([
-//   ['USD', 'United States dollar'],
-//   ['EUR', 'Euro'],
-//   ['GBP', 'Pound sterling'],
-// ]);
+
 
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 
 
+// // 146 forEach with maps and sets
 
+//MAPS
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+//this is an array of arrays
+// remember that a map is an array of [key, value] pairs
+// similar to arrays you can call the forEach which can take 3 values
+// current value, curreny key, complete map.
+currencies.forEach(function(value, key, map){
+  console.log(`${key}: ${value}`);      // only unqique values
+})
+
+
+//SET
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+
+console.log(currenciesUnique);
+currenciesUnique.forEach(function(value, key, map) {
+  console.log(`${key}: ${value}`);        
+})
+// apparently key here is exactly the same as value.
+// this is because a set is unique values only, so having a unique key wouldnt make sense.
+// to prevent confusion they decided to keep the syntax for this forEAch function the same to all other forEach functions.
 
 
 // // 145Looping arrays: forEach
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 
-// first a FOROF loop. As a comparison
-for (const movement of movements) {
-  if (movement >0) {
-    console.log(`You deposited ${movement}`);
-  } else {
-    console.log(console.log(`You withdrew ${Math.abs(movement)}`));
-  }
-}
+// // first a FOROF loop. As a comparison
+// for (const movement of movements) {
+//   if (movement >0) {
+//     console.log(`You deposited ${movement}`);
+//   } else {
+//     console.log(console.log(`You withdrew ${Math.abs(movement)}`));
+//   }
+// }
 
-// Now the FOREACH loop
-// a FOREACH loop needs a callback function. forEach is a higher order function.
-// forEach will loop over the array and for each value it will call the function.
-console.log('-------------FOREACH-------------------');
-movements.forEach(function(movement) {
-  if (movement >0) {
-    console.log(`You deposited ${movement}`);
-  } else {
-    console.log(console.log(`You withdrew ${Math.abs(movement)}`));
-  }
-})
-
-
-console.log('-------------FOREOF + INDEX-------------------');
-// 0: function(200)
-// 1: function(450)
-// 2: function(400)
-
-// using index and value in a FOROF (HERHALING as an example)
-// In the forOf loop you have to specifically assign the index and the value as a little array, like so
-for (const [i, movement] of movements.entries()) {
-  if (movement > 0) {
-    console.log(`Movement  ${i+1} You deposited ${movement}`);
-  } else {
-    console.log(`Movement ${i+1}: You withdrew ${movement}`);
-  }
-}
+// // Now the FOREACH loop
+// // a FOREACH loop needs a callback function. forEach is a higher order function.
+// // forEach will loop over the array and for each value it will call the function.
+// console.log('-------------FOREACH-------------------');
+// movements.forEach(function(movement) {
+//   if (movement >0) {
+//     console.log(`You deposited ${movement}`);
+//   } else {
+//     console.log(console.log(`You withdrew ${Math.abs(movement)}`));
+//   }
+// })
 
 
-console.log('-------------FOREACH + INDEX-------------------');
-// The for each method however automatically gives the index and array like so:
-// note that you can give each of these elements any name you want.
-// BUT the order wil always be the same: 1:current element | 2: indexnr | 3: the entire array that we are looping over.
-movements.forEach(function(movement, i, arr) {
-  if (movement > 0) {
-    console.log(`Movement  ${movement+1} You deposited ${movement}`);
-  } else {
-    console.log(`Movement ${movement+1}: You withdrew ${movement}`);
-  }
-})
+// console.log('-------------FOREOF + INDEX-------------------');
+// // 0: function(200)
+// // 1: function(450)
+// // 2: function(400)
+
+// // using index and value in a FOROF (HERHALING as an example)
+// // In the forOf loop you have to specifically assign the index and the value as a little array, like so
+// for (const [i, movement] of movements.entries()) {
+//   if (movement > 0) {
+//     console.log(`Movement  ${i+1} You deposited ${movement}`);
+//   } else {
+//     console.log(`Movement ${i+1}: You withdrew ${movement}`);
+//   }
+// }
+
+
+// console.log('-------------FOREACH + INDEX-------------------');
+// // The for each method however automatically gives the index and array like so:
+// // note that you can give each of these elements any name you want.
+// // BUT the order wil always be the same: 1:current element | 2: indexnr | 3: the entire array that we are looping over.
+// movements.forEach(function(movement, i, arr) {
+//   if (movement > 0) {
+//     console.log(`Movement  ${movement+1} You deposited ${movement}`);
+//   } else {
+//     console.log(`Movement ${movement+1}: You withdrew ${movement}`);
+//   }
+// })
 
 // CONCLUDING foreach is easier because its basically automatic.
 
