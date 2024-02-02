@@ -61,6 +61,32 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+// 148 DOM MANIPULATION
+
+const displayMovements = function(movements) {
+containerMovements.innerHTML = '';      // className.innerhtml = '' sets the html to a string ''
+
+movements.forEach(function(mov, i) {
+  const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+  const html = `
+    <div class="movements__row">
+      <div class="movements__type movements__type--${type}">${i + 1} ${type}t</div>
+      <div class="movements__value">${mov}</div>
+    </div>
+  `;
+  containerMovements.insertAdjacentHTML('afterbegin', html);
+  // containerMovements.insertAdjacentHTML('beforeend', html);  // this would show everything in reverse order. Check the documentation. it makes it clear.
+});
+};
+
+displayMovements(account1.movements);
+
+console.log(containerMovements.innerHTML);    // innerHTML is not just a setter. it also returns the html, like so.
+
+
+
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -72,32 +98,36 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 // // 146 forEach with maps and sets
 
-//MAPS
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// //MAPS
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
-//this is an array of arrays
-// remember that a map is an array of [key, value] pairs
-// similar to arrays you can call the forEach which can take 3 values
-// current value, curreny key, complete map.
-currencies.forEach(function(value, key, map){
-  console.log(`${key}: ${value}`);      // only unqique values
-})
+// //this is an array of arrays
+// // remember that a map is an array of [key, value] pairs
+// // similar to arrays you can call the forEach which can take 3 values
+// // current value, curreny key, complete map.
+// currencies.forEach(function(value, key, map){
+//   console.log(`${key}: ${value}`);      // only unqique values
+// })
 
 
-//SET
-const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+// //SET
+// const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
 
-console.log(currenciesUnique);
-currenciesUnique.forEach(function(value, key, map) {
-  console.log(`${key}: ${value}`);        
-})
-// apparently key here is exactly the same as value.
-// this is because a set is unique values only, so having a unique key wouldnt make sense.
-// to prevent confusion they decided to keep the syntax for this forEAch function the same to all other forEach functions.
+// console.log(currenciesUnique);
+// currenciesUnique.forEach(function(value, key, map) {
+//   console.log(`${key}: ${value}`);        
+// })
+// // apparently key here is exactly the same as value.
+// // this is because a set is unique values only, so having a unique key wouldnt make sense.
+// // to prevent confusion they decided to keep the syntax for this forEAch function the same to all other forEach functions.
+
+
+
+
 
 
 // // 145Looping arrays: forEach
