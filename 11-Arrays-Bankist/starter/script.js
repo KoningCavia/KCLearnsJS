@@ -61,57 +61,113 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-// 148 DOM MANIPULATION
-
-const displayMovements = function(movements) {
-containerMovements.innerHTML = '';      // className.innerhtml = '' sets the html to a string ''
-
-movements.forEach(function(mov, i) {
-  const type = mov > 0 ? 'deposit' : 'withdrawal';
-
-  const html = `
-    <div class="movements__row">
-      <div class="movements__type movements__type--${type}">${i + 1} ${type}t</div>
-      <div class="movements__value">${mov}</div>
-    </div>
-  `;
-  containerMovements.insertAdjacentHTML('afterbegin', html);
-  // containerMovements.insertAdjacentHTML('beforeend', html);  // this would show everything in reverse order. Check the documentation. it makes it clear.
-});
-};
-
-displayMovements(account1.movements);
-
-console.log(containerMovements.innerHTML);    // innerHTML is not just a setter. it also returns the html, like so.
-
-
-
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
 
 
-// 150 DATA TRANSFORMATIONS, MAP, FILTER ,REDUCE
+// // 151 THE MAP METHOD
 
 
-//theory lecture
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-// these are three methods we use all the time to tranform array data .
+// const euroToUsd = 1.1;
 
-// map 
-//is a method to loop over arrays. It is similar to "forEach", however map creates a brand new array based on the original array. It also jsut works with a callback function, but always creates an array (forEach can do anything, but i guess it takes more steps to create an array, this is more convenient)
+// const movementsUSD = movements.map(function(mov) {
+//   return mov*euroToUsd;
+// })
+// const movements23 = movements.map(function(mov) {
+//   return 23; 
+// })
 
-//FILTER
-// This method loops over an array and returns a new array that contains only those variables that satisfy a certain condition (eg (current >2) )
+// console.log(movements);
+// console.log(movementsUSD);
+// console.log(movements23);
 
 
-//REDUCE
-// reduce boils down all vallues in an array into 1 value. For example sum all values (or whatever you want to happen).
+// //lets write the above method as a forOf loop.
+// const movementsUSDFor = [];
+// for (const mov of movements) {
+//   movementsUSDFor.push(mov*euroToUsd);
+// }
+// console.log(movementsUSDFor);
+
+// // Little Challenge create an arrow function variant of the map function
+// // omg remember this. this is a verry quick arrow function.
+// //some people say this is bad because its less readable. But gosh it seems handy,
+// const movementsUSDArrow = movements.map(mov => mov * euroToUsd)   // IMPORTANT EXAMPLE
+// console.log(`arrow function:`, movementsUSDArrow);
+
+
+// // like the forEach method the map method has acces to the same three parameters (value, index, complete array)
+
+// const movementsDescriptions = movements.map((mov, i, arr) => {
+//     if (mov > 0) {
+//     return `Movement  ${i+1} You deposited ${mov}`;
+//   } else {
+//     return `Movement ${i+1}: You withdrew ${mov}`;
+//   };
+// })
+// console.log(`movementsDescription:`, movementsDescriptions);
+
+// // Above method simplified
+// const movementsDescriptions2 = movements.map((mov, i, arr) => {
+//   return `Movement ${i+1} You ${mov >= 0 ? `deposited` : `withdrew`} ${Math.abs(mov)}`
+// });
+// console.log('movementsDescriptions2:', movementsDescriptions2);
+
+// // now you could say: this does exactly the same thig as the forEach method. However the foreach method logs stuff to the console (for example) and that is a side effect. 
+// // in other words: THE FOREAHC METHOD HAS SIDE EFFECTS.
 
 
 
 
+// // 150 DATA TRANSFORMATIONS, MAP, FILTER ,REDUCE
+
+
+// // theory lecture
+
+// // these are three methods we use all the time to tranform array data .
+
+// // map 
+// // is a method to loop over arrays. It is similar to "forEach", however map creates a brand new array based on the original array. It also jsut works with a callback function, but always creates an array (forEach can do anything, but i guess it takes more steps to create an array, this is more convenient)
+
+// // FILTER
+// // This method loops over an array and returns a new array that contains only those variables that satisfy a certain condition (eg (current >2) )
+
+
+// // REDUCE
+// // reduce boils down all vallues in an array into 1 value. For example sum all values (or whatever you want to happen).
+
+
+
+
+// // 148 DOM MANIPULATION
+
+// const displayMovements = function(movements) {
+//   containerMovements.innerHTML = '';      // className.innerhtml = '' sets the html to a string ''
+  
+//   movements.forEach(function(mov, i) {
+//     const type = mov > 0 ? 'deposit' : 'withdrawal';
+  
+//     const html = `
+//       <div class="movements__row">
+//         <div class="movements__type movements__type--${type}">${i + 1} ${type}t</div>
+//         <div class="movements__value">${mov}</div>
+//       </div>
+//     `;
+//     containerMovements.insertAdjacentHTML('afterbegin', html);
+//     // containerMovements.insertAdjacentHTML('beforeend', html);  // this would show everything in reverse order. Check the documentation. it makes it clear.
+//   });
+//   };
+  
+//   displayMovements(account1.movements);
+  
+//   console.log(containerMovements.innerHTML);    // innerHTML is not just a setter. it also returns the html, like so.
+  
+  
+  
 
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
