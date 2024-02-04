@@ -92,6 +92,27 @@ console.log(containerMovements.innerHTML);    // innerHTML is not just a setter.
 // LECTURES
 
 
+// 150 DATA TRANSFORMATIONS, MAP, FILTER ,REDUCE
+
+
+//theory lecture
+
+// these are three methods we use all the time to tranform array data .
+
+// map 
+//is a method to loop over arrays. It is similar to "forEach", however map creates a brand new array based on the original array. It also jsut works with a callback function, but always creates an array (forEach can do anything, but i guess it takes more steps to create an array, this is more convenient)
+
+//FILTER
+// This method loops over an array and returns a new array that contains only those variables that satisfy a certain condition (eg (current >2) )
+
+
+//REDUCE
+// reduce boils down all vallues in an array into 1 value. For example sum all values (or whatever you want to happen).
+
+
+
+
+
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 
