@@ -61,10 +61,55 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function(movements) {
+  containerMovements.innerHTML = '';      // className.innerhtml = '' sets the html to a string ''
+  
+  movements.forEach(function(mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+  
+    const html = `
+      <div class="movements__row">
+        <div class="movements__type movements__type--${type}">${i + 1} ${type}t</div>
+        <div class="movements__value">${mov}</div>
+      </div>
+    `;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+  };
+
+  displayMovements(account1.movements);
+
+  const creatUsernames = function(accs) {
+
+    //use for each. because we dont want to create a new array. we want to modify the array we get.
+    // we are making use of the 'sideeffects' that a forEach loop provides (and map doesn't);
+     accs.forEach(function(acc) {
+      acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+     });
+ };
+ creatUsernames(accounts);
+ console.log(accounts);
+
+
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+// // 152 COMPUTING USERNAMES
+
+//
+const user = 'Steven Thomas Williams';  // stw
+const username = user.toLowerCase().split(' ').map(name => name[0]).join('');
+console.log('username: ', username)
+
+//and further see the createUserNames method above:
+
+
 
 
 // // 151 THE MAP METHOD
@@ -145,6 +190,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 // // 148 DOM MANIPULATION
 
+        // THIS METHOD IS DUPLICATED ABOVE
 // const displayMovements = function(movements) {
 //   containerMovements.innerHTML = '';      // className.innerhtml = '' sets the html to a string ''
   
