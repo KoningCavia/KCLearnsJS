@@ -99,15 +99,52 @@ const displayMovements = function(movements) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+
+// // 153 THE FILTER METHOD
+
+// // this worls (again) with a callback function.
+// //thos (again) takes three parameters (value, i, complete array).
+
+// // the return (callback) function should return a boolean!
+// const deposite = movements.filter(function(mov) {
+//   return mov > 0;
+// })
+// console.log(deposite);
+
+// //DIFFERENCE WITH FOROF LOOP
+// // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// const depositsOfLoop = [];
+// for (const mov of movements) {
+//   if (mov > 0)
+//   depositsOfLoop.push(mov);
+// }
+
+// console.log(`deposits OFLOOP: `, depositsOfLoop);
+
+// // challenge
+// const withdrawals = movements.filter(
+//   mov => mov > 0
+// )
+// console.log(`withdrawals: `, withdrawals);
+// // so they both do the same. the filter method is a bit more convenient, so whats up?
+// // well
+// // map allows for chaining lots of array methods, which would be alot harder for the forOf loop
+
+
+
+
 
 // // 152 COMPUTING USERNAMES
 
-//
-const user = 'Steven Thomas Williams';  // stw
-const username = user.toLowerCase().split(' ').map(name => name[0]).join('');
-console.log('username: ', username)
+// //
+// const user = 'Steven Thomas Williams';  // stw
+// const username = user.toLowerCase().split(' ').map(name => name[0]).join('');
+// console.log('username: ', username)
 
-//and further see the createUserNames method above:
+// //and further see the createUserNames method above:
 
 
 
