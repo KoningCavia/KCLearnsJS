@@ -79,8 +79,14 @@ const displayMovements = function(movements) {
 
   displayMovements(account1.movements);
 
-  const creatUsernames = function(accs) {
+  //154 REDUCE METHOD
+const calcDiscplayBalance = function(movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0) 
+  labelBalance.textContent = `${balance} EUR`;
+}
+calcDiscplayBalance(account1.movements);
 
+  const creatUsernames = function(accs) {
     //use for each. because we dont want to create a new array. we want to modify the array we get.
     // we are making use of the 'sideeffects' that a forEach loop provides (and map doesn't);
      accs.forEach(function(acc) {
@@ -92,14 +98,56 @@ const displayMovements = function(movements) {
      });
  };
  creatUsernames(accounts);
- console.log(accounts);
+
 
 
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+
+// 154 THE REDUCE METHOD
+
+console.log(movements);
+
+// this method works with a callback function that takes the three parameters like always, but it has an extra parameter placed first, which is a bit different. It is called the accumulator. IT is basically an accumulation of all values that were considered up untill now
+// in short, it is the sum.
+//the reduce method returns a single value (rather than an array for the filter and map methods)
+const balance = movements.reduce(function(acc, cur, i, arr){
+  console.log(`Iteration ${i}: ${acc}`);
+  return acc + cur;
+}, 0);
+
+console.log(balance);
+//The reduce function itself has a second parameter, this is the inital value of the accumulator
+
+//ARROW FUNCTION
+const balanceArrow =  movements.reduce((acc, cur) => acc += cur, 0);
+// Let's rebuild the reduce method using a FOR LOOP
+console.log('balanceArrow: ', balanceArrow);
+
+let balance2 = 0; // initial sum value
+for (const mov of movements) balance2 += mov;
+console.log(balance2);
+// we only need one external variable whenever we want to use a forloop. This gets unpractical when we need many loops for many calculatons.
+
+
+
+// Other stuff (besides accumulating values)
+
+// Get MAX value
+// reduce is to boil down the entire array to one value, which could be ANY value
+const maxValue = movements.reduce((acc, cur, i, arr) => cur >= acc ? cur : acc, movements[0]);
+console.log(maxValue);
+
+
+// balance(movements);
+
 
 
 // // 153 THE FILTER METHOD
