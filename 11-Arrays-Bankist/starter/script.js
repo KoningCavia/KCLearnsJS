@@ -190,70 +190,70 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 
 
-// // 152 COMPUTING USERNAMES
+// 152 COMPUTING USERNAMES
 
-// //
-// const user = 'Steven Thomas Williams';  // stw
-// const username = user.toLowerCase().split(' ').map(name => name[0]).join('');
-// console.log('username: ', username)
+//
+const user = 'Steven Thomas Williams';  // stw
+const username = user.toLowerCase().split(' ').map(name => name[0]).join('');
+console.log('username: ', username)
 
-// //and further see the createUserNames method above:
-
-
+//and further see the createUserNames method above:
 
 
-// // 151 THE MAP METHOD
 
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-// const euroToUsd = 1.1;
-
-// const movementsUSD = movements.map(function(mov) {
-//   return mov*euroToUsd;
-// })
-// const movements23 = movements.map(function(mov) {
-//   return 23; 
-// })
-
-// console.log(movements);
-// console.log(movementsUSD);
-// console.log(movements23);
+// 151 THE MAP METHOD
 
 
-// //lets write the above method as a forOf loop.
-// const movementsUSDFor = [];
-// for (const mov of movements) {
-//   movementsUSDFor.push(mov*euroToUsd);
-// }
-// console.log(movementsUSDFor);
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-// // Little Challenge create an arrow function variant of the map function
-// // omg remember this. this is a verry quick arrow function.
-// //some people say this is bad because its less readable. But gosh it seems handy,
-// const movementsUSDArrow = movements.map(mov => mov * euroToUsd)   // IMPORTANT EXAMPLE
-// console.log(`arrow function:`, movementsUSDArrow);
+const euroToUsd = 1.1;
+
+const movementsUSD = movements.map(function(mov) {
+  return mov*euroToUsd;
+})
+const movements23 = movements.map(function(mov) {
+  return 23; 
+})
+
+console.log(movements);
+console.log(movementsUSD);
+console.log(movements23);
 
 
-// // like the forEach method the map method has acces to the same three parameters (value, index, complete array)
+//lets write the above method as a forOf loop.
+const movementsUSDFor = [];
+for (const mov of movements) {
+  movementsUSDFor.push(mov*euroToUsd);
+}
+console.log(movementsUSDFor);
 
-// const movementsDescriptions = movements.map((mov, i, arr) => {
-//     if (mov > 0) {
-//     return `Movement  ${i+1} You deposited ${mov}`;
-//   } else {
-//     return `Movement ${i+1}: You withdrew ${mov}`;
-//   };
-// })
-// console.log(`movementsDescription:`, movementsDescriptions);
+// Little Challenge create an arrow function variant of the map function
+// omg remember this. this is a verry quick arrow function.
+//some people say this is bad because its less readable. But gosh it seems handy,
+const movementsUSDArrow = movements.map(mov => mov * euroToUsd)   // IMPORTANT EXAMPLE
+console.log(`arrow function:`, movementsUSDArrow);
 
-// // Above method simplified
-// const movementsDescriptions2 = movements.map((mov, i, arr) => {
-//   return `Movement ${i+1} You ${mov >= 0 ? `deposited` : `withdrew`} ${Math.abs(mov)}`
-// });
-// console.log('movementsDescriptions2:', movementsDescriptions2);
 
-// // now you could say: this does exactly the same thig as the forEach method. However the foreach method logs stuff to the console (for example) and that is a side effect. 
-// // in other words: THE FOREAHC METHOD HAS SIDE EFFECTS.
+// like the forEach method the map method has acces to the same three parameters (value, index, complete array)
+
+const movementsDescriptions = movements.map((mov, i, arr) => {
+    if (mov > 0) {
+    return `Movement  ${i+1} You deposited ${mov}`;
+  } else {
+    return `Movement ${i+1}: You withdrew ${mov}`;
+  };
+})
+console.log(`movementsDescription:`, movementsDescriptions);
+
+// Above method simplified
+const movementsDescriptions2 = movements.map((mov, i, arr) => {
+  return `Movement ${i+1} You ${mov >= 0 ? `deposited` : `withdrew`} ${Math.abs(mov)}`
+});
+console.log('movementsDescriptions2:', movementsDescriptions2);
+
+// now you could say: this does exactly the same thig as the forEach method. However the foreach method logs stuff to the console (for example) and that is a side effect. 
+// in other words: THE FOREAHC METHOD HAS SIDE EFFECTS.
 
 
 
