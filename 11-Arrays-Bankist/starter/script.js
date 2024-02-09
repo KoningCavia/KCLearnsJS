@@ -139,24 +139,24 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const euroToUsd = 1.1;
 
 
-// 156 THE MAGIC OF CHAINING METHODS
+// // 156 THE MAGIC OF CHAINING METHODS
 
 
-// here we filter all array methods neatly
-const totalDepositsUSD = movements.filter(mov => mov > 0)
-// .map(mov=> mov * euroToUsd)
-.map((mov,i,arr)=> mov * euroToUsd)
-.reduce((acc, mov) => acc+mov);
-console.log(totalDepositsUSD);
+// // here we filter all array methods neatly
+// const totalDepositsUSD = movements.filter(mov => mov > 0)
+// // .map(mov=> mov * euroToUsd)
+// .map((mov,i,arr)=> mov * euroToUsd)
+// .reduce((acc, mov) => acc+mov);
+// console.log(totalDepositsUSD);
 
-// if you want to add loggin, for example to check the outcome array of the first (filter) method we could change the second (map) method like this:
-const totalDepositsUSD2 = movements.filter(mov => mov < 0)
-.map((mov,i,arr)=> {
-  console.log(arr);
-  return mov * euroToUsd;
-})
-.reduce((acc, mov) => acc+mov,0);
-console.log(totalDepositsUSD2);
+// // if you want to add loggin, for example to check the outcome array of the first (filter) method we could change the second (map) method like this:
+// const totalDepositsUSD2 = movements.filter(mov => mov < 0)
+// .map((mov,i,arr)=> {
+//   console.log(arr);
+//   return mov * euroToUsd;
+// })
+// .reduce((acc, mov) => acc+mov,0);
+// console.log(totalDepositsUSD2);
 
 
 // // 154 THE REDUCE METHOD
