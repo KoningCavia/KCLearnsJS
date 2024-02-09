@@ -80,11 +80,38 @@ const displayMovements = function(movements) {
   displayMovements(account1.movements);
 
   //154 REDUCE METHOD
-const calcDiscplayBalance = function(movements) {
+const calcDisplayBalance = function(movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0) 
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance}€`;
 }
-calcDiscplayBalance(account1.movements);
+
+//155 chaining method
+const calcDisplaySummary= function(movements) {
+  const incomes = movements
+    .filter(mov=>mov>0)
+    .reduce((acc, mov) => acc+mov,0 )
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = movements
+    .filter(mov=>mov<0)
+    .reduce((acc, mov) => acc+mov,0 )
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  const interest = movements
+    .filter(mov=>mov>0)
+    .map(deposit=> deposit*1.2/100)
+    .filter((int, i, arr) => {      // add filter that only adds interest thats higher than 1
+      console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc+int,0);
+
+  labelSumInterest.textContent = `${interest}`;
+
+}
+
+calcDisplayBalance(account1.movements);
+calcDisplaySummary(account1.movements);
 
   const creatUsernames = function(accs) {
     //use for each. because we dont want to create a new array. we want to modify the array we get.
@@ -109,6 +136,27 @@ calcDiscplayBalance(account1.movements);
 
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const euroToUsd = 1.1;
+
+
+// 156 THE MAGIC OF CHAINING METHODS
+
+
+// here we filter all array methods neatly
+const totalDepositsUSD = movements.filter(mov => mov > 0)
+// .map(mov=> mov * euroToUsd)
+.map((mov,i,arr)=> mov * euroToUsd)
+.reduce((acc, mov) => acc+mov);
+console.log(totalDepositsUSD);
+
+// if you want to add loggin, for example to check the outcome array of the first (filter) method we could change the second (map) method like this:
+const totalDepositsUSD2 = movements.filter(mov => mov < 0)
+.map((mov,i,arr)=> {
+  console.log(arr);
+  return mov * euroToUsd;
+})
+.reduce((acc, mov) => acc+mov,0);
+console.log(totalDepositsUSD2);
 
 
 // // 154 THE REDUCE METHOD
@@ -202,55 +250,55 @@ console.log('username: ', username)
 
 
 
-// 151 THE MAP METHOD
+// // 151 THE MAP METHOD
 
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-const euroToUsd = 1.1;
+// const euroToUsd = 1.1;
 
-const movementsUSD = movements.map(function(mov) {
-  return mov*euroToUsd;
-})
-const movements23 = movements.map(function(mov) {
-  return 23; 
-})
+// const movementsUSD = movements.map(function(mov) {
+//   return mov*euroToUsd;
+// })
+// const movements23 = movements.map(function(mov) {
+//   return 23; 
+// })
 
-console.log(movements);
-console.log(movementsUSD);
-console.log(movements23);
-
-
-//lets write the above method as a forOf loop.
-const movementsUSDFor = [];
-for (const mov of movements) {
-  movementsUSDFor.push(mov*euroToUsd);
-}
-console.log(movementsUSDFor);
-
-// Little Challenge create an arrow function variant of the map function
-// omg remember this. this is a verry quick arrow function.
-//some people say this is bad because its less readable. But gosh it seems handy,
-const movementsUSDArrow = movements.map(mov => mov * euroToUsd)   // IMPORTANT EXAMPLE
-console.log(`arrow function:`, movementsUSDArrow);
+// console.log(movements);
+// console.log(movementsUSD);
+// console.log(movements23);
 
 
-// like the forEach method the map method has acces to the same three parameters (value, index, complete array)
+// //lets write the above method as a forOf loop.
+// const movementsUSDFor = [];
+// for (const mov of movements) {
+//   movementsUSDFor.push(mov*euroToUsd);
+// }
+// console.log(movementsUSDFor);
 
-const movementsDescriptions = movements.map((mov, i, arr) => {
-    if (mov > 0) {
-    return `Movement  ${i+1} You deposited ${mov}`;
-  } else {
-    return `Movement ${i+1}: You withdrew ${mov}`;
-  };
-})
-console.log(`movementsDescription:`, movementsDescriptions);
+// // Little Challenge create an arrow function variant of the map function
+// // omg remember this. this is a verry quick arrow function.
+// //some people say this is bad because its less readable. But gosh it seems handy,
+// const movementsUSDArrow = movements.map(mov => mov * euroToUsd)   // IMPORTANT EXAMPLE
+// console.log(`arrow function:`, movementsUSDArrow);
 
-// Above method simplified
-const movementsDescriptions2 = movements.map((mov, i, arr) => {
-  return `Movement ${i+1} You ${mov >= 0 ? `deposited` : `withdrew`} ${Math.abs(mov)}`
-});
-console.log('movementsDescriptions2:', movementsDescriptions2);
+
+// // like the forEach method the map method has acces to the same three parameters (value, index, complete array)
+
+// const movementsDescriptions = movements.map((mov, i, arr) => {
+//     if (mov > 0) {
+//     return `Movement  ${i+1} You deposited ${mov}`;
+//   } else {
+//     return `Movement ${i+1}: You withdrew ${mov}`;
+//   };
+// })
+// console.log(`movementsDescription:`, movementsDescriptions);
+
+// // Above method simplified
+// const movementsDescriptions2 = movements.map((mov, i, arr) => {
+//   return `Movement ${i+1} You ${mov >= 0 ? `deposited` : `withdrew`} ${Math.abs(mov)}`
+// });
+// console.log('movementsDescriptions2:', movementsDescriptions2);
 
 // now you could say: this does exactly the same thig as the forEach method. However the foreach method logs stuff to the console (for example) and that is a side effect. 
 // in other words: THE FOREAHC METHOD HAS SIDE EFFECTS.
