@@ -138,6 +138,25 @@ calcDisplaySummary(account1.movements);
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const euroToUsd = 1.1;
 
+// 158 the find method
+
+console.log("-----158 the find method-----");
+const firstWithdrawal = movements.find(mov => mov < 0)
+
+// the find method is similar to the filter method, except in stead of returning an array with all values that follow the criteria
+// it returns only the first single element that follows the criteria
+
+console.log(movements);
+console.log(firstWithdrawal);
+
+
+console.log(accounts);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
+
+
+
 
 // // 156 THE MAGIC OF CHAINING METHODS
 
