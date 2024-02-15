@@ -54,8 +54,10 @@ const btnClose = document.querySelector('.form__btn--close');
 const btnSort = document.querySelector('.btn--sort');
 
 const inputLoginUsername = document.querySelector('.login__input--user');
+
 const inputLoginPin = document.querySelector('.login__input--pin');
 const inputTransferTo = document.querySelector('.form__input--to');
+
 const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
@@ -77,7 +79,7 @@ const displayMovements = function(movements) {
   });
   };
 
-  displayMovements(account1.movements);
+  // displayMovements(account1.movements);
 
   //154 REDUCE METHOD
 const calcDisplayBalance = function(movements) {
@@ -110,8 +112,8 @@ const calcDisplaySummary= function(movements) {
 
 }
 
-calcDisplayBalance(account1.movements);
-calcDisplaySummary(account1.movements);
+// calcDisplayBalance(account1.movements);
+// calcDisplaySummary(account1.movements);
 
   const creatUsernames = function(accs) {
     //use for each. because we dont want to create a new array. we want to modify the array we get.
@@ -138,22 +140,57 @@ calcDisplaySummary(account1.movements);
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const euroToUsd = 1.1;
 
-// 158 the find method
-
-console.log("-----158 the find method-----");
-const firstWithdrawal = movements.find(mov => mov < 0)
-
-// the find method is similar to the filter method, except in stead of returning an array with all values that follow the criteria
-// it returns only the first single element that follows the criteria
-
-console.log(movements);
-console.log(firstWithdrawal);
 
 
-console.log(accounts);
+// 159 Implementing login
 
-const account = accounts.find(acc => acc.owner === 'Jessica Davis');
-console.log(account);
+console.log('-----159 Implementing login-----');
+
+//event handler
+let currentAccount;     // here we initiate the empty variable (because we need it for certain functions). and in the login we assign a value to it.
+btnLogin.addEventListener('click', function(e) {
+  e.preventDefault();  // this is a button in a form element. and standard behavior is for the page to reload. preventDefault prevents this.
+  // console.log('LOGIN');
+
+  currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);   // here we assign the value
+  console.log(currentAccount);
+
+  if(currentAccount?.pin === Number(inputLoginPin.value)) {
+    console.log('LOGIN'); // Optional chaining baby!! does account exist?
+  
+    //display ui and welcome message
+
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
+    containerApp.style.opacity = 100;
+
+    //calculate balance
+
+    // calculate summary
+
+    //display movements
+  }
+})
+
+
+
+
+
+// // 158 the find method
+
+// console.log("-----158 the find method-----");
+// const firstWithdrawal = movements.find(mov => mov < 0)
+
+// // the find method is similar to the filter method, except in stead of returning an array with all values that follow the criteria
+// // it returns only the first single element that follows the criteria
+
+// console.log(movements);
+// console.log(firstWithdrawal);
+
+
+// console.log(accounts);
+
+// const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+// console.log(account);
 
 
 
