@@ -160,7 +160,7 @@ btnLogin.addEventListener('click', function(e) {
   }
 })
 
-//160 IMPLEMENTING TRANSFERS
+//160 TRANSFER METHOD
 btnTransfer.addEventListener('click', function(e) {
   e.preventDefault();   // this is common to do when working with forms
 
@@ -190,10 +190,36 @@ btnTransfer.addEventListener('click', function(e) {
         updateUI(currentAccount);
 
     }
-
-
-
 })
+
+
+//161 the findIndex method
+
+//161 CLOSE ACCOUNT
+console.log('-----161 the findIndex method-----');
+btnClose.addEventListener('click', function(e) {
+  e.preventDefault();
+  // console.log('Delete');
+
+  const closeAccount = inputCloseUsername.value;
+  const closePin = inputClosePin.value;
+  //Correct credentials? is currentuser the same as the 
+
+  inputCloseUsername.value = inputClosePin.value = '';
+  if(currentAccount.username === closeAccount && Number(currentAccount.pin) === Number(closePin)) {
+    const index = accounts.findIndex(acc =>         // this works exactly like the find method. except it 
+      acc.username === currentAccount.username      //returns the index of the value rather than the value itself 
+      )                  
+    //Delete user from Data
+    accounts.splice(index, 1);
+    console.log('Delete Valid');
+  
+    // Hide UI / "Logout"
+    containerApp.style.opacity = 0;
+  }
+})
+
+
 
 
 /////////////////////////////////////////////////
@@ -204,6 +230,10 @@ btnTransfer.addEventListener('click', function(e) {
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const euroToUsd = 1.1;
+
+
+
+
 
 
 
