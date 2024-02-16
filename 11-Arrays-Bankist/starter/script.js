@@ -79,12 +79,12 @@ const displayMovements = function(movements) {
   });
   };
 
-  // displayMovements(account1.movements);
 
   //154 REDUCE METHOD
-const calcDisplayBalance = function(movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0) 
-  labelBalance.textContent = `${balance}€`;
+const calcDisplayBalance = function(acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  // acc.balance = balance;
+  labelBalance.textContent = `${acc.balance}€`;
 }
 
 //155 chaining method
@@ -103,7 +103,6 @@ const calcDisplaySummary= function(acc) {
     .filter(mov=>mov>0)
     .map(deposit=> deposit*acc.interestRate/100)
     .filter((int, i, arr) => {      // add filter that only adds interest thats higher than 1
-      console.log(arr);
       return int >= 1;
     })
     .reduce((acc, int) => acc+int,0);
@@ -111,9 +110,6 @@ const calcDisplaySummary= function(acc) {
   labelSumInterest.textContent = `${interest}`;
 
 }
-
-// calcDisplayBalance(account1.movements);
-// calcDisplaySummary(account1.movements);
 
   const creatUsernames = function(accs) {
     //use for each. because we dont want to create a new array. we want to modify the array we get.
@@ -128,26 +124,19 @@ const calcDisplaySummary= function(acc) {
  };
  creatUsernames(accounts);
 
-
-
-
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
-
-
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-const euroToUsd = 1.1;
-
-
+ const updateUI = function(acc) {
+  displayMovements(acc.movements); 
+  calcDisplayBalance(acc);
+  calcDisplaySummary(acc);
+ }
 
 // 159 Implementing login
 
 console.log('-----159 Implementing login-----');
 
-//event handler
+//LOGIN LOGIC
 let currentAccount;     // here we initiate the empty variable (because we need it for certain functions). and in the login we assign a value to it.
+
 btnLogin.addEventListener('click', function(e) {
   e.preventDefault();  // this is a button in a form element. and standard behavior is for the page to reload. preventDefault prevents this.
   // console.log('LOGIN');
@@ -167,18 +156,57 @@ btnLogin.addEventListener('click', function(e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();   // makes the inputfield lose its focus
 
-    //display movements
-    displayMovements(currentAccount.movements); 
-
-    //calculate balance
-    calcDisplayBalance(currentAccount.movements);
-
-    // calculate summary
-
-    calcDisplaySummary(currentAccount);
-
+    updateUI(currentAccount);
   }
 })
+
+//160 IMPLEMENTING TRANSFERS
+btnTransfer.addEventListener('click', function(e) {
+  e.preventDefault();   // this is common to do when working with forms
+
+  //get the entered values 
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(acc => acc.username === inputTransferTo.value);  // We retrieve the account which has the username which is the same as the name entered in the text field.
+  console.log(amount, receiverAcc);
+
+
+  //validate input
+    if(amount >0 && 
+      receiverAcc &&
+      currentAccount.balance >= amount && 
+      receiverAcc?.username !== currentAccount.username) {
+        console.log('Transfer valid');
+
+        //clean inputfields
+        inputTransferAmount.value = inputTransferTo.value = '';
+
+        //add negative movement to current user
+        //add positive movement to recipient
+        currentAccount.movements.push(-amount);
+        receiverAcc.movements.push(amount);
+
+        //update UI
+
+        updateUI(currentAccount);
+
+    }
+
+
+
+})
+
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+// LECTURES
+
+
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const euroToUsd = 1.1;
+
+
+
 
 
 
