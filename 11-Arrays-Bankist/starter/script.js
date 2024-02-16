@@ -88,20 +88,20 @@ const calcDisplayBalance = function(movements) {
 }
 
 //155 chaining method
-const calcDisplaySummary= function(movements) {
-  const incomes = movements
+const calcDisplaySummary= function(acc) {
+  const incomes = acc.movements
     .filter(mov=>mov>0)
     .reduce((acc, mov) => acc+mov,0 )
   labelSumIn.textContent = `${incomes}€`;
 
-  const out = movements
+  const out = acc.movements
     .filter(mov=>mov<0)
     .reduce((acc, mov) => acc+mov,0 )
   labelSumOut.textContent = `${Math.abs(out)}€`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter(mov=>mov>0)
-    .map(deposit=> deposit*1.2/100)
+    .map(deposit=> deposit*acc.interestRate/100)
     .filter((int, i, arr) => {      // add filter that only adds interest thats higher than 1
       console.log(arr);
       return int >= 1;
@@ -163,11 +163,20 @@ btnLogin.addEventListener('click', function(e) {
     labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
     containerApp.style.opacity = 100;
 
+    // clear nput fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();   // makes the inputfield lose its focus
+
+    //display movements
+    displayMovements(currentAccount.movements); 
+
     //calculate balance
+    calcDisplayBalance(currentAccount.movements);
 
     // calculate summary
 
-    //display movements
+    calcDisplaySummary(currentAccount);
+
   }
 })
 
