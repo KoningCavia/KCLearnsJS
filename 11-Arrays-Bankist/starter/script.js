@@ -187,13 +187,27 @@ btnTransfer.addEventListener('click', function(e) {
 
         //update UI
 
-        updateUI(currentAccount);
 
+        updateUI(currentAccount);
     }
 })
 
+// 162 Some
 
-//161 the findIndex method
+btnLoan.addEventListener('click', function(e){
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value)
+
+  if(amount >0 && currentAccount.movements.some(mov => mov >= amount*0.1))
+
+  //add movements
+  currentAccount.movements.push(amount);
+
+  // update ui
+  updateUI(currentAccount);
+  inputLoanAmount.value = '';
+})
 
 //161 CLOSE ACCOUNT
 console.log('-----161 the findIndex method-----');
@@ -236,11 +250,42 @@ const euroToUsd = 1.1;
 
 
 
+// 162 SOME AND EVERY
+
+console.log('-----162 SOME AND EVERY-----');
+
+console.log(movements);
+
+// EQUALITY
+console.log(movements.includes(-130));      // -130 is indeed in the array
+// so  includes checks for equality. is the exact value -130 available in the movements aray.
+
+//But what if we want to check for a condition instead.
+//THE SUM METHOD
+
+//we want to know if there were any deposits on the account
+
+// SOME:CONDITION
+console.log(movements.some(mov => mov === -130));   // is the same as above
 
 
+const anyDeposits = movements.some(mov => mov > 0);
+console.log(anyDeposits);     // true
 
+const depositsOver5000 = movements.some(mov => mov>5000);
+console.log(depositsOver5000);    //false
 
+// EVERY  
+//returns true if ALL of the elements return true
 
+console.log(movements.every(mov => mov > 0));             // false
+console.log(account4.movements.every(mov => mov > 0));    // true 
+
+const deposit = mov => mov < 0;       // here we store the method/condition in a value so we can use it elsewhere. REMEMBER THIS IMPORTANT USEFULL
+
+console.log(movements.some(deposit)); 
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
 
 // // 158 the find method
 
@@ -322,7 +367,7 @@ const euroToUsd = 1.1;
 
 
 
-// // balance(movements);
+// balance(movements);
 
 
 
@@ -361,14 +406,14 @@ const euroToUsd = 1.1;
 
 
 
-// 152 COMPUTING USERNAMES
+// // 152 COMPUTING USERNAMES
 
-//
-const user = 'Steven Thomas Williams';  // stw
-const username = user.toLowerCase().split(' ').map(name => name[0]).join('');
-console.log('username: ', username)
+// //
+// const user = 'Steven Thomas Williams';  // stw
+// const username = user.toLowerCase().split(' ').map(name => name[0]).join('');
+// console.log('username: ', username)
 
-//and further see the createUserNames method above:
+// //and further see the createUserNames method above:
 
 
 
@@ -376,9 +421,9 @@ console.log('username: ', username)
 // // 151 THE MAP METHOD
 
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-// const euroToUsd = 1.1;
+// // const euroToUsd = 1.1;
 
 // const movementsUSD = movements.map(function(mov) {
 //   return mov*euroToUsd;
@@ -423,8 +468,8 @@ console.log('username: ', username)
 // });
 // console.log('movementsDescriptions2:', movementsDescriptions2);
 
-// now you could say: this does exactly the same thig as the forEach method. However the foreach method logs stuff to the console (for example) and that is a side effect. 
-// in other words: THE FOREAHC METHOD HAS SIDE EFFECTS.
+// // now you could say: this does exactly the same thig as the forEach method. However the foreach method logs stuff to the console (for example) and that is a side effect. 
+// // in other words: THE FOREAHC METHOD HAS SIDE EFFECTS.
 
 
 
@@ -451,7 +496,7 @@ console.log('username: ', username)
 
 // // 148 DOM MANIPULATION
 
-        // THIS METHOD IS DUPLICATED ABOVE
+//         // THIS METHOD IS DUPLICATED ABOVE
 // const displayMovements = function(movements) {
 //   containerMovements.innerHTML = '';      // className.innerhtml = '' sets the html to a string ''
   
@@ -515,7 +560,7 @@ console.log('username: ', username)
 
 
 // // 145Looping arrays: forEach
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 
 // // first a FOROF loop. As a comparison
@@ -568,28 +613,28 @@ console.log('username: ', username)
 //   }
 // })
 
-// CONCLUDING foreach is easier because its basically automatic.
+// // CONCLUDING foreach is easier because its basically automatic.
 
-// when to use which:
-// you can not break out of a forEach loop. It will always loop through the entire array.
-// So if you need to break out you need to use the forOf loop.
+// // when to use which:
+// // you can not break out of a forEach loop. It will always loop through the entire array.
+// // So if you need to break out you need to use the forOf loop.
 
 
-// // // 144 SIMPLE ARRAY METHODS
+// // 144 SIMPLE ARRAY METHODS
 
-// const arr = [23, 11, 64];
-// console.log(arr[0]);    //shows index 0 or array (duh)
-// console.log(arr.at(0));   //does the same but with a method.
+// const arr2 = [23, 11, 64];
+// console.log(arr2[0]);    //shows index 0 or array (duh)
+// console.log(arr2.at(0));   //does the same but with a method.
 // // But why?
 
 // // suppose we dont know the end of the array. We would do this:
-// console.log(arr[arr.length-1]);   //returns last value of the array
-// console.log(arr.slice(-1)[0]);       // returns last value of the array (without brackets it returns an array with one value. with brackets just the value)
+// console.log(arr2[arr2.length-1]);   //returns last value of the array
+// console.log(arr2.slice(-1)[0]);       // returns last value of the array (without brackets it returns an array with one value. with brackets just the value)
 
 // //these are two classical methods to get the last value.
 // // however the at method makes this easier
-// console.log(arr.at(-1));
-// console.log(arr.at(-2));
+// console.log(arr2.at(-1));
+// console.log(arr2.at(-2));
 // //we dont need '-1', we dont need an extra [0]. we can just say -1 and it returns the value.
 
 // // which should you use? it depends. But you probably want the .at method. Also for method chaining.
@@ -606,46 +651,46 @@ console.log('username: ', username)
 // //Arays are objects that have their own set of methods that act as tools to deal with arrays
 
 
-// let arr = ['a', 'b', 'c', 'd', 'e'];
+// let arr2 = ['a', 'b', 'c', 'd', 'e'];
 
 // //SLICE  (just like in strings)     (no mutates)
-// console.log(arr.slice(2))       // slices AFTER 2 (so 3 and after is included, but not 2)
-// console.log(arr.slice(2, 4))    // slices BEFORE 4 (so 4 and before is included)
+// console.log(arr2.slice(2))       // slices AFTER 2 (so 3 and after is included, but not 2)
+// console.log(arr2.slice(2, 4))    // slices BEFORE 4 (so 4 and before is included)
 
-// console.log(arr.slice(-2));     // takes the last 2 elements of an array
-// console.log(arr.slice(-1));     // gets the last element this is very handy, remember this.
-// console.log(arr.slice(1, -2));  // gets everything except the first 1 and the last 2.
-// console.log(arr.slice);         // creates a shallow copy.
-// console.log([...arr]);      //also creates a shallow copy.
+// console.log(arr2.slice(-2));     // takes the last 2 elements of an array
+// console.log(arr2.slice(-1));     // gets the last element this is very handy, remember this.
+// console.log(arr2.slice(1, -2));  // gets everything except the first 1 and the last 2.
+// console.log(arr2.slice);         // creates a shallow copy.
+// console.log([...arr2]);      //also creates a shallow copy.
 
 // //SPLICE  (mutates)
 //   console.log("\n\n\n\n\SPLICING");
-//   console.log(arr.splice(2));   //result seems the same, however look at the original array
-//   arr.splice(-1)
-//   console.log(arr);             // the spliced values are REMOVED from the ORIGINAL array.
+//   console.log(arr2.splice(2));   //result seems the same, however look at the original array
+//   arr2.splice(-1)
+//   console.log(arr2);             // the spliced values are REMOVED from the ORIGINAL array.
 //   //most of the time the removed part that we spliced (the first) doesnt interest us. This is generally used to remove data from the original aray.
 
 
 // // Splicing parameters work differently from slice. Here splicing starts after 1, but then only the next 2 values are spliced. so specifically only value 2 and 3 are removed.
-// arr = ['a', 'b', 'c', 'd', 'e'];
+// // arr = ['a', 'b', 'c', 'd', 'e'];
 
-// console.log(arr.splice(1,2))
-// console.log(arr)            // and everything BUT 2 and 3 are still in the original array.
+// console.log(arr2.splice(1,2))
+// console.log(arr2)            // and everything BUT 2 and 3 are still in the original array.
 
 
 // // REVERS   (mutates)
 // console.log("\n\n\nREVERSE");
 
-// arr = ['a', 'b', 'c', 'd', 'e'];
-// let arr2 = ['j','i','h','g','f'];
-// console.log(arr2.reverse());      // dont forget the '()'
-// console.log(arr2);      // reverse does mutate the array. The original array stays reversed.
+// arr2 = ['a', 'b', 'c', 'd', 'e'];
+// let arr3 = ['j','i','h','g','f'];
+// console.log(arr3.reverse());      // dont forget the '()'
+// console.log(arr3);      // reverse does mutate the array. The original array stays reversed.
 
 // // CONCAT   (NO mutate)
 // console.log('\n\n\nCONCAT');
-// const letters = arr.concat(arr2);     // concats arrays // (NO mutate)
+// const letters = arr2.concat(arr3);     // concats arrays // (NO mutate)
 // console.log(letters);     
-// console.log([...arr, ...arr2]);       // does the same as concat.  (NO mutate)
+// console.log([...arr2, ...arr3]);       // does the same as concat.  (NO mutate)
 
 
 // // JOIN
