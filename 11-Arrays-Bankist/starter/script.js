@@ -63,10 +63,12 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function(movements) {
+const displayMovements = function(movements, sort = false) {    // by default sorting is false
   containerMovements.innerHTML = '';      // className.innerhtml = '' sets the html to a string ''
+
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
   
-  movements.forEach(function(mov, i) {
+  movs.forEach(function(mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
   
     const html = `
@@ -233,6 +235,12 @@ btnClose.addEventListener('click', function(e) {
   }
 })
 
+let sorted = false;        // hier maken we de staat van de boolean
+btnSort.addEventListener('click', function(e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);    // hier sturen we de tegenovergestelde staat van de boolean met de method call mee
+  sorted = !sorted;                                       // hier slaan we de tegenovergesteld staat van de boolean op in "sorted"
+})
 
 
 
@@ -245,41 +253,87 @@ btnClose.addEventListener('click', function(e) {
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const euroToUsd = 1.1;
 
-// 163 FLAT AND FLATMAP
-// USED TO DEAL WITH NESTED ARRAYS
-console.log('-----163 FLAT AND FLATMAP-----');
 
 
-const arr = [[1,2,3], [4,5,6] ,7,8];    // we hebben een array met arrays
-console.log(arr.flat());        // .flat plakt heel handig alle arrays aan elkaar in 1 array
+// 164 SORTING ARRAYS
+console.log('-----164 Sorting Arrays-----');
 
 
-const arrDeep = [[[1,2],3], [4,[5,6]] ,7,8];  // array in een array in een array?
-console.log(arrDeep.flat());  // nee dat werkt niet helemaal, we hebben nu een array met arrays
+const owners = ['Jonas', 'Zac' , 'Adam', 'Martha'];
+console.log(owners.sort());   // sorts from A to Z
 
-console.log(arrDeep.flat().flat());   // dubbel flatten
-console.log(arrDeep.flat(2));   // ah we kunnen een nummer toevoegen waarmee we aangeven hoe veel levels we willen flatten
+console.log(owners);        // the original arrays is mutated. So we have to be very careful about using this method
 
 
-const accountMovements = accounts.map(acc => acc.movements);
-console.log(accountMovements.flat());   // 1 array
-console.log(accountMovements);          // array of arrays
+console.log(movements);
+// console.log(movements.sort());    // wait this looks weierd. It is because these values are sorted as strings
 
-//FLAT
-const overallBalance = accounts
-.map(acc =>acc.movements)
-.flat()
-.reduce((acc, mov) => acc = acc + mov, 0); // chain all methods
-console.log(overallBalance);
 
-//apparently performing .map() followed by .flat() is used a lot. So a new method was created that does both at the same time (more efficiently). So adding several arrays together (.map) and then turning that in one array (.flat)
+// return < 0 dan A , B
+// return > 0 dan B , A
+console.log(movements.sort((a,b) => {       // a = currentValue  |  b = nextValue
+  if(a>b)
+    return 1;
+  if(a<b) 
+    return -1;
+}));
+//ascending
+console.log(movements.sort((a,b) => {       // a = currentValue  |  b = nextValue
+  if(a>b)
+    return -1;
+  if(a<b) 
+    return 1;
+}));
+// descending (changed 1 and -1)
 
-//FLATMAP
-const overallBalance2 = accounts
-.flatMap(acc =>acc.movements)
-.reduce((acc, mov) => acc = acc + mov, 0); // chain all methods
-console.log(overallBalance2);
-// Note
+movements.sort((a, b) => a - b);  // ascending
+console.log(movements); 
+
+movements.sort((a, b) => b - a);  // descending
+
+
+//the above works perfectly because if a is bigger than b it will always return a positive result. However is b is bigger than a it wll always return a negative results. 
+// that is all you need to know about sorting numbers
+
+//Back to the app. the sorting 
+
+
+
+// // 163 FLAT AND FLATMAP
+// // USED TO DEAL WITH NESTED ARRAYS
+// console.log('-----163 FLAT AND FLATMAP-----');
+
+
+// const arr = [[1,2,3], [4,5,6] ,7,8];    // we hebben een array met arrays
+// console.log(arr.flat());        // .flat plakt heel handig alle arrays aan elkaar in 1 array
+
+
+// const arrDeep = [[[1,2],3], [4,[5,6]] ,7,8];  // array in een array in een array?
+// console.log(arrDeep.flat());  // nee dat werkt niet helemaal, we hebben nu een array met arrays
+
+// console.log(arrDeep.flat().flat());   // dubbel flatten
+// console.log(arrDeep.flat(2));   // ah we kunnen een nummer toevoegen waarmee we aangeven hoe veel levels we willen flatten
+
+
+// const accountMovements = accounts.map(acc => acc.movements);
+// console.log(accountMovements.flat());   // 1 array
+// console.log(accountMovements);          // array of arrays
+
+// //FLAT
+// const overallBalance = accounts
+// .map(acc =>acc.movements)
+// .flat()
+// .reduce((acc, mov) => acc = acc + mov, 0); // chain all methods
+// console.log(overallBalance);
+
+// //apparently performing .map() followed by .flat() is used a lot. So a new method was created that does both at the same time (more efficiently). So adding several arrays together (.map) and then turning that in one array (.flat)
+
+// //FLATMAP
+// const overallBalance2 = accounts
+// .flatMap(acc =>acc.movements)
+// .reduce((acc, mov) => acc = acc + mov, 0); // chain all methods
+// console.log(overallBalance2);
+// // Note flatMap can only go 1 level deep. 
 
 
 
