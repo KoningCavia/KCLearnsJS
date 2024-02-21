@@ -245,47 +245,80 @@ btnClose.addEventListener('click', function(e) {
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const euroToUsd = 1.1;
 
+// 163 FLAT AND FLATMAP
+// USED TO DEAL WITH NESTED ARRAYS
+console.log('-----163 FLAT AND FLATMAP-----');
+
+
+const arr = [[1,2,3], [4,5,6] ,7,8];    // we hebben een array met arrays
+console.log(arr.flat());        // .flat plakt heel handig alle arrays aan elkaar in 1 array
+
+
+const arrDeep = [[[1,2],3], [4,[5,6]] ,7,8];  // array in een array in een array?
+console.log(arrDeep.flat());  // nee dat werkt niet helemaal, we hebben nu een array met arrays
+
+console.log(arrDeep.flat().flat());   // dubbel flatten
+console.log(arrDeep.flat(2));   // ah we kunnen een nummer toevoegen waarmee we aangeven hoe veel levels we willen flatten
+
+
+const accountMovements = accounts.map(acc => acc.movements);
+console.log(accountMovements.flat());   // 1 array
+console.log(accountMovements);          // array of arrays
+
+//FLAT
+const overallBalance = accounts
+.map(acc =>acc.movements)
+.flat()
+.reduce((acc, mov) => acc = acc + mov, 0); // chain all methods
+console.log(overallBalance);
+
+//apparently performing .map() followed by .flat() is used a lot. So a new method was created that does both at the same time (more efficiently). So adding several arrays together (.map) and then turning that in one array (.flat)
+
+//FLATMAP
+const overallBalance2 = accounts
+.flatMap(acc =>acc.movements)
+.reduce((acc, mov) => acc = acc + mov, 0); // chain all methods
+console.log(overallBalance2);
+// Note
 
 
 
+// // 162 SOME AND EVERY
+
+// console.log('-----162 SOME AND EVERY-----');
+
+// console.log(movements);
+
+// // EQUALITY
+// console.log(movements.includes(-130));      // -130 is indeed in the array
+// // so  includes checks for equality. is the exact value -130 available in the movements aray.
+
+// //But what if we want to check for a condition instead.
+// //THE SUM METHOD
+
+// //we want to know if there were any deposits on the account
+
+// // SOME:CONDITION
+// console.log(movements.some(mov => mov === -130));   // is the same as above
 
 
-// 162 SOME AND EVERY
+// const anyDeposits = movements.some(mov => mov > 0);
+// console.log(anyDeposits);     // true
 
-console.log('-----162 SOME AND EVERY-----');
+// const depositsOver5000 = movements.some(mov => mov>5000);
+// console.log(depositsOver5000);    //false
 
-console.log(movements);
+// // EVERY  
+// //returns true if ALL of the elements return true
 
-// EQUALITY
-console.log(movements.includes(-130));      // -130 is indeed in the array
-// so  includes checks for equality. is the exact value -130 available in the movements aray.
+// console.log(movements.every(mov => mov > 0));             // false
+// console.log(account4.movements.every(mov => mov > 0));    // true 
 
-//But what if we want to check for a condition instead.
-//THE SUM METHOD
+// const deposit = mov => mov < 0;       // here we store the method/condition in a value so we can use it elsewhere. REMEMBER THIS IMPORTANT USEFULL
 
-//we want to know if there were any deposits on the account
-
-// SOME:CONDITION
-console.log(movements.some(mov => mov === -130));   // is the same as above
-
-
-const anyDeposits = movements.some(mov => mov > 0);
-console.log(anyDeposits);     // true
-
-const depositsOver5000 = movements.some(mov => mov>5000);
-console.log(depositsOver5000);    //false
-
-// EVERY  
-//returns true if ALL of the elements return true
-
-console.log(movements.every(mov => mov > 0));             // false
-console.log(account4.movements.every(mov => mov > 0));    // true 
-
-const deposit = mov => mov < 0;       // here we store the method/condition in a value so we can use it elsewhere. REMEMBER THIS IMPORTANT USEFULL
-
-console.log(movements.some(deposit)); 
-console.log(movements.every(deposit));
-console.log(movements.filter(deposit));
+// console.log(movements.some(deposit)); 
+// console.log(movements.every(deposit));
+// console.log(movements.filter(deposit));
 
 // // 158 the find method
 
