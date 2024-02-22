@@ -283,9 +283,23 @@ const z = Array.from({length: 7}, (_, i )=> 1+i);     // the callback function h
 console.log(z);
 
 
-// 100 random diceroles
+// 100 random diceroles in an array
 const die = Array.from({length: 100}, () => Math.trunc(Math.random()*100)+1);
 console.log(die);
+
+
+// ARRAY.FROM
+//              allows to make arrays from ANY iterable
+
+
+
+
+
+labelBalance.addEventListener('click', function() {
+  const movementsUI = Array.from(document.querySelectorAll('.movements__value'));
+console.log(movementsUI);
+  console.log(movementsUI.map(el => Number(el.textContent.replace('€', ''))));
+})
 
 // // 164 SORTING ARRAYS
 // console.log('-----164 Sorting Arrays-----');
