@@ -254,42 +254,74 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const euroToUsd = 1.1;
 
 
+// 165 MORE WAYS OF CREATING AND FILLING ARRAYS
 
-// 164 SORTING ARRAYS
-console.log('-----164 Sorting Arrays-----');
+console.log('-----165 MORE WAYS OF CREATING AND FILLING ARRAYS-----');
 
-
-const owners = ['Jonas', 'Zac' , 'Adam', 'Martha'];
-console.log(owners.sort());   // sorts from A to Z
-
-console.log(owners);        // the original arrays is mutated. So we have to be very careful about using this method
+const arr = [1,2,3,4,5,6,7];             //create new array
+console.log(new Array(1,2,3,4,5,6,7));    // same    
 
 
-console.log(movements);
-// console.log(movements.sort());    // wait this looks weierd. It is because these values are sorted as strings
+//EMPTY ARRAYS + FILL METHOD
+const x = new Array(7);     // this surprisingly creates a new array with a length of 7 empty values
+console.log(x);
+console.log(x.map(() => 5));    // this does not fill the entire arra with the value 5
+console.log(x.map(value => value = 5)) ;    // also no fill... :(
+// x.fill(1);          // the .fill method will fill it actually.
+x.fill(1,3,5)       // fill it with '1's but only from index 3 untill index 4 (including index 3 excluding index 5)
+console.log(x);
+
+arr.fill(23, 2,6)
+console.log(arr);
+
+//ARRAY.FROM
+const y = Array.from({length: 7}, () => 1);       //create an array with length 7 filled with 1's, using a callback function that just returns 1 every time
+console.log(y);
+
+// const z = Array.from({length: 7}, (z, i )=> 1+i);         // returns 1+i which is the new z
+const z = Array.from({length: 7}, (_, i )=> 1+i);     // the callback function here works exactly like the .map method.
+console.log(z);
 
 
-// return < 0 dan A , B
-// return > 0 dan B , A
-console.log(movements.sort((a,b) => {       // a = currentValue  |  b = nextValue
-  if(a>b)
-    return 1;
-  if(a<b) 
-    return -1;
-}));
-//ascending
-console.log(movements.sort((a,b) => {       // a = currentValue  |  b = nextValue
-  if(a>b)
-    return -1;
-  if(a<b) 
-    return 1;
-}));
-// descending (changed 1 and -1)
+// 100 random diceroles
+const die = Array.from({length: 100}, () => Math.trunc(Math.random()*100)+1);
+console.log(die);
 
-movements.sort((a, b) => a - b);  // ascending
-console.log(movements); 
+// // 164 SORTING ARRAYS
+// console.log('-----164 Sorting Arrays-----');
 
-movements.sort((a, b) => b - a);  // descending
+
+// const owners = ['Jonas', 'Zac' , 'Adam', 'Martha'];
+// console.log(owners.sort());   // sorts from A to Z
+
+// console.log(owners);        // the original arrays is mutated. So we have to be very careful about using this method
+
+
+// console.log(movements);
+// // console.log(movements.sort());    // wait this looks weierd. It is because these values are sorted as strings
+
+
+// // return < 0 dan A , B
+// // return > 0 dan B , A
+// console.log(movements.sort((a,b) => {       // a = currentValue  |  b = nextValue
+//   if(a>b)
+//     return 1;
+//   if(a<b) 
+//     return -1;
+// }));
+// //ascending
+// console.log(movements.sort((a,b) => {       // a = currentValue  |  b = nextValue
+//   if(a>b)
+//     return -1;
+//   if(a<b) 
+//     return 1;
+// }));
+// // descending (changed 1 and -1)
+
+// movements.sort((a, b) => a - b);  // ascending
+// console.log(movements); 
+
+// movements.sort((a, b) => b - a);  // descending
 
 
 //the above works perfectly because if a is bigger than b it will always return a positive result. However is b is bigger than a it wll always return a negative results. 
