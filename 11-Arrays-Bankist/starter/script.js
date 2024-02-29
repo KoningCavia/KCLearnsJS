@@ -253,6 +253,19 @@ btnSort.addEventListener('click', function(e) {
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const euroToUsd = 1.1;
 
+// 167 ARRAY METHODS PRACTICE
+console.log('-----167 ARRAY METHODS PRACTICE-----');
+
+
+//calculate how much has been deposited in total
+const allTransactions = accounts.flatMap( acc => acc.movements);
+let deposits = allTransactions.filter(trans => trans>0 ? trans : 0);
+let totalDeposits = deposits.reduce((acc, cur) => acc+cur);
+console.log(allTransactions);
+console.log(deposits);
+console.log(totalDeposits);
+let totalChain = accounts.flatMap(acc=> acc.movements).filter(trans => trans>0?trans:0).reduce((acc, cur)=>acc+cur);
+console.log(totalChain);
 
 // 165 MORE WAYS OF CREATING AND FILLING ARRAYS
 
