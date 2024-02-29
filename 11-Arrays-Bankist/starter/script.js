@@ -291,10 +291,24 @@ console.log(trans1000Reduce);
 
 const sumAllTransactions = accounts
   .flatMap(acc=>acc.movements)
-  .reduce((acc, cur) => acc+Math.abs(cur) 
-  ,0);
+  .reduce((acc, cur) => {
+    cur>0 ? acc.deposits += cur : acc.withdrawals += cur; 
+    return acc}
+  , {deposits:0, withdrawals: 0});
   console.log(sumAllTransactions);
 
+  //the same but cleaner and complexer i guess
+  const {deposits2, withdrawals2} = accounts
+    .flatMap(acc=> acc.movements)
+    .reduce(
+      (sums, cur) => {
+        sums[cur > 0 ? 'deposits2' : 'withdrawals2'] +=
+        cur;
+        return sums;
+      },
+      {deposits2, withdrawals2}
+      )
+  
 
 // 165 MORE WAYS OF CREATING AND FILLING ARRAYS
 
