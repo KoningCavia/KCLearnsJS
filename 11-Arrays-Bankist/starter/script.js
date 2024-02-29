@@ -338,10 +338,10 @@ console.log(movementsUI);
 // movements.sort((a, b) => b - a);  // descending
 
 
-//the above works perfectly because if a is bigger than b it will always return a positive result. However is b is bigger than a it wll always return a negative results. 
-// that is all you need to know about sorting numbers
+// // the above works perfectly because if a is bigger than b it will always return a positive result. However is b is bigger than a it wll always return a negative results. 
+// // that is all you need to know about sorting numbers
 
-//Back to the app. the sorting 
+// // Back to the app. the sorting 
 
 
 
@@ -460,47 +460,47 @@ console.log(movementsUI);
 // console.log(totalDepositsUSD2);
 
 
-// 154 THE REDUCE METHOD
+// // 154 THE REDUCE METHOD
 
-console.log(movements);
+// console.log(movements);
 
-// this method works with a callback function that takes the three parameters like always, but it has an extra parameter placed first, which is a bit different. It is called the accumulator. IT is basically an accumulation of all values that were considered up untill now
-// in short, it is the sum.
-//the reduce method returns a single value (rather than an array for the filter and map methods)
-const balance = movements.reduce(function(acc, cur, i, arr){
-  console.log(`Iteration ${i}: ${acc}`);
-  return acc + cur;
-}, 0);
+// // this method works with a callback function that takes the three parameters like always, but it has an extra parameter placed first, which is a bit different. It is called the accumulator. IT is basically an accumulation of all values that were considered up untill now
+// // in short, it is the sum.
+// //the reduce method returns a single value (rather than an array for the filter and map methods)
+// const balance = movements.reduce(function(acc, cur, i, arr){
+//   console.log(`Iteration ${i}: ${acc}`);
+//   return acc + cur;
+// }, 0);
 
-console.log(balance);
-//The reduce function itself has a second parameter, this is the inital value of the accumulator
+// console.log(balance);
+// //The reduce function itself has a second parameter, this is the inital value of the accumulator
 
-//ARROW FUNCTION
-const balanceArrow =  movements.reduce((acc, cur) => acc += cur, 0);
-// Let's rebuild the reduce method using a FOR LOOP
-console.log('balanceArrow: ', balanceArrow);
+// //ARROW FUNCTION
+// const balanceArrow =  movements.reduce((acc, cur) => acc += cur, 0);
+// // Let's rebuild the reduce method using a FOR LOOP
+// console.log('balanceArrow: ', balanceArrow);
 
-let balance2 = 0; // initial sum value
-for (const mov of movements) balance2 += mov;
-console.log(balance2);
-// we only need one external variable whenever we want to use a forloop. This gets unpractical when we need many loops for many calculatons.
-
-
-
-// Other stuff (besides accumulating values)
-
-// Get MAX value
-// reduce is to boil down the entire array to one value, which could be ANY value
-const maxValue = movements.reduce((acc, cur, i, arr) => cur >= acc ? cur : acc, movements[0]);
-console.log(maxValue);
-
-
-// The reduce method is by far the most powerfull method we learned in this section (map, filter, reduce) and also the hardest to use. We will learn about it though ;)
+// let balance2 = 0; // initial sum value
+// for (const mov of movements) balance2 += mov;
+// console.log(balance2);
+// // we only need one external variable whenever we want to use a forloop. This gets unpractical when we need many loops for many calculatons.
 
 
 
+// // Other stuff (besides accumulating values)
 
-balance(movements);
+// // Get MAX value
+// // reduce is to boil down the entire array to one value, which could be ANY value
+// const maxValue = movements.reduce((acc, cur, i, arr) => cur >= acc ? cur : acc, movements[0]);
+// console.log(maxValue);
+
+
+// // The reduce method is by far the most powerfull method we learned in this section (map, filter, reduce) and also the hardest to use. We will learn about it though ;)
+
+
+
+
+// balance(movements);
 
 
 
@@ -734,23 +734,23 @@ balance(movements);
 // }
 
 
-console.log('-------------FOREACH + INDEX-------------------');
-// The for each method however automatically gives the index and array like so:
-// note that you can give each of these elements any name you want.
-// BUT the order wil always be the same: 1:current element | 2: indexnr | 3: the entire array that we are looping over.
-movements.forEach(function(movement, i, arr) {
-  if (movement > 0) {
-    console.log(`Movement  ${movement+1} You deposited ${movement}`);
-  } else {
-    console.log(`Movement ${movement+1}: You withdrew ${movement}`);
-  }
-})
+// console.log('-------------FOREACH + INDEX-------------------');
+// // The for each method however automatically gives the index and array like so:
+// // note that you can give each of these elements any name you want.
+// // BUT the order wil always be the same: 1:current element | 2: indexnr | 3: the entire array that we are looping over.
+// movements.forEach(function(movement, i, arr) {
+//   if (movement > 0) {
+//     console.log(`Movement  ${movement+1} You deposited ${movement}`);
+//   } else {
+//     console.log(`Movement ${movement+1}: You withdrew ${movement}`);
+//   }
+// })
 
-// CONCLUDING foreach is easier because its basically automatic.
+// // CONCLUDING foreach is easier because its basically automatic.
 
-// when to use which:
-// you can not break out of a forEach loop. It will always loop through the entire array.
-// So if you need to break out you need to use the forOf loop.
+// // when to use which:
+// // you can not break out of a forEach loop. It will always loop through the entire array.
+// // So if you need to break out you need to use the forOf loop.
 
 
 // // 144 SIMPLE ARRAY METHODS
