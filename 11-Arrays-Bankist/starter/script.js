@@ -257,15 +257,44 @@ const euroToUsd = 1.1;
 console.log('-----167 ARRAY METHODS PRACTICE-----');
 
 
+//1
 //calculate how much has been deposited in total
 const allTransactions = accounts.flatMap( acc => acc.movements);
-let deposits = allTransactions.filter(trans => trans>0 ? trans : 0);
+let deposits = allTransactions.filter(trans => trans>0);
 let totalDeposits = deposits.reduce((acc, cur) => acc+cur);
 console.log(allTransactions);
 console.log(deposits);
 console.log(totalDeposits);
-let totalChain = accounts.flatMap(acc=> acc.movements).filter(trans => trans>0?trans:0).reduce((acc, cur)=>acc+cur);
+let totalChain = accounts
+  .flatMap(acc=> acc.movements)
+  .filter(trans => trans>0)
+  .reduce((acc, cur)=>acc+cur);
 console.log(totalChain);
+
+//2
+//Count how many deposits there have been with at least 1000 dollars
+const trans1000Count = accounts
+  .flatMap(acc => acc.movements)
+  .filter(trans => trans>=1000)
+  .length;
+console.log(trans1000Count);
+
+const trans1000Reduce = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((accu, curr) => curr>=1000? accu+1: accu
+    ,0);
+
+console.log(trans1000Reduce);
+
+//3
+// create a new object which contains the sum of je deposits and the withdrawals.
+
+const sumAllTransactions = accounts
+  .flatMap(acc=>acc.movements)
+  .reduce((acc, cur) => acc+Math.abs(cur) 
+  ,0);
+  console.log(sumAllTransactions);
+
 
 // 165 MORE WAYS OF CREATING AND FILLING ARRAYS
 
