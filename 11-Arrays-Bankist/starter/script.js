@@ -301,14 +301,41 @@ const sumAllTransactions = accounts
   const {deposits2, withdrawals2} = accounts
     .flatMap(acc=> acc.movements)
     .reduce(
-      (sums, cur) => {
-        sums[cur > 0 ? 'deposits2' : 'withdrawals2'] +=
+      (acc, cur) => {
+        acc[cur > 0 ? 'deposits2' : 'withdrawals2'] +=
         cur;
-        return sums;
+        return acc;
       },
-      {deposits2, withdrawals2}
+      {deposits2:0, withdrawals2:0}
       )
   
+
+//4
+// create tidal case
+// this is a nice title -> This Is a Nice Title
+
+
+const convertTitleCase = function(title) {
+  const capitalize = function(str) {
+    return str[0].toUpperCase()+str.slice(1)
+  }
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with']; // remember this excpetions. it is important and common
+  let string = title
+    .toLowerCase()
+    .split(' ')
+    // .map(word => exceptions.includes(word)? word : word[0].toUpperCase().concat(word.slice(1)))
+    .map(word => exceptions.includes(word)? word : capitalize(word))
+    .join(' ');
+
+    return capitalize(string);
+}
+
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title but not too long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
+
+
+
 
 // 165 MORE WAYS OF CREATING AND FILLING ARRAYS
 
