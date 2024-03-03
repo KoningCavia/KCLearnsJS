@@ -104,6 +104,7 @@ calcAverageHumanAge(Data1);
 console.log("---------------");
 calcAverageHumanAge(Data2);
 
+//CHALLENGE 3
 
 // Rewrite the 'calcAverageHumanAge' function from Challenge #2, but this time
 // as an arrow function, and using chaining!
@@ -130,3 +131,110 @@ const dat2 = calcAverageHumanAge2(Data2)
 console.log(dat1);
 console.log(`--------------`);
 console.log(dat2);
+
+
+// CHALLENGE 4
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+  ];
+// Julia and Kate are still studying dogs, and this time they are studying if dogs are
+// eating too much or too little.
+// Eating too much means the dog's current food portion is larger than the
+// recommended portion, and eating too little is the opposite.
+// Eating an okay amount means the dog's current food portion is within a range 10%
+// above and 10% below the recommended portion (see hint).
+// Your tasks:
+
+// 1. Loop over the 'dogs' array containing dog objects, and for each dog, calculate
+// the recommended food portion and add it to the object as a new property. Do
+// not create a new array, simply loop over the array. Forumla:
+// recommendedFood = weight ** 0.75 * 28. (The result is in grams of
+// food, and the weight needs to be in kg)
+// dogs.map(dog => dog.recFood = dog.weight**0.75*28);
+
+dogs.forEach(dog => dog.recFood = dog.weight**0.75*28)    //foreach just loops and doesnt return an array
+console.log(dogs);
+
+
+// 2. Find Sarah's dog and log to the console whether it's eating too much or too
+// little. Hint: Some dogs have multiple owners, so you first need to find Sarah in
+// the owners array, and so this one is a bit tricky (on purpose) �
+
+//find dog where owner is sarah
+
+console.log(dogs.find(dog => dog.owners.includes('Sarah')));
+
+// 3. Create an array containing all owners of dogs who eat too much
+// ('ownersEatTooMuch') and an array with all owners of dogs who eat too little
+// ('ownersEatTooLittle').
+
+console.log(dogs);
+let ownersEatTooMuch = dogs.filter(dog => dog.curFood > dog.recFood*1.1).flatMap(dog => dog.owners);    //filter returns an array with dogs that eat too much. flatmap than takes the owners arrays within that array too flatMap them.
+let ownersEatTooLittle = dogs.filter(dog => dog.curFood < dog.recFood*0.9).flatMap(dog => dog.owners);
+
+console.log(ownersEatTooMuch);
+console.log(ownersEatTooLittle);
+
+// 4. Log a string to the console for each array created in 3., like this: "Matilda and
+// Alice and Bob's dogs eat too much!" and "Sarah and John and Michael's dogs eat
+// too little!
+console.log(`4: log two strings one for too much and one for too little`);
+
+let strLittle = ``;
+let i = 0;
+ownersEatTooLittle.forEach(name => {
+  strLittle+= i === 0? `${name}`: ` and ${name}`;
+  i++;
+})
+strLittle += `'s dogs eat too litte!`
+console.log(strLittle);
+
+let strMuch='';
+let j=0;
+ownersEatTooMuch.forEach(name => {
+  strMuch+= j===0 ? `${name}`:` and ${name}`
+  j++;
+})
+strMuch+= `'s dogs eat too much!`
+console.log(strMuch);
+
+
+
+// 5. Log to the console whether there is any dog eating exactly the amount of food
+// that is recommended (just true or false)
+console.log(`5: any dog eating exactly the recomended amount`);
+console.log(dogs.some(dog =>
+  dog.curFood === dog.recFood
+  ));
+
+
+// 6. Log to the console whether there is any dog eating an okay amount of food
+// (just true or false)
+console.log(`6: Any dog eating an ok amount?`);
+console.log(
+  dogs.some(dog=>
+    dog.curFood<dog.recFood*1.1 && dog.curFood>dog.recFood*0.9
+    ));
+
+// 7. Create an array containing the dogs that are eating an okay amount of food (try
+// to reuse the condition used in 6.)
+console.log('7: OK intake dogs');
+
+let okDogs = dogs.filter(dog=>
+  dog.curFood<dog.recFood*1.1 && dog.curFood>dog.recFood*0.9
+  );
+
+  console.log(okDogs);
+// 8. Create a shallow copy of the 'dogs' array and sort it by recommended food
+// portion in an ascending order (keep in mind that the portions are inside the
+// array's objects �)
+console.log(`8: ordered shallow copy`);
+let shallowDogs =dogs.slice()
+let sortedShallow = shallowDogs.sort((a,b) =>
+  a.recFood - b.recFood
+  );
+
+  console.log(sortedShallow);
