@@ -154,8 +154,9 @@ const dogs = [
 // recommendedFood = weight ** 0.75 * 28. (The result is in grams of
 // food, and the weight needs to be in kg)
 // dogs.map(dog => dog.recFood = dog.weight**0.75*28);
+console.log(`1: CALCULATE RECOMMENDED FOOR PORTIONS`);
 
-dogs.forEach(dog => dog.recFood = dog.weight**0.75*28)    //foreach just loops and doesnt return an array
+dogs.forEach(dog => dog.recFood = Math.trunc(dog.weight**0.75*28))    //foreach just loops and doesnt return an array
 console.log(dogs);
 
 
@@ -164,12 +165,16 @@ console.log(dogs);
 // the owners array, and so this one is a bit tricky (on purpose) �
 
 //find dog where owner is sarah
+console.log(`2: LOG SARAHS DOG`);
 
 console.log(dogs.find(dog => dog.owners.includes('Sarah')));
+let sarahsdog = dogs.find(dog=> dog.owners.includes('Sarah')).owners;
+console.log(`Sarah's dog is eating too ${sarahsdog.curFood>sarahsdog.recFood? 'much': 'little'}`);
 
 // 3. Create an array containing all owners of dogs who eat too much
 // ('ownersEatTooMuch') and an array with all owners of dogs who eat too little
 // ('ownersEatTooLittle').
+console.log(`3: CREATE ARRAYS DOGS THAT EAT TOO MUCH AND TOO LITTLE`);
 
 console.log(dogs);
 let ownersEatTooMuch = dogs.filter(dog => dog.curFood > dog.recFood*1.1).flatMap(dog => dog.owners);    //filter returns an array with dogs that eat too much. flatmap than takes the owners arrays within that array too flatMap them.
@@ -192,6 +197,9 @@ ownersEatTooLittle.forEach(name => {
 strLittle += `'s dogs eat too litte!`
 console.log(strLittle);
 
+// better solution
+console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat too little!`);
+
 let strMuch='';
 let j=0;
 ownersEatTooMuch.forEach(name => {
@@ -201,6 +209,8 @@ ownersEatTooMuch.forEach(name => {
 strMuch+= `'s dogs eat too much!`
 console.log(strMuch);
 
+//better solution
+console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much`);
 
 
 // 5. Log to the console whether there is any dog eating exactly the amount of food
@@ -214,18 +224,13 @@ console.log(dogs.some(dog =>
 // 6. Log to the console whether there is any dog eating an okay amount of food
 // (just true or false)
 console.log(`6: Any dog eating an ok amount?`);
-console.log(
-  dogs.some(dog=>
-    dog.curFood<dog.recFood*1.1 && dog.curFood>dog.recFood*0.9
-    ));
+const checkEatingOk = dog =>  dog.curFood<dog.recFood*1.1 && dog.curFood>dog.recFood*0.9;
+console.log(dogs.some(checkEatingOk));
 
 // 7. Create an array containing the dogs that are eating an okay amount of food (try
 // to reuse the condition used in 6.)
 console.log('7: OK intake dogs');
-
-let okDogs = dogs.filter(dog=>
-  dog.curFood<dog.recFood*1.1 && dog.curFood>dog.recFood*0.9
-  );
+let okDogs = dogs.filter(checkEatingOk);
 
   console.log(okDogs);
 // 8. Create a shallow copy of the 'dogs' array and sort it by recommended food
@@ -233,8 +238,10 @@ let okDogs = dogs.filter(dog=>
 // array's objects �)
 console.log(`8: ordered shallow copy`);
 let shallowDogs =dogs.slice()
-let sortedShallow = shallowDogs.sort((a,b) =>
-  a.recFood - b.recFood
-  );
 
-  console.log(sortedShallow);
+let sortedShallowDogs2 =dogs.slice().sort((a,b) =>
+  a.recFood - b.recFood
+);
+
+
+  console.log(sortedShallowDogs2);
