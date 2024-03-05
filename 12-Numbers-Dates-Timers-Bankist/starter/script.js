@@ -268,35 +268,6 @@ btnSort.addEventListener('click', function(e) {
 
 
 
-// 172 THE REMAINDER OPERATOR
-console.log(`-----172 THE REMAINDER OPERATOR-----`);
-
-//every time you need to do something every Nth time. Use the remainder operator.
-
-console.log(5 % 2);
-console.log(5 / 2);   // 5 = 2 * 2 + 1
-
-console.log(8 % 3);
-console.log(8 / 3);   // 8 = 2 * 3 + 2
-
-console.log(6&2);   // answer = 0 6/2 = 3
-console.log(7%2);   // answer = 1 (3*2 = 6 and 1 is the remainder)
-
-const isEven = n => n % 2 === 0;
-
-console.log(isEven(8));
-console.log(isEven(23));
-console.log(isEven(514));
-
-
-labelBalance.addEventListener('click',function() {
-[...document.querySelectorAll('.movements__row')].
-forEach(function(row, i){
-  if(i % 2===0) row.style.backgroundColor = 'orangered';
-  if(i % 3===0) row.style.backgroundColor = 'blue'
-  });
-})
-
 
 
 
@@ -390,3 +361,59 @@ console.log((2.345).toFixed(2));  //so this effectively removes 1 decimal point
 console.log(+(2.345).toFixed(3));   // the + signs makes this method return a number.
 
 //now lets apply some of this to the bankist app.
+
+
+
+// 173 THE REMAINDER OPERATOR
+console.log(`-----172 THE REMAINDER OPERATOR-----`);
+
+//every time you need to do something every Nth time. Use the remainder operator.
+
+console.log(5 % 2);
+console.log(5 / 2);   // 5 = 2 * 2 + 1
+
+console.log(8 % 3);
+console.log(8 / 3);   // 8 = 2 * 3 + 2
+
+console.log(6&2);   // answer = 0 6/2 = 3
+console.log(7%2);   // answer = 1 (3*2 = 6 and 1 is the remainder)
+
+const isEven = n => n % 2 === 0;
+
+console.log(isEven(8));
+console.log(isEven(23));
+console.log(isEven(514));
+
+
+labelBalance.addEventListener('click',function() {
+[...document.querySelectorAll('.movements__row')].
+forEach(function(row, i){
+  if(i % 2===0) row.style.backgroundColor = 'orangered';
+  if(i % 3===0) row.style.backgroundColor = 'blue'
+  });
+})
+
+
+// 174 NUMERIC SEPARATORS
+console.log(`-----174 NUMERIC SEPARATORS-----`);
+
+// 287.460.000.000
+const diameterBad = 287460000000  // hard to read actuall value
+const diameter = 287_460_000_000  // js doesnt allow for .'s but does allow for _'s.
+console.log(diameter);            
+
+const price = 345_99;    // typical price in cents
+console.log(price);      
+
+const transferFee1 = 15_00;
+const transferFee2 = 1_500;
+//both are the exact same number. But we perceive the first as 15 euro (1500 cents). and the second as 1.500 (1500)
+console.log(transferFee1);
+console.log(transferFee2);
+
+const PI = 3.14_15;   //doesnt make sense BUT the number will be shown perfectly fine.
+// const PI2 = 3._1415;    // This is NOT allowed
+console.log(PI);        
+
+console.log(Number('230000'));
+console.log(Number('230_000'));   // this doesnt work. Putting an _ in a string
