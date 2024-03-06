@@ -458,3 +458,57 @@ console.log(10/3);
 
 console.log(11n/3n);
 console.log(11%3);
+
+
+
+// 176 CREATING DATES
+console.log('-----176 CREATING DATES-----');
+
+
+
+//create a date
+// there are 4 ways
+
+// //1
+// const now = new Date;   // current date and time
+// console.log(now);
+
+// //2 parsing from a data string
+// console.log(new Date('Mar 06 2024 16:25:37'));
+// console.log(new Date('24 December, 2024'));  // Dit is een slimme parses. Ik heb dit gewoon zo opgeschrreven en js begreep het gewoon! 
+
+// const date2 = new Date(account1.movementsDates[0]);
+// console.log(date2);
+
+// console.log(new Date(2037, 10, 19, 15, 23, 5));
+//                   //yr, mont, day, hr, min, sec
+
+// //note that month is zero based. 10 here is november
+
+// //november only has 30 days. What happend if we enter november 31st?
+// console.log(new DataTransfer(2037, 10, 31));
+// //it autocorrects to december first .(november 35 would make december 5th).
+
+// // if you enter one number it will count that as milliseconds since unix time (1 januari 1970)
+// console.log(new Date(0));
+// console.log(new Date(3*24*60*60*1000));  //3 days in millisecs after unix time
+
+// console.log(3*24*60*60*1000); // 
+
+//working with dates4
+const future = new Date(2037, 10, 19, 15, 23, 5);
+console.log(future.getFullYear());
+console.log(future.getMonth()); 
+console.log(future.getDate());  // gets number of the month
+console.log(future.getDay());   // gets day of the week
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.getMilliseconds());
+console.log(future.toISOString());  //turns date in string following international standard
+console.log(future.getTime());    // returns timestamp = milliseconds since unix time
+
+
+// set of all methods up here
+future.setFullYear(2040);
+console.log(future);    // year was set to 2040
