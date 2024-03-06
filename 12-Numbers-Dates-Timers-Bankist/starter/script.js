@@ -417,3 +417,44 @@ console.log(PI);
 
 console.log(Number('230000'));
 console.log(Number('230_000'));   // this doesnt work. Putting an _ in a string
+
+// 175 WORKING WITH BIGINT
+console.log("-----175 WORKING WITH BIGINT-----");
+
+console.log(2**53-1);     // this is the biggets number javascript can deal with.
+console.log(Number.MAX_SAFE_INTEGER);   // This biggest number even has its own Number method.
+
+console.log(2**53+1);         // these numbers return VERRY inconcistent results
+console.log(2**53+2);
+console.log(2**53+3);
+console.log(2**53+4);
+
+
+console.log(45846454322356845323058351531218755);     // this number will be imprecise
+console.log(45846454322356845323058351531218755n);     // if we add an 'n' this number is suddenly a BIGINT!
+console.log(BigInt(45846454322356845323058351531218755));   // apparently also doesnt work..?
+
+//Operations
+console.log(10000n+10000n);         // adding bigint with bigint
+console.log(15834893498248192389234400818222n*1000n);     // multiplying bigint with bigint
+// console.log(Math.sqrt(16n));      // doesnt work because bigint isnt really a number per se
+
+const huge = 23439831925893894902923n;
+const num = 23;
+// console.log(huge*num);        // gives an erro (canot mix bigint and other types)
+console.log(huge*BigInt(num));    // this is where we use bigInt (to change a normal int to a                               bigint so you can perform operations with other bigints.)
+
+console.log((20n>15));      // this will work
+console.log(20n === 20);    // is false. === doesnt do type coercion.
+console.log(typeof 20n);
+console.log(20n == 20);     // is true because == does do corecion
+
+console.log(huge+ ' is really big');      // the bigint it converted to a string
+
+
+// Divisions
+console.log(11n/3n);      // it will round down the fraction to the nearest int (BIGINT doesnt do fractions) WAIT is this the inverse from 11%3?
+console.log(10/3);
+
+console.log(11n/3n);
+console.log(11%3);
