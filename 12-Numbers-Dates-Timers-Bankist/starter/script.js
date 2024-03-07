@@ -80,17 +80,27 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
 // Functions
-const displayMovements = function(movements, sort = false) {    // by default sorting is false
+const displayMovements = function(acc, sort = false) {    // by default sorting is false
   containerMovements.innerHTML = '';      // className.innerhtml = '' sets the html to a string ''
 
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const movs = sort ? acc.movements.slice().sort((a, b) => a - b) : acc.movements;
   
   movs.forEach(function(mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const date = new Date(acc.movementsDates[i]);    // we use the movements index to find the right date.
+    const day = `${date.getDate()}`.padStart(2,0);      // EXTRACT THE INFO
+    const month = `${date.getMonth()+1}`.padStart(2,0);  
+    const year = date.getFullYear();
+    const displayDate = labelDate.textContent = `${day}/${month}/${year}`; // 
+    
+
+
   
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${i + 1} ${type}t</div>
+        <div class="movements__date">${displayDate}</div>
         <div class="movements__value">${mov.toFixed(2)}</div>
       </div>
     `;
@@ -144,7 +154,7 @@ const calcDisplaySummary= function(acc) {
  creatUsernames(accounts);
 
  const updateUI = function(acc) {
-  displayMovements(acc.movements); 
+  displayMovements(acc); 
   calcDisplayBalance(acc);
   calcDisplaySummary(acc);
  }
@@ -155,6 +165,18 @@ console.log('-----159 Implementing login-----');
 
 //LOGIN LOGIC
 let currentAccount;     // here we initiate the empty variable (because we need it for certain functions). and in the login we assign a value to it.
+//FAKE ALWAYS LOGGED IN
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity=100;
+
+const now = new Date();
+const day = `${now.getDate()}`.padStart(2,0);       // pad to two positionsat the starting side (left). Fill with '0'.
+const month = `${now.getMonth()+1}`.padStart(2,0);  
+const year = now.getFullYear();
+const hour = now.getHours().padStart(2,0);
+const min = now.getMinutes().padStart(2,0);
+labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
 
 btnLogin.addEventListener('click', function(e) {
   e.preventDefault();  // this is a button in a form element. and standard behavior is for the page to reload. preventDefault prevents this.
@@ -204,6 +226,10 @@ btnTransfer.addEventListener('click', function(e) {
         currentAccount.movements.push(-amount);
         receiverAcc.movements.push(amount);
 
+        // add movement dates to both accounts
+        currentAccount.movementsDates.push(new Date().toISOString());
+        receiverAcc.movementsDates.push(new Date().toISOString());
+
         //update UI
 
 
@@ -222,6 +248,8 @@ btnLoan.addEventListener('click', function(e){
 
   //add movements
   currentAccount.movements.push(amount);
+  // add movementDate
+  currentAccount.movementsDates.push(new Date().toISOString())
 
   // update ui
   updateUI(currentAccount);
@@ -255,7 +283,7 @@ btnClose.addEventListener('click', function(e) {
 let sorted = false;        // hier maken we de staat van de boolean
 btnSort.addEventListener('click', function(e) {
   e.preventDefault();
-  displayMovements(currentAccount.movements, !sorted);    // hier sturen we de tegenovergestelde staat van de boolean met de method call mee
+  displayMovements(currentAccount, !sorted);    // hier sturen we de tegenovergestelde staat van de boolean met de method call mee
   sorted = !sorted;                                       // hier slaan we de tegenovergesteld staat van de boolean op in "sorted"
 })
 
