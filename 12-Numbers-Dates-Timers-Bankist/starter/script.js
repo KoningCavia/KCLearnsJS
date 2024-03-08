@@ -22,8 +22,8 @@ const account1 = {
     '2020-04-01T10:17:24.185Z',
     '2020-05-08T14:11:59.604Z',
     '2020-05-27T17:01:17.194Z',
-    '2024-03-04T17:17:47.999Z',
-    '2024-03-06T23:01:01.667Z',
+    '2023-03-04T17:17:47.999Z',
+    '2023-03-06T23:01:01.667Z',
   ],
   currency: 'EUR',
   locale: 'pt-PT', // de-DE
@@ -81,7 +81,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
-const formatMovementDate = function(date) {
+const formatMovementDate = function(date, locale) {
   const calcDaysPassed = (date1, date2) => 
   Math.round(Math.abs((date2-date1)/(1000*60*60*24)));
 
@@ -90,14 +90,19 @@ const formatMovementDate = function(date) {
   if(daysPassed === 0) return 'Today';
   if(daysPassed === 1) return 'Yesterday';
   if(daysPassed <= 7) return `${daysPassed} days ago`;
+ 
   else {
 
-  const day = `${date.getDate()}`.padStart(2,0);      // EXTRACT THE INFO
-  const month = `${date.getMonth()+1}`.padStart(2,0);  
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`; // 
+  // const day = `${date.getDate()}`.padStart(2,0);      // EXTRACT THE INFO
+  // const month = `${date.getMonth()+1}`.padStart(2,0);  
+  // const year = date.getFullYear();
+  // return `${day}/${month}/${year}`; // 
 
-  }
+  return new Intl.DateTimeFormat(locale).format(date);
+
+
+}
+
 }
 
 
@@ -109,7 +114,7 @@ const displayMovements = function(acc, sort = false) {    // by default sorting 
   movs.forEach(function(mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const date = new Date(acc.movementsDates[i]);    // we use the movements index to find the right date.
-    const displayDate = labelDate.textContent =  formatMovementDate(date);
+    const displayDate = formatMovementDate(date, acc.locale);
 
     const html = `
       <div class="movements__row">
@@ -179,18 +184,16 @@ console.log('-----159 Implementing login-----');
 
 //LOGIN LOGIC
 let currentAccount;     // here we initiate the empty variable (because we need it for certain functions). and in the login we assign a value to it.
-//FAKE ALWAYS LOGGED IN
+
+// FAKE ALWAYS LOGGED IN
 currentAccount = account1;
 updateUI(currentAccount);
 containerApp.style.opacity=100;
 
-const now = new Date();
-const day = `${now.getDate()}`.padStart(2,0);       // pad to two positionsat the starting side (left). Fill with '0'.
-const month = `${now.getMonth()+1}`.padStart(2,0);  
-const year = now.getFullYear();
-const hour = `${now.getHours()}`.padStart(2,0);
-const min = `${now.getMinutes()}`.padStart(2,0);
-labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+
+
+
+
 
 btnLogin.addEventListener('click', function(e) {
   e.preventDefault();  // this is a button in a form element. and standard behavior is for the page to reload. preventDefault prevents this.
@@ -206,6 +209,27 @@ btnLogin.addEventListener('click', function(e) {
 
     labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
     containerApp.style.opacity = 100;
+
+    //Create current date and time
+    const now = new Date();
+    const options = {
+    hour: 'numeric',
+    minute: 'numeric',
+    day: 'numeric',
+    month: 'long',     //numeric gives month number, long gives the months name
+    year: 'numeric',       //numeric 2-digit
+    // weekday: 'long'
+  }
+
+  // const locale = navigator.language;    // returns the location according to your browser
+  // console.log(locale);    
+  labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, options).format(now);
+    // const day = `${now.getDate()}`.padStart(2,0);       // pad to two positionsat the starting side (left). Fill with '0'.
+    // const month = `${now.getMonth()+1}`.padStart(2,0);  
+    // const year = now.getFullYear();
+    // const hour = `${now.getHours()}`.padStart(2,0);
+    // const min = `${now.getMinutes()}`.padStart(2,0);
+    // labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
 
     // clear nput fields
     inputLoginUsername.value = inputLoginPin.value = '';
@@ -565,3 +589,10 @@ const calcDaysPassed = (date1, date2) => Math.abs((date2-date1)/(1000*60*60*24))
 
 const days1 = calcDaysPassed(new Date(2037,3,14), new Date(2037,3,24));
 console.log(days1);
+
+
+// 179 INTERNATIONALIZING DATES
+console.log("-----179 INTERNATIONALIZING DATES-----");
+
+//when we do calculations with dates we get a result in milliseconds which we then can use for further calculations
+
