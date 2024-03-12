@@ -99,11 +99,19 @@ const formatMovementDate = function(date, locale) {
   // return `${day}/${month}/${year}`; // 
 
   return new Intl.DateTimeFormat(locale).format(date);
-
-
+};
 }
 
-}
+const formatCur = function(value, locale, curr) {
+  return new Intl.NumberFormat(locale, 
+    {
+      style: 'currency',    // add curency sign
+      currency: curr}).    // in US style
+      format(value);          // apply it to this value.
+  
+  }
+
+
 
 
 const displayMovements = function(acc, sort = false) {    // by default sorting is false
@@ -116,11 +124,12 @@ const displayMovements = function(acc, sort = false) {    // by default sorting 
     const date = new Date(acc.movementsDates[i]);    // we use the movements index to find the right date.
     const displayDate = formatMovementDate(date, acc.locale);
 
+    const formattedMovement = formatCur(mov, acc.locale, acc.currency)
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${i + 1} ${type}t</div>
         <div class="movements__date">${displayDate}</div>
-        <div class="movements__value">${mov.toFixed(2)}</div>
+        <div class="movements__value">${formattedMovement}</div>
       </div>
     `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -128,11 +137,14 @@ const displayMovements = function(acc, sort = false) {    // by default sorting 
   };
 
 
+
+
+
   //154 REDUCE METHOD
 const calcDisplayBalance = function(acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  // acc.balance = balance;
-  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+  
+  labelBalance.textContent = `${formatCur(acc.balance, acc.locale, acc.currency)}€`;
 }
 
 //155 chaining method
@@ -140,12 +152,12 @@ const calcDisplaySummary= function(acc) {
   const incomes = acc.movements
     .filter(mov=>mov>0)
     .reduce((acc, mov) => acc+mov,0 )
-  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
+  labelSumIn.textContent = `${formatCur(incomes, acc.locale, acc.currency)}€`;
 
   const out = acc.movements
     .filter(mov=>mov<0)
     .reduce((acc, mov) => acc+mov,0 )
-  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
+  labelSumOut.textContent = `${formatCur(Math.abs(out), acc.locale, acc.currency)}€`;
 
   const interest = acc.movements
     .filter(mov=>mov>0)
@@ -155,7 +167,7 @@ const calcDisplaySummary= function(acc) {
     })
     .reduce((acc, int) => acc+int,0);
 
-  labelSumInterest.textContent = `${interest.toFixed(2)}`;
+  labelSumInterest.textContent = `${formatCur(interest, acc.locale, acc.currency)}€`;
 
 }
 
@@ -596,3 +608,28 @@ console.log("-----179 INTERNATIONALIZING DATES-----");
 
 //when we do calculations with dates we get a result in milliseconds which we then can use for further calculations
 
+// lots of things were done in the bankist app. Look there for an actual samenvatting
+
+
+//180 INTERNATIONALIZING NUMBERS
+console.log("-----180 INTERNATIONALIZING NUMBERS-----");
+
+//internationalizing numbers RATHER than dates. 
+const numb = 3884764.23
+
+const options = {
+  style: "currency",   // style has three options: unit, currency, percent (makes unit be ignored)
+  unit: 'celsius',    // mile-per-hour, celsius
+  currency: 'EUR',    // currency is necessary when doing currency
+  // useGrouping: false,   // grouping is removed. de puntjes in 3.000.000,00 
+}
+
+console.log('US: ' ,new Intl.NumberFormat('en-US', options).format(numb));
+
+console.log('Germany: ' ,new Intl.NumberFormat('de-DE', options).format(numb));
+
+console.log('Syria: ' ,new Intl.NumberFormat('ar-SY', options).format(numb));
+// navigator.language is a general method for browsers.
+console.log(navigator.language, 'BROSWER: ' ,new Intl.NumberFormat(navigator.language, options).format(numb));
+
+console.log('NEDERLANDSSSSSSSS: ' ,new Intl.NumberFormat('nl-NL', options).format(numb));
