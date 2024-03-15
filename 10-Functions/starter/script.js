@@ -359,10 +359,10 @@ boardPassenges(180, 3)
 //   return str.replace(/ /g, '').toLowerCase();
 // };
 
-// const upperFirstWord = function (str) {
-//   const [first, ...others] = str.split(' ');
-//   return [first.toUpperCase(), ...others].join(' ');
-// };
+const upperFirstWord = function (str) {
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
+};
 
 // // higher-order function
 // const transformer = function (str, fn) {
