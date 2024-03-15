@@ -143,7 +143,7 @@ const calcDisplayBalance = function (acc) {
     acc.balance,
     acc.locale,
     acc.currency
-  )}€`;
+  )}`;
 };
 
 //155 chaining method
@@ -151,7 +151,7 @@ const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${formatCur(incomes, acc.locale, acc.currency)}€`;
+  labelSumIn.textContent = `${formatCur(incomes, acc.locale, acc.currency)}`;
 
   const out = acc.movements
     .filter(mov => mov < 0)
@@ -160,7 +160,7 @@ const calcDisplaySummary = function (acc) {
     Math.abs(out),
     acc.locale,
     acc.currency
-  )}€`;
+  )}`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -175,7 +175,7 @@ const calcDisplaySummary = function (acc) {
     interest,
     acc.locale,
     acc.currency
-  )}€`;
+  )}`;
 };
 
 const creatUsernames = function (accs) {
@@ -197,17 +197,44 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const startLogoutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+    //in each call, print the remaining time tot UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    // Decrease 1 second
+
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = `Log in to get started`;
+      containerApp.style.opacity = 0;
+    }
+    time--;
+
+    //when 0 seconds, stop timer and log out user
+  };
+  //Set time to 5 minutes
+  let time = 300;
+
+  //call the timer every second
+  tick(); // here tick gets called immediately
+  const timer = setInterval(tick, 1000); // tick gets called every concurrent second now
+  return timer; // return timer to check later if a timer is already running
+};
+
 // 159 Implementing login
 
 console.log('-----159 Implementing login-----');
 
 //LOGIN LOGIC
-let currentAccount; // here we initiate the empty variable (because we need it for certain functions). and in the login we assign a value to it.
+let currentAccount, timer; // here we initiate the empty variable (because we need it for certain functions). and in the login we assign a value to it.
 
 // FAKE ALWAYS LOGGED IN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 100;
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault(); // this is a button in a form element. and standard behavior is for the page to reload. preventDefault prevents this.
@@ -255,7 +282,8 @@ btnLogin.addEventListener('click', function (e) {
     // clear nput fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur(); // makes the inputfield lose its focus
-
+    if (timer) clearInterval(timer);
+    timer = startLogoutTimer();
     updateUI(currentAccount);
   }
 });
@@ -293,8 +321,11 @@ btnTransfer.addEventListener('click', function (e) {
     receiverAcc.movementsDates.push(new Date().toISOString());
 
     //update UI
-
     updateUI(currentAccount);
+
+    // Reset timer
+    clearInterval(timer);
+    timer = startLogoutTimer();
   }
 });
 
@@ -315,6 +346,10 @@ btnLoan.addEventListener('click', function (e) {
 
       // update ui
       updateUI(currentAccount);
+
+      //Reset Timer
+      clearInterval(timer);
+      timer = startLogoutTimer();
     }, 2500); // 2.5 seconds delay for loan approvement
   }
   inputLoanAmount.value = '';
