@@ -540,79 +540,79 @@ for (const[key, value] of question) {
 
 
 
-// // 109 Logical Assignment operators
-// const rest1 =  {
-//   name: 'Capri',
-//   numGuests: 0,
-// };
-// const rest2 =  {
-//   name: 'la Piazza',
-//   owner: 'Giovanni Rosi',
-// };
+// 109 Logical Assignment operators
+const rest1 =  {
+  name: 'Capri',
+  numGuests: 0,
+};
+const rest2 =  {
+  name: 'la Piazza',
+  owner: 'Giovanni Rosi',
+};
 
-// //FIRSTLY based of  || -> the OR assignment operator
-// // // Using the || operator to set a default
-// // rest2.numGuests = rest2.numGuests || 10
-// // rest1.numGuests = rest1.numGuests || 10
+// FIRSTLY based of  || -> the OR assignment operator
+// Using the || operator to set a default
+rest2.numGuests = rest2.numGuests || 10
+rest1.numGuests = rest1.numGuests || 10
 
-// // // This is literally the same but even Shorter!
-// // rest1.numGuests ||= 10;
-// // rest2.numGuests ||= 10;
+// This is literally the same but even Shorter!
+rest1.numGuests ||= 10;
+rest2.numGuests ||= 10;
 
-// // console.log(rest1);
-// // console.log(rest2);
+console.log(rest1);
+console.log(rest2);
 
-// //SECONDLY variant of ?? -> Nullish assignment operator
+//SECONDLY variant of ?? -> Nullish assignment operator
 
-// rest1.numGuests ??= 10;
-// rest2.numGuests ??= 10;
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
 
-// console.log(rest1);
-// console.log(rest2);
-
-
-// // Thirdly:variant of && -> the AND assignment operators 
-// // If the restaurant has an owner, we want to replace it with the string anonymous
-
-// // rest1.owner = rest1.owner && '<ANONYMOUS>';     // returns undefined, because rest1.owner is undefined
-// // rest2.owner = rest2.owner && '<ANONYMOUS>';     // returns anonymous, because rest2.owner is truthy
-// rest1.owner &&= '<ANONYMOUS>'
-// rest2.owner &&= '<ANONYMOUS>'
-
-// console.log(rest1);       // returns undefined, because rest1.owner is undefined
-// console.log(rest2);       // returns anonymous, because rest2.owner is truthy
+console.log(rest1);
+console.log(rest2);
 
 
+// Thirdly:variant of && -> the AND assignment operators 
+// If the restaurant has an owner, we want to replace it with the string anonymous
 
-// // //108 The nullish coalescing operator (??)
+// rest1.owner = rest1.owner && '<ANONYMOUS>';     // returns undefined, because rest1.owner is undefined
+// rest2.owner = rest2.owner && '<ANONYMOUS>';     // returns anonymous, because rest2.owner is truthy
+rest1.owner &&= '<ANONYMOUS>'
+rest2.owner &&= '<ANONYMOUS>'
 
-// // restaurant.numGuests = 0;
-// // const guests = restaurant.numGuests || 10;
-// // console.log(guests);
+console.log(rest1);       // returns undefined, because rest1.owner is undefined
+console.log(rest2);       // returns anonymous, because rest2.owner is truthy
 
-// // // this works literally like the || operator except it works with nullish values rather than falsy values:
-// // const guestCorrect = restaurant.numGuests ?? 10;
-// // console.log(guestCorrect);
 
-// // // 107 && }} and shortcircuiting
 
-// // //this can use ANY data type and can return ANY datatype
-// // console.log(3 || 'Jonas');
+//108 The nullish coalescing operator (??)
 
-// // console.log('' || 'Jonas');
-// // console.log(true || 0);
-// // console.log(undefined || null);
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+console.log(guests);
 
-// // console.log( undefined || 0 || '' || 'Hello' || 23 || null);
+// this works literally like the || operator except it works with nullish values rather than falsy values:
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect);
 
-// // //check wether there is a value numGuests if not defaults to ten.
-// // restaurant.numGuests = 23;
-// // const guests1 = restaurant.numGuests ? restaurant.numGuests :10;
-// // console.log(guests1);
+// 107 && }} and shortcircuiting
 
-// // //this does literally the same but much quicker.
-// // const guests2 = restaurant.numGuests||10;
-// // console.log(guests2);
+//this can use ANY data type and can return ANY datatype
+console.log(3 || 'Jonas');
+
+console.log('' || 'Jonas');
+console.log(true || 0);
+console.log(undefined || null);
+
+console.log( undefined || 0 || '' || 'Hello' || 23 || null);
+
+//check wether there is a value numGuests if not defaults to ten.
+restaurant.numGuests = 23;
+const guests1 = restaurant.numGuests ? restaurant.numGuests :10;
+console.log(guests1);
+
+//this does literally the same but much quicker.
+const guests2 = restaurant.numGuests||10;
+console.log(guests2);
 
 
 
