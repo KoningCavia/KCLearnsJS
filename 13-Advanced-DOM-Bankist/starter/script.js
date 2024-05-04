@@ -67,4 +67,16 @@ message.innerHTML = 'We use cookies or improved functionality and analytics. <bu
 
 
 header.prepend(message);
-header.append(message);
+// header.append(message.cloneNode(true));   // if you wanted to add the same element twice. You have to copy it. Or else it will simply be moved. This also means that existing elements can simply be moved. How swell!
+
+// header.before(message);   // this places the message BEFORE the header. so as a sibling, rather than a child element.
+// header.after(message)   // and places it before.
+
+
+// DELETE ELEMENTS
+document.querySelector('.btn--close-cookie').
+addEventListener('click', function(){
+  message.remove      // this is very new.
+  message.parentElement.removeChild(message); //this is a common method of doing the same thing. First you must select the parentelement to be able to remove the child. This is called domtraversing
+
+})
